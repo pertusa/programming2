@@ -1,116 +1,123 @@
-# Tema 1 - Introducción
+# Unit 1 - Introduction
 
-En este tema veremos un repaso de los contenidos de Programación 1, añadiendo conceptos sobre  diseño de algoritmos y programas, metodología y sintaxis de C++.
+In this unit, we review of the contents of Programming 1 adding concepts on design of algorithms and programs, methodology and C ++ syntax.
 
-## Diseño de algoritmos y programas
+## Design of algorithms and programs
 
-Para hacer un programa es necesario crear uno o varios ficheros de código fuente escritos en un lenguaje de programación. Una vez tenemos el código, mediante un compilador podemos transformarlo en un programa ejecutable que es capaz de interpretar el ordenador.
+In order to develop a program it is necessary to create one or several source code files written in a programming language. Once we have the code, using a compiler we can transform it into an executable program that the computer can run.
 
-Por tanto, es necesario escribir código fuente, compilarlo y como resultado ya podemos ejecutar nuestro programa. Sin embargo, antes de comenzar a picar código tenemos que analizar los **requerimientos** y pensar en el **diseño** de nuestro algoritmo.
+Therefore, it is necessary to write source code, compile it and as a result we can execute our program. However, before starting to write the code we need to analyze the ** requirements ** and think about the ** design ** of our algorithm.
 
-Las fases de desarrollo de un programa son las siguientes:
+The development phases of a program are the following:
 
-1. Estudio de los requerimientos del problema
-1. Diseño del algoritmo (a ser posible en papel)
-1. Escritura del código fuente en el ordenador
-1. Compilación del programa y corrección de errores
-1. Ejecución del programa
-1. Prueba de todos los casos posibles (o casi)
+1. Study of the requirements of the problem
+1. Algorithm design (maybe on paper)
+1. Writing the source code on the computer
+1. Compilation of the program and correction of errors
+1. Execution of the program
+1. Test of all possible cases (or almost)
 
-El proceso de escribir, compilar, ejecutar y probar debería ser iterativo, haciendo pruebas de funciones o módulos por separado del programa.
+The process of writing, compiling, executing and testing should be iterative, checking independent functions or modules from the program.
 
-### 1. Requerimientos
+### 1. Requirements
 
-Para empezar tenemos que tener claros los **requerimientos**, es decir, **qué** debe hacer nuestro programa. En algunos casos es sencillo ,por ejemplo, si queremos hacer un programa para mostrar los _n_ primeros números primos. Sin embargo en otros casos es mucho más complicado, por ejemplo, si queremos hacer un programa de contabilidad para una empresa.
+To start a program we ned to know in advance the ** requirements **, that is, ** what ** our program should do. In some cases this is simple. For example, if we wanted to make a program to show the first _n_ numbers. However in other cases it is much more complicated, for example, if we are planning to develop an accounting software for a company.
 
-Antes de comenzar a diseñar el programa es necesario tener un listado de requerimientos con todas las opciones de nuestro programa. Este es un listado de ejemplo para hacer un juego:
+Before starting to design the program, it is necessary to have a list of requirements with all the options that it will contain. This is a sample list for a game:
 
-* Tendremos varios niveles ordenados por dificultad
-* En cada nivel tendremos cerdos, pájaros y otros objetos con los que interactúan
-* El usuario podrá lanzar un pájaro con un tirachinas para acabar con los cerdos
-* Un cerdo se destruye si un pájaro o un objeto impacta contra él.
-* Podemos tener varios tipos de pájaros.
-* El usuario puede tocar un pájaro en vuelo para hacer acciones especiales que dependen de su tipo.
+* There are several levels sorted by difficulty
+* In each level there will be pigs, birds and other objects with which they interact
+* The user can throw a bird with a slingshot to kill the pigs
+* A pig is destroyed if a bird or an object hits it.
+* We can have several types of birds.
+* The user can touch a bird in flight to make special actions depending on the bird's type.
 * etc...
 
-Como ves, la lista de requerimientos puede ser muy larga. En las prácticas de Programación 2 (P2) daremos el listado de requerimientos de forma clara para que no haya dudas sobre qué debe hacer el programa y cómo debe interactuar el usuario.
+As you can see, the list of requirements can be very long. In the assignments of Programming 2 (P2) we will give you the list of requirements in a clear manner to avoid doubts about what the program should do and how the user should interact with it.
 
-### 2. Diseño del algoritmo
+### 2. Algorithm design
 
-Una vez tenemos claros los requerimientos, tenemos que pensar **cómo** vamos a implementar nuestro programa. Esto se hace en la fase de diseño, e incluye detectar los tipos datos necesarios, decidir las funciones para trabajar con ellos, y elaborar un flujo de programa.
+Once we know the requirements, we have to think about ** how ** are we going to implement our program. This is done in the design phase, and includes detecting the necessary data types, deciding the functions that we need and  developing a program flow.
 
-La fase de diseño es muy importante, y conviene hacerla en papel. Para esto, lo recomendable es pensar primero en qué datos tenemos (en el ejemplo anterior, pájaros, cerdos, objetos, niveles, paisajes de fondo) y qué vamos a hacer con cada uno de ellos (lanzarPájaro, impactarConCerdo, tocarPájaro, etc.) para inferir las funciones.
+The design stage is very important, and it can be done on paper. For this, it is advisable to first think about what data do we have (in the previous example, birds, pigs, objects, levels, background landscapes) and what are we going to do with them (launchBird, impactWithPig, touchBird, etc.) to obtain the functions.
 
-En el caso de los programas con interfaz gráfico (por ejemplo, programas para móviles), podemos hacer el diseño en el mismo entorno de programación, colocando pantallas, botones, vistas, etc. En el caso de un programa sin gráficos (como será en esta asignatura), el diseño se limita a crear los tipos de datos necesarios y las funciones para trabajar con ellos.
+In the case of programs with a graphical interface (for example, smartphone apps), we can perform the design using a programming environment for adding screens, buttons, views, etc. In the case of a program without graphics (as in this subject), the design is limited to creating the types of data needed and the necessary functions to work with them.
 
-En teoría, con un buen diseño ya podemos hacer el código, y no es necesario rediseñar el programa. En la realidad, para programas complicados es probable que, a pesar de que el diseño sea bueno, nos toque rehacer algunas partes. Por ejemplo, podemos hacer una app para móvil y darnos cuenta de que un botón no queda todo lo bien que pensábamos en un sitio determinado, y esto nos obligue a cambiar el diseño. Independientemente, lo que está claro es que cuanto mejor diseñemos un programa más sencillo será continuar con las siguientes fases, por lo que es recomendable dedicarle tiempo para pensarlo bien.
+In theory, with a good design we can already implement the code, and it is not necessary to redesign the program. In reality, for complicated programs it is likely that, although the initial design will be good, we need to redo some parts. For example, we could make a smartphone app and realize that a button is not as adequate in a certain location as we thought, and this may force us to change the design. Anyway, it is clear that if we make a good initial design it will be easier to continue with the following phases, so it is advisable to dedicate time to think this stage properly.
 
-### 3. Escritura del código
+### 3. Writing the code
 
-Una vez tenemos claro cómo vamos a hacer el programa, procederemos a **escribir el código fuente**, usando un editor de textos, o alternativamente un entorno de desarrollo integrado (IDE, _Integrated Development Environment_).
+Once we are clear about how we are going to make the program, we can proceed to ** write its source code ** using a text editor, or alternatively an integrated development environment (IDE, _Integrated Development Environment_).
 
-Es muy importante no escribir mucho código (por ejemplo más de 50 líneas) de golpe. Lo que debe hacerse es escribir unas pocas líneas de código (o una función), y después compilar. Tras arreglar los errores de compilación y probar que el código hace lo esperado podemos seguir escribiendo.
+It is very important not to write too much code (for example more than 50 lines) at once. Instead, you should  write a few lines of code (or a function), and then compile it. After fixing the compilation errors and testing that the code fragment does what is expected, we can continue writing.
 
-Si hacemos mucho código sin comprobarlo, lo más normal cuando intentemos compilarlo es que nos salgan muchísimos errores de compilación y no seamos capaces de resolverlos adecuadamente.
+If we make a lot of code without checking it, when we try to compile it it will likely get a lot of compilation errors and we will not be able to solve them properly.
 
-### 4. Compilación y corrección de errores
+### 4. Compilation and error correction
 
-Un compilador interpreta o convierte nuestro código fuente en un programa que el ordenador puede ejecutar. Lo normal tras escribir código es que tengamos algunos errores de compilación. Estos errores hay que corregirlos, reescribiendo el código y compilando hasta que no se produzcan más errores.
+A compiler interprets or converts source code into a program that the computer can execute. In most cases, after writing code we can get some compilation errors. These errors must be corrected and the code should be rewritten and compiled until no more errors occur.
 
-Hay dos tipos de errores: los errores de compilación, que impiden generar un ejecutable, y los _warnings_ de compilación, que nos dejan generar el ejecutable pero nos avisan de que puede que haya algo mal. Es conveniente arreglar todos los _warnings_, ya que muchas veces nos avisan de algo que no está bien y acaba produciendo errores durante la siguiente fase, la ejecución del programa.
+There are two types of errors: compilation errors, which prevent generating an executable, and compilation _warnings_, which allow us to generate the executable but warn us that something may be wrong. It is convenient to fix all _warnings_, since many times they indicate that something is not right and ends up producing errors during the next stage, the execution of the program.
 
-### 5. Ejecución
+### 5. Execution
 
-Una vez tenemos una parte de nuestro programa compilado, debemos ejecutarlo para ver que el código que hemos añadido hace lo esperado. A veces no es así, y nos toca volver a la fase 3, reescribiendo el código, compilándolo y volviendo a ejecutar.
+Once we have compiled a new fragment of our program, we must run it to check that the code does what is expected. Sometimes this is not the case and we have to go back to stage 3, rewriting the code, compiling and executing it again.
 
-### 6. Prueba
+### 6. Test
 
-Tras ejecutar el programa hemos visto que todo funciona correctamente pero, ¿es así en todos los casos?. ¿Qué ocurre si, por ejemplo, el usuario introduce por teclado un valor incorrecto? ¿Sigue funcionando todo bien?
+After running the program we can verify that everything works as expected but, is that the case in all possible situations? What happens if, for example, the user types in an incorrect value? Is everything still working well?
 
-En principio es complicado controlar todos los posibles casos que pueden darse durante la ejecución del programa, pero hay algunos trucos para esto.
+In principle, it is difficult to control all possible cases that may occur during the execution of the program, but there are some tricks consider them.
 
-Por ejemplo, tenemos la siguiente función:
+For example, we have the following function:
 
 ```cpp
 float division(int a, int b) {
-	float resultado = a/b;
-	return resultado;
+	float result = a/b;
+	return result;
 }
 ```
 
-Hay dos errores de ejecución en el código, ¿Puedes verlos?
+There are two execution errors in the code, can you see them?
 
-Cuando la ejecutemos, veremos enseguida el primer error.
+If we run it, we could see the first error right away.
+
 
 ```cpp
 cout << division(3,4) << endl;
 ```
 
-El resultado será 0, ya que hemos hecho una división entera. Podemos arreglarlo:
+The result will be 0, since we have made an integer division. We can fix it:
 
 ```cpp
-float resultado = (float)a/b;
+float result = (float)a/b;
 ```
 
-En cuanto uno de los dos operandos sea de tipo _float_, el resultado será _float_. Sin embargo, el segundo error es más complicado. ¿cómo lo encontramos?
+As soon as one of the two operands is of type _float_, the result will be _float_. However, the second error is more complicated. How could we find it?
 
-La respuesta es que **para cada función debemos considerar todos los posibles valores de sus parámetros** y ver si la salida será correcta con ellos. Por ejemplo, en esta función recibimos dos enteros. Su valor puede ser positivo, negativo, o cero.
+The answer is that ** for each function we must consider all the possible values ​​of its parameters ** and see if the output will be correct with them. For example, this function receives two integers. Their value can be positive, negative, or zero.
 
-¿Si algún parámetro es negativo, funcionaría? Sí.
-¿Si algún parámetro es cero, funcionaría? No, ya que no pueden hacerse divisiones por cero y b podría tener ese valor. Por tanto, para que la función fuera correcta tendríamos que hacer cambios:
+If any parameter is negative, would it work? Yes.
+
+If any parameter is zero, would it work? No, since divisions can not be made by zero and _b_ could have that value.
+
+Therefore, to obtain a correct function we would need to make changes:
 
 ```cpp
 float division(int a, int b) {
-	float resultado=0;
+	float result=0;
 	if (b!=0) {
-		resultado = (float)a/b;
+		result = (float)a/b;
 	}
 	else {
-		cout << "Error, no se permiten divisiones por cero!" << endl;
+		cout << "Error, division by zero is not allowed!" << endl;
 	}
-	return resultado;
+	return result;
 }
 ```
+
+
+
 
 ## C++
 
