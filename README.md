@@ -1,7 +1,7 @@
 # Presentación
 
-Este libro contiene los apuntes de la asignatura <a href="http://www.dlsi.ua.es/asignaturas/p2">Programación 2</a> de la <a href="http://www.ua.es">Universidad de Alicante</a>.
+This book follows the contents of the subject <a href="http://www.dlsi.ua.es/asignaturas/p2">Programming 2</a> from the <a href="http://www.ua.es">University of Alicante</a>.
 
-Autores: <a href="http://www.dlsi.ua.es/~pertusa">Antonio Pertusa </a>, <a href="http://www.dlsi.ua.es/~dtomas">David Tomás</a>, Carlos Pérez, Jaume Aragonés, Juan Antonio Pérez y Francisco Moreno.
+Authors: <a href="http://www.dlsi.ua.es/~pertusa">Antonio Pertusa </a>, <a href="http://www.dlsi.ua.es/~dtomas">David Tomás</a>, Carlos Pérez, Jaume Aragonés, Juan Antonio Pérez y Francisco Moreno.
 
-> Este libro está en construcción y se actualizará conforme vaya avanzando la asignatura durante el segundo cuatrimestre. Sólo estarán realmente terminados los capítulos que correspondan al tema tratado en las clases de teoría.
+> This book is under construction and will be updated as the subject progresses during the second semester. 
