@@ -1198,7 +1198,7 @@ The `-L` option is to display each number on a different line, and the `-N` opti
 
 If the parameters indicated by the user are not correct, a syntax error message must be displayed and the program should end. The complicated part of this exercise is checking that all parameters are correct.
 
-### Typical structure of a C ++ program
+### Typical structure of a C ++ program
 
 For review, let's see the typical structure of a C++ program:
 
