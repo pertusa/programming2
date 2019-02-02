@@ -6,7 +6,7 @@ In this unit, we review of the contents of Programming 1 adding concepts on desi
 
 In order to develop a program it is necessary to create one or several source code files written in a programming language. Once we have the code, using a compiler we can transform it into an executable program that the computer can run.
 
-Therefore, it is necessary to write source code, compile it and as a result we can execute our program. However, before starting to write the code we need to analyze the ** requirements ** and think about the ** design ** of our algorithm.
+Therefore, it is necessary to write source code, compile it and as a result we can execute our program. However, before starting to write the code we need to analyze the **requirements** and think about the **design** of our algorithm.
 
 The development phases of a program are the following:
 
@@ -95,7 +95,7 @@ float result = (float)a/b;
 
 As soon as one of the two operands is of type _float_, the result will be _float_. However, the second error is more complicated. How could we find it?
 
-The answer is that ** for each function we must consider all the possible values ​​of its parameters ** and see if the output will be correct with them. For example, this function receives two integers. Their value can be positive, negative, or zero.
+The answer is that **for each function we must consider all the possible values ​​of its parameters** and see if the output will be correct with them. For example, this function receives two integers. Their value can be positive, negative, or zero.
 
 If any parameter is negative, would it work? Yes.
 
@@ -116,13 +116,9 @@ float division(int a, int b) {
 }
 ```
 
-
-
-
 ## C++
 
-Tras ver cómo hacer un programa en líneas generales, vamos a centrarnos ahora en el lenguaje C++, que es el que usaremos en Programación 2. Existen muchas referencias sobre C++, pero si quieres complementar este libro de apuntes recomendamos <a href="http://www.cplusplus.com">cplusplus</a> y <a href="http://www.minidosis.org">minidosis</a>.
-
+In this section we will focus on the C ++ language, which is the one used in Programming 2. There are many C++ references, but if you want to complement this book we recommend <a href="http://www.cplusplus.com">cplusplus</a> and <a href="http://www.minidosis.org">minidosis</a>.
 
 <!---
 XXX: FALTA INTEGRAR ESTO AQUI
@@ -164,66 +160,65 @@ funciones \\
 -->
 
 
-### Elementos básicos
+### Basic elements
 
-En un código fuente podemos encontrarnos distintos elementos básicos:
+In a source code we can find different basic elements:
 
-* Identificadores: Nombres de variables, funciones, constantes, etc.
-* Constantes: 123, 12.3, 'a', etc.
-* Palabras reservadas: `if`, `while`, etc.
-* Símbolos: {}, (), [], ;, etc.
-* Operadores: ++, --, +, \*, /, etc.
-* Tipos de datos: `int`, `char`, `float`, `double`, `bool`, `void`, etc.
+* Identifiers: Variable names, functions, constants, etc.
+* Constants: 123, 12.3, 'a', etc.
+* Reserved words: `if`, `while`, etc.
+* Symbols: {}, (), [], ;, etc.
+* Operators: ++, --, +, \*, /, etc.
+* Data types: `int`, `char`, `float`, `double`, `bool`, `void`, etc.
 
-Por ejemplo, en este código:
+For example, in this fragment:
 
 ```cpp
 int main() {
   for (int i=0; i<10; i++)
-    cout << "Hola mundo" << endl;
+    cout << "Hello world" << endl;
 }
 ```
 
-* Identificadores: `i`
-* Constantes: 0, 10, `"Hola mundo"`
-* Palabras reservadas: `for`, `main`, `std::cout`, `std::endl`
-* Símbolos: `(`, `)`, `;``
-* Operadores: =, <, ++, <<
-* Tipos de datos: `int`
+* Identifiers: `i`
+* Constants: 0, 10, `"Hola mundo"`
+* Reserved words: `for`, `main`, `std::cout`, `std::endl`
+* Symbols: `(`, `)`, `;``
+* Operators: =, <, ++, <<
+* Data types: `int`
 
-Vamos a ver en detalle cada uno de estos elementos.
+Let's see in detail each of these elements.
 
-#### Identificadores
+#### Identifiers
 
-Los identificadores son los nombres que le damos a nuestras constantes, variables o funciones. Los elige el programador, por lo que debe seguir una serie de recomendaciones:
+The identifiers are the names that we give to the constants, variables or functions. The programmer chooses them, but you must follow a series of recommendations:
 
-* Los identificadores deben ser **significativos**, es decir, su nombre debe indicar para qué se utiliza. Estos son ejemplos correctos:
-
-```cpp
-int numeroAlumnos = 0;
-void visualizarAlumnos(...)
-```
-
-Por convenio, en C++ se suele seguir la notación _lowerCamelCase_, es decir, el nombre de las variables y funciones debe empezar por una letra minúscula, y si hay más de una palabra la primera letra debe ser mayúscula, como en el ejemplo anterior.
-
-Estos son ejemplos de nombres incorrectos:
+* Identifier names must be **relevant**, that is, their name must indicate what they are used for. The following are correct examples:
 
 ```cpp
-const int kOCHO=8; // No se debe llamar a una constante con su valor
-int p,q,r,a,b; // Una sóla letra no es significativa
-int contador1,contador2; // mejor int i,j;
+int numberStudents = 0;
+void viewStudents(...)
 ```
 
-También por convenio, en C++ los contadores empiezan por la letra _i_. Por tanto, si tenemos varios contadores deberíamos llamarlos _i,j,k_, etc.
+In C++, notation _lowerCamelCase_ is usually followed, that is, the name of the variables and functions must start with a lowercase letter, and if there is more than one word, each first letter must be uppercase as in the previous example.
 
+These are examples of wrong names:
 
-Evidentemente, existen palabras reservadas que no se pueden utilizar como nombres definidos por el usuario. Por ejemplo, en C++ no podemos llamar a una variable con el nombre `int`, `long`, `friend`, `for`, etc.
+```cpp
+const int kOCHO=8; // A constant should not be named with its value
+int p,q,r,a,b; // A unique letter is not relevant
+int counter1,counter2; // better int i,j;
+```
 
-El nombre de constantes se suele poner en mayúsculas, para distinguirlas de las variables.
+Also by agreement, counters in C++ begin with the letter _i_. Therefore, if we have several counters we should call them _i,j,k_, etc.
 
-#### Constantes
+Obviously, there are reserved words that can not be used as user-defined names. For example, in C ++ we can not name a variable as `int`, `long`, `friend`, `for`, etc.
 
-Podemos tener constantes de varios tipos
+Constant names are usually capitalized, to distinguish them from variables.
+
+#### Constants
+
+We can have constants of different types:
 
 | Tipo   | Ejemplos                   |
 |--------|----------------------------|
@@ -233,26 +228,26 @@ Podemos tener constantes de varios tipos
 | char[] | "hola","","doble: \""      |
 | bool   | true, false                |
 
-
-Cuando las constantes aparecen directamente en el código con su valor, como en el siguiente ejemplo, se dice que son **implícitas**:
+When the constants appear directly in the code with their value, as in the following example, they are said to be **implicit**.
 
 ```cpp
 if (i<255) {
-  cout << "Valor correcto" << endl;
+  cout << "Correct value" << endl;
 }
 ```
-Sin embargo, si las declaramos con un nombre que las identifique, se dice que son **explícitas**:
+
+However, if we declare them with a name that identifies them, they are said to be **explicit**:
 
 ```cpp
 const int kMAXVALUE = 255;
-const char kMESSAGE[] = "Valor correcto";
+const char kMESSAGE[] = "Correct value";
 
 if (i<kMAXVALUE) {
   cout << kMESSAGE << endl;
 }
 ```
 
-Podemos declrar constantes explícitas de cualquier tipo:
+We can declare explicit constants of any type:
 
 ```cpp
 const int MAXALUMNOS=600;
@@ -260,120 +255,119 @@ const double PI=3.141592;
 const char DESPEDIDA[] = "ADIOS";
 ```
 
-La pregunta es, ¿cuándo debemos hacerlo?. Y la respuesta es: **casi siempre**, ya que deberíamos declarar como constantes aquellos valores que podríamos querer cambiar en futuras versiones del programa. Por ejemplo, es posible que queramos cambiar el texto de un mensaje, por lo que debemos declararlo como constante.
+The question is, when should we do it? And the answer is: **almost always**, since we should declare as constants those values that we might want to change in future versions of the program. For example, we may want to change the text of a message, so we must declare it as constant.
 
-La principal ventaja de usar constantes es que normalmente en el código tenemos que usar un mismo valor muchas veces (por ejemplo, un mensaje de error). Si lo declaramos como una constante explícita y queremos cambiar su valor en un futuro, sólo tendríamos que hacer este cambio en la declaración. Si no lo declaramos como explícito, nos tocaría buscar en el código todas las líneas en las que se aparece este mensaje para cambiar su valor, lo cual es más incómodo y propenso a errores por despistes.
+The main advantage of using constants is that usually in the code we need to use the same value many times (for example, an error message). If we declare it as an explicit constant and we want to change its value in the future, we would only have to make this change in the declaration. If we do not declare it as explicit, we would have to look in the code for all the instructions in which this message appears to change its value, which is more uncomfortable and prone to errors.
 
 #### Variables
 
-A diferencia de las constantes, que sólo pueden tener un valor fijo asignado, las variables pueden usarse para almacenar valores que cambien durante la ejecución del programa.
+Unlike constants, which can only have a fixed value assigned, variables can be used to store values that change during program execution.
 
-Es muy recomendable que siempre que se declare una variable de (tipo simple) se le asigne un valor de inicialización, bien en la misma línea o bien en la siguiente. Por ejemplo:
+It is highly recommended that whenever a variable (of simple type) is declared, an initialization value will be assigned, either in the same instruction or in the next one. For example:
 
 ```cpp
- int numeroProfesores=0; // Inicialización en la misma línea
+ int numProfessors=0; // Initialization in the same instruction
 
  int numeroAlumnos;
- numeroAlumnos = 10; // Inicialización en la siguiente línea
+ numeroAlumnos = 10; // Initialization in the next instruction
 ```
 
-Si no inicializa una variable de tipo simple, su valor será el que haya en memoria en ese momento, es decir, cualquiera (no podemos controlarlo).
+If you do not initialize a variable of simple type, its value will be the one in memory at that moment, that is, anything (we can not control it).
 
-> Los tipos simples más comunes en C/C++ son `int`, `char`, `float`, `double`, `unsigned` y `bool`.
+> The most common simple types in C / C ++ are `int`, `char`, `float`, `double`, `unsigned` and `bool`.
 
-Este código sería erróneo:
+This code would be wrong:
 
 ```cpp
 int i;
-cout << i << endl; // El valor será aleatorio
+cout << i << endl; // The value of i is "random" 
 ```
-##### Ámbitos
 
-Todas las variables (y constantes) que declaramos en nuestro código tienen un ámbito. El ámbito de una variable o constante comienza cuando se declara, y termina cuando acaba el bloque de llaves que la contiene. Por tanto, sólo podemos usar las variables o constantes durante su ámbito.
+##### Scopes
+
+All the variables (and constants) that declared in our code have a scope. The scope of a variable or constant begins when it is declared, and ends when the braces (block) that contains it ends. Therefore, we can only use the variables or constants during their scope.
 
 ```cpp
 if (i<10) {
 	int j = 20;
 }
-j = 10; // No podemos usar la variable j aquí porque se ha destruído cuando ha terminado el if
-
+j = 10; // We cannot use the variable j here because it was removed when the if instruction ended
 ```
 
-Ejemplo para un bucle:
+Loop example:
 
 ```cpp
 for (int i=0; i<10; i++) {
-	cout << "Hola mundo" << endl;
+	cout << "Hello world" << endl;
 }
-i = 2; // No podemos usar la variable i porque ya se ha destruído
-
+i = 2; // We cannot use the variable i here because it was removed
 ```
 
-Podemos declarar (aunque no es nada conveniente) dos variables que se llamen igual dentro de la misma función, siempre que tengan un ámbito distinto. Por ejemplo, esto compilaría:
+We can declare (although it is not convenient) two variables that have the same name within the same function, as long as they have a different scope. For example, this would compile:
 
 
 ```cpp
 int ncajas=0;
-// ya se puede usar ncajas
 if (i<10) {
-  // se puede usar
-  int ncajas=100; // Dentro podemos declarar otra variable con el mismo nombre (no aconsejable)
-  cout << ncajas << endl; // imprime 100
+  // we can use ncajas
+  int ncajas=100; // and another variable can be declared using the same name (not recommended!)
+  cout << ncajas << endl; // prints 100
 }
-cout << ncajas << endl; // imprime 0, ya que se usa la primera variable
+cout << ncajas << endl; // prints 0, as this instruction is printing the first variable
 ```
 
-##### Variables globales
+##### Global variables
 
-Las variables normalmente se declaran dentro de una función, pero cuando se declaran fuera se llaman variables globales. En general, se recomienda no utilizar variables globales (son peligrosas) y en Programación 2 están terminantemente prohibidas.
+Variables are usually declared within a function, but when they are declared outside they are called global variables. In general, it is recommended not to use global variables (they are dangerous) and in Programming 2 they are strictly forbidden.
 
-¿Por qué prohibimos estas variables? Veamos un ejemplo de código en la que se puede ver lo complicadas que son de manejar.
+Why do we forbid these variables? Let's see an example of code in which you can see how complicated could be to manage them.
+
 
 ```cpp
 #include <iostream>
 using namespace std;
-int contador=10;
+int counter=10;
 
-void cuentaAtras() {
-  while (contador > 0) {
-    cout << contador << " ";
-    contador--;
+void countDown() {
+  while (counter > 0) {
+    cout << counter << " ";
+    counter--;
   }
   cout << endl;
 }
 
 int main() {
-  cuentaAtras();   // Imprime 10, 9, 8, ... 0
-  cuentaAtras();   // Aqui no se imprime nada
+  countDown();   // Prints 10, 9, 8, ... 0
+  countDown();   // Here nothing is printed
 }
 ```
 
-En este ejemplo, tenemos una variable global llamada `contador` que inicialmente vale 10. Podemos ver que si llamamos a la función `cuentaAtras`, la primera vez hará una cosa y la segunda otra distinta.
+In this example, we have a global variable called `counter` that is initially set to 10. We can see that if we call the `countDown` function, the first time will do one thing and the second will do something different.
 
-Este código es muy complicado de controlar, ya que **una misma función con los mismos parámetros se comporta de forma distinta** dependiendo de en qué punto del código hagamos la llamada.
+This code is very complicated to control, since **the same function with the same parameters behaves differently** depending on where we make the call in the code.
 
-#### Tipos de datos
+#### Data types
 
-Estos son los principales **tipos de datos simples** en C++:
+These are the main **data types** in C++:
 
-| Tipo   | Descripción                   |
+| Type   | Description                   |
 |--------------|----------------------------|
-|`short` | Entero corto |
-| `int`  | Entero, el doble de bytes que `short` |
-| `char` | Caracter |
+|`short` | Short integer |
+| `int`  | Integer, twice the bytes of `short` |
+| `char` | Character |
 | `float`| Real |
-|`double`| Real, el doble de bytes que `float` |
-|`bool` | Booleano|
+|`double`| Real, twice the bytes of `float` |
+|`bool` | Boolean|
 
-Además, para los números enteros tenemos su versión sin signo (`unsigned short` y `unsigned int`). Si un entero corto (`short`) se representa con 2 bytes, su rango va desde -32768 a 32767. En cambio, si es `unsigned short`, podremos representar desde 0 a 65535, por lo que si sabemos que no podemos tener valores negativos podremos aprovechar para representar números más altos sin necesitar más bytes.
+In addition, for integers we have the unsigned versions (`unsigned short` and `unsigned int`). If a short integer (`short`) is represented with 2 bytes, its value ranges from -32768 to 32767. On the other hand, if it is an `unsigned short`, we can represent from 0 to 65535. Therefore, if we know that we can not have negative values, we could use unsigned to represent higher numbers without needing more bytes.
 
-> El número de bytes necesarios cada tipo de dato depende de la plataforma (por ejemplo, si es sistema operativo es de 32 bits o 64 bits).
+> The number of bytes required for each data type depends on the platform (for example, if the operating system is 32 or 64 bits).
 
-##### Conversión
+##### Conversion
 
-En nuestro código podemos convertir una variable de un tipo a otro. Esta conversión puede ser implícita (el compilador lo hace por nosotros directamente), o explícita (tenemos que indicarle que lo haga). A continuación podemos ver ejemplos de conversiones **implícitas**:
+In our code we can convert a variable from one type to another. This conversion can be implicit (the compiler does it for us directly), or explicit (we have to tell it to do it). Below we can see examples of **implicit** conversions:
 
-| Conversión   | Ejemplos                   |
+| Conversion   | Examples                   |
 |--------------|----------------------------|
 | char -> int  | int le = 'A' + 2;          |
 | int -> float | float pi = 1 + 2.141592;   |
@@ -381,155 +375,155 @@ En nuestro código podemos convertir una variable de un tipo a otro. Esta conver
 | bool -> int | int c = true; // c == 1   |
 | int -> bool   | bool c = 77212; // b == true     |
 
-En estos ejemplos anteriores no hay problemas de conversión, por que la variable destino es más general que la variable original. Por ejemplo, en un `int` (normalmente 2 bytes) siempre podremos almacenar un valor `char` (1 byte).
+In these previous examples there are no conversion problems, because the target variable is more general than the original variable. For example, we can always store a value `char` (1 byte) in an `int` (usually 2 bytes).
 
-Sin embargo, hay otros casos en los que haceiendo la conversión podemos perder información. En estas situaciones el compilador mostrará un `warning`, y tendremos que forzar la conversión en el código, haciendo lo que conocemos como `casting`.
+However, there are other cases in which doing the conversion we can lose information. In these situations the compiler will show a `warning`, and we will have to force the conversion in the code, doing what we know as `casting`.
 
-> Es importante no ignorar los _warnings_.
+> It is important not to ignore the _warnings_.
 
-Vamos a ver algunos ejemplos de conversiones **explícitas**:
+Let's see some **explicit** conversion examples:
 
-| Conversión   | Ejemplos                   |
+| Conversion   | Examples                   |
 |--------------|----------------------------|
 | int -> char  | char c = (char)('A' + 2); // c valdrá 'C'    |
-| float -> int | int epi = (int)pi;  // epi valdrá 3  |
+| float -> int | int epi = (int)pi;  // epi will be 3  |
 | double -> float | double d = (double)pi; |
 
-En el primer caso, si convertimos un número entero a un caracter podríamos tener problemas (si es mayor de 255 no nos cabría en un byte). Por tanto, el compilador nos da un _warning_ (a veces incluso un error) para que lo tengamos en cuenta. Para indicar explícitamente que queremos convertir un tipo a otro incluso si puede haber problemas, tenemos que hacer un _casting_, convirtiendo el tipo de dato mediante paréntesis antes del nombre de la variable.
+In the first case, if we convert an integer to a character we could have problems (if it is greater than 255 it would not fit into a byte). Therefore, the compiler gives us a _warning_ (sometimes even an error) so that we take this into account. To indicate explicitly that we want to convert one type to another, even if there may be problems, we have to do a _casting_, converting the data type using parentheses before the name of the variable.
 
+##### Type declaration
 
-##### Declaración de tipos
-
-En C++, como en la mayoría de lenguajes de programación, se pueden definir tipos nuevos. Para empezar, podemos asignar alias a ciertos tipos de datos ya existentes, usando `typedef`:
-
-```cpp
-typedef int entero;  
-entero i,j; // i,j son int
-
-typedef bool logico,booleano;  // logico y booleano son bool
-logico b;  // b es bool
-```
-
-También podemos declarar un array como un tipo:
+In C ++, as in most programming languages, you can define new types. To start, we can assign aliases to certain types of existing data, using `typedef`:
 
 ```cpp
-typedef char cadena[MAXCADENA];  // cadena es un array de char
+typedef int integer;  
+integer i,j; // i,j are int
+
+typedef bool logico,booleano;  // logico and booleano are bool
+logico b;  // b is bool
 ```
 
-En Programación 2 no recomendamos redefinir los tipos ya existentes, básicamente porque un programador de C++ no está acostumbrado a ver tipos de datos que se llamen _logico_ o _cadena_ en el código. Pensad que véis un código lleno de tipos de datos que no conocéis, habría que ir a la definición de los tipos para saber qué significan en cada caso, y esto no es cómodo a la hora de compartir y reutilizar código.
+We can also declare an array as a type:
 
-Además de redefinir tipos existentes, C++ nos permite crear nuevos tipos de datos. En Programación 2, los únicos tipos de datos nuevos que veremos serán los registros (en el último tema veremos cómo hacer clases, pero en realidad no son tipos de datos). Podemos declarar un registro de dos formas:
+```cpp
+typedef char chararray[MAXARRAY];  // chararray is an array of char
+```
+
+In Programming 2 we do not recommend to redefine existing types, basically because a C++ developer is not used to seeing data types that are called _logico_ or _chararray_ in the code. If you see a code full of data types that you do not know, you should go to the definition of the types to know what they mean in each case, and this is not comfortable when sharing and reusing code.
+
+In addition to redefining existing types, C++ allows us to create new types of data. In Programming 2, the only new data types that we will see will be the structs (in the last topic we will learn how to make classes, but actually they are not data types). We can declare a struct in two ways:
+
 
 <!--- CAMBIADO TRASPAS --->
 
 ```cpp
- struct Alumno {      // Primera forma: 'Alumno' es un tipo en C++ (recomendado)
-   int dni;           
-   double nota;
+ struct Student {      // First way: 'Student' is a C++ type (recommended)
+   int id;
+   double mark;
  };
 ```
 
-
 ```cpp
- typedef struct {     // Segunda forma: 'Alumno' es un tipo en C
-   int dni;
-   double nota;
- } Alumno;
+ typedef struct {     // Second way: 'Student' is a type in C (and C++)
+   int id;
+   double mark;
+ } Student;
 ```
 
-En ambos casos declaramos un tipo de dato llamado `Alumno`. Después, podemos crear una variable de este tipo de la siguiente forma:
+In both cases we declare a type of data called `Student`. Then, we can create a variable of this type as follows:
 
 ```cpp
-Alumno alu;
+Student alu;
 ```
 
-La principal ventaja de usar registros es que nos permiten agrupar variables. Imaginemos que tenemos la siguiente función:
+The main advantage of using structs is that they allow us to group variables. Let's consider the following function:
+
 
 ```cpp
-int gestionarAlumno(int dni, double nota, char nombre[], int turno, int numFaltas);
+int manageStudent(int id, double mark, char name[], int group, int absences);
 ```
 
-Si usáramos un registro `Alumno` para agrupar todos estos datos, la llamada sería más sencilla:
+If we used a `Student` struct to group all this data, the call would be simpler:
 
 ```cpp
-int gestionarAlumno(Alumno alu);
+int manageStudent(Student alu);
 ```
 
-Además, podríamos crear arrays:
+In addition, we could create arrays:
 
 ```cpp
-Alumno alumnos[100];
+Student alus[100];
 ```
 
-Para acceder a los datos de un registro podemos usar un punto (`.`) tras su nombre. Por ejemplo:
+To access the data of a record we can use a dot (`.`) after its name. For example:
 
 ```cpp
-Alumno a,b;
+Student a,b;
 
-a.dni = 123133;  // asignacion a un campo
-b = a;           // asignacion de un registro
+a.id = 123133;  // field assignment
+b = a;          // struct assignment
 ```
 
-La asignación directa de registros (como aparece en la última línea del ejemplo anterior) es posible, pero no debemos hacerlo si dentro del registro tenemos un array o un puntero. El motivo es que hay que tener mucho cuidado al asignar directamente un registro o un puntero, por razones que veremos en el tema de memoria dinámica.
+The direct assignment of structs (as in the last line of the previous example) is possible, but we should not do it if we have an array or a pointer inside the struct. The reason is that we must be very careful when directly assigning a struct or a pointer for the reasons that we will see in the dynamic memory unit.
 
-#### Expresiones
+#### Expressions
 
-Las expresiones se usan cuando queremos hacer cálculos y evalúan una o varias operaciones devolviendo un resultado. En una expresión tenemos operadores y operandos, como puede verse en el siguiente ejemplo:
+Expressions are used when we want to perform calculations and evaluate one or several operations returning a result. Inside an expression we have operators and operands, as can be seen in the following example:
 
 ```cpp
-int i = 10 + 12; // Expresión con operadores 10 y 12, y operando +.
+int i = 10 + 12; // Expression with operators 10 and 12, and operand +.
 ```
 
-Las expresiones pueden ser de varios tipos.
+The expressions can be of several types.
 
-##### Expresiones aritméticas
+##### Arithmetic expressions
 
-En C++ los principales operadores aritméticos son la suma (`+`), la resta (`-`), la multiplicación (`*`), la división (`/`), y el el resto o módulo (`\%`).
+In C ++ the main arithmetic operators are sum (`+`), subtraction (`-`),  multiplication (`*`), division (`/`), and module (`\%` ).
 
-Si aparece un operando de tipo `char` o `bool`, se convierte implícitamente a `int`. Por ejemplo:
+If we have an operand of type `char` or `bool` inside an arithmetic expression, it is implicitly converted to `int`. For example:
 
 ```cpp
 int i = 'a' + 3; // i == 100
 char c = 'A' + 3; // c == D
 ```
 
-Cuando hacemos una división entre dos números enteros (`int`), el resultado es un número entero. Por ejemplo:
+A division between two integers (`int`) returns an integer number. For example:
 
 ```cpp
 float f1 = 7 / 2; // f1 == 3
 float f2 =  (float)7 / 2; // f2 == 3.5
 ```
 
-En cuanto uno de los dos operandos es `float` (o `double`), el resultado de la división es un número real, como puede verse en el ejemplo anterior.
+As soon as one of the two operands is `float` (or `double`), the result of the division is a real number, as can be seen in the previous example.
 
-El operador resto (`%`) devuelve el resto de una división entre dos números enteros. Por ejemplo:
-
-```cpp
-int resto = 30 % 7; // resto == 2
-```
-
-En las expresiones aritméticas hay operadores que tienen preferencia sobre otros. En concreto, los operadores `*` y `/` se evalúan antes que los operadores `+`y `-`.
+The module operator (`%`) returns the remainder of a division between two integers. For example:
 
 ```cpp
-int n = 2+3*2;  // Se evalúa 2+6, ya que la multiplicación se hace antes
+int remainder = 30 % 7; // remainder == 2
 ```
 
-En caso de que haya varias operaciones en una expresión es recomendable usar paréntesis para evitar problemas. Por ejemplo:
+In arithmetic expressions there are operators that have preference over others. In particular, the `*` and `/` operators are always evaluated before the `+` and `-` operators.
+
+```cpp
+int n = 2+3*2;  // First, 2+6 is computed, as multiplication operation has preference
+```
+
+If there are several operations in an expression, it is recommended to use parentheses to avoid problems. For example:
 
 ```cpp
 int n = 2+(3*(7/2.5));
 ```
 
-##### Operadores de incremento y decremento
+##### Increment and decrement operators
 
-Los operadores `++` y `--` se usan para incrementar o decrementar el valor de una variable de tipo entero. Podemos usarlos antes o después de la variable:
+Operators `++` and `--` are used to increase or decrease the value of an integer variable. We can use them before or after the variable: 
 
 ```cpp
-++i;  // Preincremento
-i++;  // Postincremento
+++i;  // Preincrement
+i++;  // Postincrement
 ```
 
-La diferencia entre ponerlos antes o después es importante, ya que no significa lo mismo. Si van en una línea como en el ejemplo anterior, el resultado es idéntico. Sin embargo, cuando van acompañadas de otras instrucciones, cambia:
+The difference between setting them before or after is important, since it does not mean the same thing. If they appear alone in a line as in the previous example, the result is identical. However, when used with other instructions, their behaviour changes:
 
 ```cpp
 int i = 3;
@@ -539,83 +533,83 @@ i=3;
 int j = i++;  // j == 3, i == 4
 ```
 
-Como puedes ver, con preincremento (o predecremento) la suma se hace **antes** de calcular el resto de la expresión. En cambio, con postincremento (o postdecremento), se hace **al final**. En el primer caso, primero se hace el incremento (`++i`), y luego se asigna este valor a `k`. Sin embargo, en el segundo caso se hace la asignación (`j = i`) y al finalizar se incrementa el valor de `i `.
+As you can see, with preincrement (or predecrement) the sum is performed **before** calculating the rest of the expression. On the other hand, postincrement (or postdecrement) are calculated **at the end** of the instruction. In the first case, the increment is calculated first (`++i`), and then this value is assigned to `k`. However, in the second case the assignment is made (`j = i`) and finally the value of `i` is increased.
 
-Aunque se pueden utilizar en cualquier punto de una expresión, lo recomendable es no mezclar estos operadores en la misma instrucción, ya que es muy complicado predecir el resultado. Por ejemplo, ¿cuál sería el valor de `j` en este caso?:
+Although they can be used at any point of an expression, it is advisable not to mix these operators in the same instruction, since it is very complicated to predict their result. For example, what would be the value of `j` in this case?:
 
 ```cpp
 i = 3;
-j = i++ + --i;  // valor de j?
+j = i++ + --i;  // value of j?
 ```
 
-> Piensa en la respuesta, y luego confirma el resultado ejecutando este código.
+> Think of the answer, and then confirm the result by executing this code.
 
-##### Expresiones relacionales
+##### Relational expressions
 
-Las expresiones relacionales evalúan una operación, devolviendo únicamente `true` o `false`. Los principales operadores relacionales en C++ son `==`, `!=`, `>=`, `>`, `<=`, `<`.
+Relational expressions evaluate an operation, returning just `true` or `false`. The main relational operators in C ++ are `==`, `!=`, `>=`, `>`, `<=`, `<`.
 
-Si los operandos son de distinto tipo, se convierten implícitamente al tipo más general. Por ejemplo:
+If the operands are of different types, they are implicitly converted to the more general type. For example:
 
 ```cpp
-bool resultado = 2 < 3.4; // Internamente la operación es 2.0 < 3.4
+bool result = 2 < 3.4; // Internally the operation is 2.0 < 3.4
 ```
 
-En C++, los operandos se agrupan de dos en dos por la izquierda. Por tanto, para saber si `a < b < c`, tenemos que indicar lo siguiente:
+In C++, operands are grouped two by two. Therefore, to know if `a<b<c`, we have to indicate the following:
 
 ```cpp
 if (a < b && b < c) {
-	// Se cumple la relación
+	// relation is met
 }
 ```
 
-##### Expresiones lógicas
+##### Logic expressions
 
-Las expresiones lógicas evalúan una expresión de tipo lógico, devolviendo `true` o `false`. Los principales operadores lógicos en C++ son `!`, `&&`, `||`. La negación (`!`) devuelve `true` si lo que viene ab continuación es `false`, o `false` si lo que viene a continuación es `true`. Por ejemplo:
+Logic expressions evaluate an expression of logical type, returning either `true` or `false`. The main logical operators in C++ are `!`, `&&`, `||`. Denial (`!`) returns `true` if what follows afterwards is `false`, or `false` if what follows is `true`. For example:
+
+```cpp
+int i = 2;
+bool end = false;
+
+if (i == 2 && !end) {
+	// Condition is true, this line is executed
+}
+```
+
+There is a C++ feature that is important to know: The **short-circuit evaluation**. When we have a condition `||`, if the left operand is `true`, then the right operand will never be evaluated, as `true||x` will always be `true`. For example:
 
 ```cpp
 int i = 2;
 bool salir = false;
 
-if (i == 2 && !salir) {
-	// La condición es verdadera, entra aquí
+if (i == 2 || !end) {
+	// Variable end is not checked, as i==2
 }
-
 ```
 
-Hay una característica de C++ que es importante conocer : la **evaluación en cortocirtuito**. Cuando tenemos una condición `||`, si el operando izquierdo es `true` el operando derecho no se llega a evaluar, ya que `true || x` siempre será `true`. Por ejemplo:
+Also, when we have a condition `&&`, if the left operand is `false` then the right operand will not be evaluated, since `false && x` will always be `false`. For example:
 
 ```cpp
-int i = 2;
-bool salir = false;
+char v[] = "Hello world";
+const char search = 'k';
 
-if (i == 2 || !salir) {
-	// La variable salir no llega a comprobarse, ya que se cumple que i==2
+for (int i = 0; i < strlen(v) && v[i]!=search; i++) {
+ 	cout << v[i];   // Loop prints "Hello world"
 }
 ```
 
-Asimismo, cuando tenemos una condición `&&`, si el operando izquierdo es `false`, el operando derecho no se llega a evaluar, ya que `false && x` siempre será `false`. Por ejemplo:
+This code snippet prints a string until it finds the letter `'k'`.  Look at the condition `&&`. When `i==strlen(v)`, this expression will be `false` and therefore `v[i]!=search` will not be checked. If the short-circuit evaluation did not exist and this second condition would be checked, a segmentation fault (_segmentation fault_) would occur when trying to look at a position in the array that is beyond its size. If we implemented the condition backwards, `v[i]!=search && i<strlen(v)`, we would get this error. Therefore, **the order of the operands in a logic expression is important**.
 
-```cpp
-char v[] = "Hola mundo";
-char letraBuscada = 'k';
 
-for (int i = 0; i < strlen(v) && v[i]!=letraBuscada; i++) {
- 	cout << v[i];   // El bucle imprime "Hola mundo"
-}
-```
+#### Input / output
 
-Este fragmento de código imprime una cadena hasta que se encuentra con la letra `'k'`. Fíjate en la condición `&&`. Cuando `i==strelen(v)`, esta expresión será `false` y por tanto no llega a comprobarse `v[i]!=letraBuscada`. Si no existiera la evaluación en cortocircuito y esta segunda condición se comprobara, se produciría un fallo de segmentación (_segmentation fault_) al intentar mirar en una posición del array mayor de su tamaño. Si implementáramos la condición al revés, `v[i]!=letraBuscada && i<strlen(v)`, nos saldría este error. Por tanto, **el orden de los operandos en una expresión lógica es importante**.
-
-#### Entrada / salida
-
-En C++ disponemos de los _streams_ de entrada y salida _cin_ y _cout_, respectivamente. Podemos mostrar una variable por pantalla de la siguiente forma:
+In C ++ we have the input and output _streams_ called _cin_ and _cout_, respectively. We can show a variable on the screen as follows:
 
 ```cpp
 int i = 3;
 cout << i << endl;
 ```
 
-Como ves, las "flechas" van en el sentido de la operación (se envían los datos a `cout`). Por defecto, todo lo que se envía a la salida estándar (`cout`) se imprime por pantalla. Sin embargo, podemos cambiar este comportamiento. Escribe este programa, llámalo `prueba.cc` y compílalo:
+As can be seen, the "arrows" point in the direction of the operation (the data is sent to `cout`). By default, everything that is sent to the standard output (`cout`) is printed on the screen. However, we can change this behavior. Write this program, call it `test.cc` and compile it:
 
 
 ```cpp
@@ -624,25 +618,25 @@ Como ves, las "flechas" van en el sentido de la operación (se envían los datos
 using namespace std;
 
 int main() {
-	cout << "Hola mundo" << endl;
+	cout << "Hello world" << endl;
 }
 ```
 
-Y ejecútalo desde el terminal:
+Run it from the terminal: 
 
 ```bash
-$ ./prueba
+$ ./test
 ```
 
-Verás que se muestra por pantalla el mensaje. Ahora vamos a ejecutarlo de otra forma:
+You will see that the message is printed on the screen. Now let's execute it in another way:
 
 ```bash
-$ ./prueba > salida.txt
+$ ./test > output.txt
 ```
 
-En lugar de mostrarse por pantalla, la salida se ha guardado en el fichero `salida.txt`, que puedes abrir con cualquier editor de texto. A esto se le llama **redirección** de la salida estándar.
+Instead of being displayed on the screen, the output has been saved in the `output.txt` file, which you can open with any text editor. This is called **redirection** of the standard output.
 
-Igual que podemos mostrar algo, también podemos leer el valor de una variable desde teclado:
+Just as we can show something, we can also read the value of a variable from the keyboard:
 
 ```cpp
 #include <iostream>
@@ -651,15 +645,14 @@ using namespace std;
 
 int main() {
 	int n;
-	cin >> n; // Leemos un valor entero por teclado
-	cout << "He leido" << n << endl;
+	cin >> n; // An integer is read from the keyboard
+	cout << "I read " << n << endl;
 }
 ```
 
-En este caso, leemos de la **entrada estándar** con `cin`. Los datos a leer dependerán del tipo de la variable. En este ejemplo, es un número entero, pero podría ser un caracter (sólo se leería una letra), o una cadena, por ejemplo. El operador de entrada lee desde teclado ignorando blancos y tabuladores hasta leer el tipo de dato de la variable que se le indica, y deja el puntero de lectura justo después.
+In this case, we read from the **standard input** with `cin`. The data to be read will depend on the type of the variable. In this example it is an integer, but it could be a character (only one letter would be read), or a string, for example. The input operator reads from the keyboard ignoring blanks and tabs until reading the data type of the variable that is indicated, and leaves the reading pointer just after.
 
-Al igual que con `cout`, podemos leer varias variables seguidas:
-
+As with `cout`, we can read several variables in a single instruction:
 
 ```cpp
 #include <iostream>
@@ -669,615 +662,607 @@ using namespace std;
 int main() {
 	int n;
 	char c;
-	cin >> n >> c; // Leemos un valor entero y un caracter por teclado
-	cout << "He leido" << n << " y " << c << endl;
+	cin >> n >> c; // We read an integer value and a character
+	cout << "I read" << n << " and " << c << endl;
 }
 ```
 
-Cuando ejecutemos el programa quedará a la espera de que introduzcamos un número entero y a continuación un caracter.
+When we run this program, it will wait for us to enter an integer number and then a character.
 
-> Cada vez que leamos algo con `cin >>` , es conveniente poner a continuación `cin.get();`, `cin.ignore();` o llamar a una función propia  `limpiarBuffer()`  para que no se nos quede en el _buffer_ el caracter de salto de línea, ya que puede dar problemas si se lee después una cadena como veremos en el tema de `strings`.
+> Every time we read something with `cin >>`, it is convenient to write `cin.get();`, `cin.ignore();` or call a function `cleanBuffer()` so that the line break character will be removed from the _buffer_, since it can give problems if a string is read afterwards as we will see in the `strings` unit.
 
-Vamos a ejecutar el programa anterior redireccionando la entrada estándar. Con cualquier editor de texto creamos un nuevo fichero llamado `entrada.txt`, y escribimos lo siguiente:
+We will execute the previous program redirecting the standard input. With any text editor we create a new file called `input.txt`, and write the following:
 
 ```bash
 124 k
 ```
 
-No te olvides de poner un salto de línea al final del fichero. A acontinuación, ejecutamos:
+Do not forget to put a line break at the end of the file. Then, we execute:
 
 ```bash
-$ ./prueba < entrada.txt
+$ ./test < input.txt
 ```
 
-Verás como el programa ya no pide los datos de la entrada, sino que los lee desde el fichero. Podemos también usar la redirección de entrada y salida a la vez:
+You will see how the program no longer asks for the input data, but reads it from the file. We can also use the input and output redirection simultaneously:
 
 ```bash
-$ ./prueba < entrada.txt > salida.txt
+$ ./test < input.txt > output.txt
 ```
 
-El programa leerá la entrada estándar desde el fichero `entrada.txt` y escribirá el resultado en `salida.txt`.
+The program will read the standard input from the file `input.txt`, writing the result in `output.txt`.
 
-Existe un tercer _stream_, la salida de error (`cerr`). Cambia el programa anterior, reemplazando `cout` por `cerr`. Como verás, si ejecutamos el programa como hemos hecho la última vez, se mostrará la información por la pantalla y `entrada.txt` estará vacío. Esto ocurre porque lo que sale por la salida de error se redirecciona de forma distinta a lo que se muestra por la salida estándar. Para redireccionar el error, tenemos que poner:
+There is a third _stream_, the error output (`cerr`). Change the previous program, replacing `cout` with `cerr`. As you can see, if we run the program as we did before, the information will be displayed on the screen and `output.txt` will be empty. This occurs because what goes through the error output is redirected differently from what is shown by the standard output. To redirect the standard error, we have to write:
 
 
 ```bash
-$ ./prueba < entrada.txt 2> error.txt
+$ ./test < input.txt 2> errors.txt
 ```
 
-
-La salida de error se suele usar para mostrar mensajes de error de nuestros programas. Por ejemplo, añade cualquier cosa al código anterior para que no compile. Ejecuta el compilador:
+Usually, the error output is used to display error messages from our programs. For example, add anything to the previous code so it does not compile. Execute the compiler:
 
 ```bash
-g++ -o prueba prueba.cc 2> errores.txt
+g++ -o test test.cc 2> errors.txt
 ```
 
-Verás que los errores de compilación se han guardado en `errores.txt`, ya que el programa `g++` muestra los mensajes de error mediante `cerr`.
+You will see that the compilation errors were saved in `errors.txt`, since the `g++` program shows all error messages using `cerr`.
 
+#### Flow control
 
-#### Control de flujo
-
-El control de flujo de código nos permite añadir condiciones al código, de forma que nuestro programa ejecute sólo ciertas instrucciones en función de una condición.
+The code flow control allows us to add conditions to the code, so that our program executes only certain instructions based on a given condition.
 
 ##### `if`
 
-La instrucción `if` ejecuta lo que hay a continuación siempre y cuando la condición sea `true`. Podemos también añadir un `else` para que se ejecuten instrucciones alternativas cuando no se cumple la condición:
+The `if` statement executes what is next as long as the condition is `true`. We can also add an `else` so that alternative instructions are executed when the condition is not met:
 
 ```cpp
-if (condicion) {
-	// Instrucciones
+if (condition) {
+	// Instructions
 }
 else {
-	// Otras instrucciones
+	// Other instructions
 }
 ```
+
 ##### `while`
 
-La instrucción de control de flujo `while` crea un bucle que finaliza cuando se deja de cumplir una condición.
+The flow control instruction `while` creates a loop that ends when a condition is no longer met.
 
 ```cpp
-while (condicion) {
-	// Instrucciones
+while (condition) {
+	// Instructions
 }
 ```
 
-Es desaconsejable usar `||` en la condición de un `while`, ya que es muy complicado de controlar y poco intuitivo. Por ejemplo, piensa cuándo pararía el bucle en el siguiente código:
+It is not recommended to use `||` inside a `while` condition, since it is very complicated to control and unintuitive. For example, try to guess when would the loop end in the following code:
 
 ```cpp
-bool encontrado=false;
+bool found=false;
 int i=0;
-while (i<10 || !encontrado) {
+while (i<10 || !found) {
 	cout << i << endl;
    i++;
 }
 ```
 
-Respuesta: Nunca, ya que se debe cumplir que `i<10` **y también** que `encontrado==true`.
+Answer: Never, as `i<10` must be met, **and also** `found` should be `true`.
 
-> Nota: Para parar un programa que se ha quedado en un bucle infinito, pulsa `Ctrl + C`.
+> Note: To stop a program from an infinite loop, press `Ctrl+C`.
 
 ##### `for`
 
-Las condiciones `for` son bucles con una inicialización y una instrucción que se ejecuta tras cada iteración:
+The `for` conditions are loops with an initialization and an instruction that is executed after each iteration:
 
 ```cpp
-for (inicializacion; condicion; finalizacion) {
-	// Instrucciones
+for (initialization; condition; ending) {
+	// Instructions
 }
 ```
 
-Los `for` suelen ser necesariso cuando recorremos una serie de elementos, por ejemplo para recorrer un array:
+The `for` loops are usually necessary when we iterate through a series of elements, for example in an array:
 
 ```cpp
-bool salir = false;
+bool end = false;
 int array[] = {1,3,5,2,5,6,1,2};
 
-for (int i=0; i<8 && !salir; i++) {
+for (int i=0; i<8 && !end; i++) {
 	cout << i << endl;
 	if (array[i] == 6)
-		salir=true;
+		end=true;
 }
 ```
 
-En realidad un `for` es equivalente a una condición `while` pero usando menos código:
+Actually, a `for` is equivalent to a `while` condition but saving some code:
 
 ```cpp
-inicializacion;
-while (condicion) {
-   // Instrucciones
-   finalizacion;
+initialization;
+while (condition) {
+   // Instructions
+   ending;
 }
 ```
-
 
 ##### `do-while`
 
-Las instrucciones de control `do-while` son similares a las instrucciones `while`, con la diferencia de que la primera vez **siempre** ejecutan su contenido.
+The `do-while` control instructions are similar to the `while` instructions, with the difference that the first time **they always** execute their content.
 
 ```cpp
 do {
-  // Instrucciones
-} while (condicion);
+  // Instructions
+} while (condition);
 ```
 
-Se usan, por ejemplo, cuando queremos mostrar un menú por pantalla.
+They are used, for example, when we want to show a menu on the screen.
 
 ##### `switch`
 
-Las instrucciones `switch` se usan cuando queremos hacer una acción para una variable que puede tener varios valores distintos. Por ejemplo:
+The `switch` instructions are used when we want to make an action for a variable that could have certain values. For example:
 
 ```cpp
 switch (variable) {
-  case valor1:
-           // Instrucciones 1
+  case value1:
+           // Instructions 1
            break;
-  case valor2:
-           // Instrucciones 2
+  case value2:
+           // Instructions 2
            break;
   default:
-           // Instrucciones 3
+           // Instructions 3
            break;
 }
 ```
 
-En C++ la variable (o constante) del `switch` debe ser de tipo entero o char (que se convierte implícitamente a entero). Por ejemplo:
+In C++ the variable (or constant) used in `switch` must be an integer or a char (which is implicitly converted into an int). For example:
 
 ```cpp
 char c;
 cin >> c;
 switch(c) {
 	case 'a':
-		cout << "Seleccionado a" << endl;
+		cout << "Selected a" << endl;
 		break;
 	case 'b':
 	case 'c':
-		cout << "Seleccionado b o c" << endl;
+		cout << "Selected b or c" << endl;
 		break;
 	default:
-		cout << "Valor desconocido" << endl;
+		cout << "Unknown value" << endl;
 		break;
 }
 ```
 
+If the variable is of another type such as `float` or `double`, the program will not compile.
 
-Si la variable es de otro tipo como `float` o `double`, el programa no compilará.
+> As you can see, we have to use `break` in the `switch`. You can also use `break` to exit a `while`, `do` or `for` loop.
 
-> Como ves, tenemos que usar `break` en los `switch`. También se puede usar `break` para salir de un bucle `while`, `do` o `for`.
+#### Arrays and matrices
 
+An array is a container that allows to store a sequence of variables or constants. In C/C++, an array must be declared using a **fixed size** that can not be changed in runtime.
 
-#### _Arrays_ y matrices
-
-Un _array_ es un contenedor que permite almacenar una secuencia de variables o constantes. En C/C++, cuando declaramos un _array_ lo hacemos con un **tamaño fijo** que no puede cambiar en tiempo de ejecución.
-
-Podemos usar una constante para indicar su tamaño:
+We can use a constant to indicate the size:
 
 ```cpp
-int arrayAlumnos[10];
-char fila[kMAXTABLERO];
+int studentsArray[10];
+char row[kMAXBOARD];
 ```
 
-También podemos crear un _array_ inicializándolo con una serie de elementos. En este caso no hay que especificar el tamaño:
+We can also create a array by initializing it with a series of elements. In this case it is not necessary to specify the size:
 
 ```cpp
-int numeros[] = {1,3,5,2,5,6,1,2};
+int numbers[] = {1,3,5,2,5,6,1,2};
 ```
 
-En C++ podemos crar un array con un tamaño asignado por una variable:
+In C ++ we can create an array with a size assigned by a variable:
 
 ```cpp
 int n;
 cin >> n;
-int v[n]; // El tamaño del array se conoce en tiempo de ejecución. NO RECOMENDABLE!
+int v[n]; // The array size is known in runtime. NOT RECOMMENDED!
 ```
 
-Pero el estándar del lenguaje no recomienda hacerlo así. Si el tamaño del _array_ no se conoce en tiempo de compilación, entonces es mejor usar vectores, como veremos a continuación.
+However, the language standard does not recommend doing so. If the size of the array is not known at compile time, then it is better to use vectors, as we will see below.
 
-Para acceder a los valores de un _array_ podemos usar corchetes: `[]`
+We can use square brackets (`[]`) to access the values of an array:
 
 ```cpp
-int numeros[] = {1,3,5,2,5,6,1,2};
-cout << numeros[2] << endl; // Imprime 5
+int numbers[] = {1,3,5,2,5,6,1,2};
+cout << numbers[2] << endl; // Prints 5
 ```
 
-El índice de un _array_ comienza en la posición 0. Asimismo, nunca podemos sobrepasar el número de elementos de un _array_, ya que lo más probable es que se produzca un fallo de segmentación:
+The index of an array starts at position 0. Also, we can never exceed the number of elements of an array, since is most likely to throw a segmentation fault:
 
 ```cpp
-int numeros[] = {1,3,5,2,5,6,1,2};
+int numbers[] = {1,3,5,2,5,6,1,2};
 
-numeros[20] = 12; // Error, el array tiene menos de 20 elementos
-numeros[8] = 3; // Error, el array tiene 8 elementos cuyas posiciones van de 0 a 7
+numbers[20] = 12; // Error, the array has less than 20 elements
+numbers[8] = 3; // Error, the array has 8 elements which positions range from 0 to 7
 
 for (int i=0; i<8; i++) {
-	numeros[i] = 4; // Correcto
+	numbers[i] = 4; // Correct
 }
 ```
 
-Es importante comprobar siempre los límites de un _array_ para no acceder fuera de ellos.
+It is important to always check the limits of an array to avoid accessing outside them.
 
-Una matriz es un _array_ de más de una dimensión:
+A matrix is an array with more than one dimension:
 
 ```cpp
 int matrix[10][10];
 
-matrix[0][2]=31; // Asignación de un valor
+matrix[0][2]=31; // Value assignment
 ```
 
-#### Cadenas de caracteres en C
+#### Arrays of characters in C
 
-Las cadenas de caracteres en C son simplemente _arrays_ que contienen caracteres. Por ejemplo:
+Character arrays in C are simply arrays that contain characters. For example:
 
 ```cpp
-const char cadena[]="Hola";
+const char myarray[]="Hello";
 ```
 
-Para representar una cadena de caracteres usamos comillas dobles (`"`), mientras que para representar un sólo caracter usamos comillas simples (`'`).
+To represent a character string we use double quotes (`"`), whereas to represent a single character we use single quotes (`'`).
+
+The peculiarity is that these C arrays add the null character at the end: `'\0'`.
 
 
-La peculiaridad es que a estos _arrays_ C les añade el carácter nulo al final: `'\0'`.
+| H | e | l | l | o |\0 |
 
-| H | o | l | a |\0 |
-|:---|:---|:---|:---|:---|
-| <sub>0</sub> | <sub>1</sub> | <sub>2</sub> | <sub>3</sub> | <sub>4</sub> |
+<!---|:---|:---|:---|:---|:---|--->
 
+| <sub>0</sub> | <sub>1</sub> | <sub>2</sub> | <sub>3</sub> | <sub>4</sub> | <sub>5</sub> |
 
-Es necesario que todas las cadenas de C acaben con el caracter nulo para que se ejecuten correctamente las funciones que trabajan sobre ellas, como `strlen`, `strcpy`, etc.
+It is required that all the C character arrays end with the null character so that the functions that work on them (such as `strlen`, `strcpy`, etc.) could be executed correctly.
 
-Al igual que cualquier otro _array_, si lo declaramos sin inicializarlo debemos especificar su tamaño:
+Like any other array, if we declare it without initialization we must specify its size:
 
 ```cpp
-const int tCADENA = 10;
-char cadena[tCADENA];
+const int tARRAY = 10;
+char charArray[tARRAY];
 ```
 
-#### Vectores
+#### Vectors
 
-Como hemos visto anteriormente, una vez hemos declarado un _array_ no podemos cambiar su tamaño. Si lo que queremos es usar _arrays_ de tamaño variable, entonces tenemos que usar los **vectores** de C++.
+As we have seen previously, once we have declared an array we cannot change its size. If we wanted to use arrays of variable size, then we should use C++ **vectors** instead.
 
-Un <a href=http://www.cplusplus.com/reference/vector/vector/>vector</a> es un _array_ con acceso eficiente a elementos y con la habilidad para cambiar automáticamente de tamaño cuando se añaden o se eliminan elementos. Estos vectores inicialmente pertenecían a la biblioteca _STL (Standard Template Library)_, que implementa una serie de contenedores dinámicos, algoritmos e iteradores.
+A <a href=http://www.cplusplus.com/reference/vector/vector/>vector</a> is an array with efficient access to elements and with the ability to  be resized automatically when elements are added or deleted. These vectors initially belonged to the _STL (Standard Template Library)_ library, which implements a series of dynamic containers, algorithms and iterators.
 
-Veamos un ejemplo de cómo usarlos:
+Let's see an example to use them:
 
 ```cpp
-vector<int> v; // Declara un vector de enteros
-vector<int> v2(3); // Declara un vector de 3 enteros
-v.resize(4); // Cambia dinámicamente su tamanyo
+vector<int> v; // Declare an integer vector
+vector<int> v2(3); // Declare an integer vector with 3 elements
+v.resize(4); // Dinamically change its size
 
-v.push_back(12); // Añade un valor al final del vector
+v.push_back(12); // Add a value at the end of the vector
 
-// Acceso a elementos
+// Element access
 for (unsigned int i=0; i<v.size(); i++) {
-      v[i]=23; // Asignación
+      v[i]=23; // Assignment
 }
 ```
 
-Como puedes ver en este fragmento de código, podemos declarar un vector sólo indicando su tipo y sin especificar su tamaño:
+As you can see in this code snippet, we can declare a vector only indicating its type, without specifying its size:
 
 ```cpp
 vector<int> v;
 ```
 
-También podemos indicar un tamaño inicial:
+Optionally, we can also indicate an initial size:
 
 ```cpp
 vector<int> v2(3);
 ```
 
-Añadimos un elemento al final de un vector con `push_back()`, y podemos saber el tamaño efectivo de un vector con `size()`.
+We can add an element to the end of a vector with `push_back()`, and get the effective size of a vector with `size()`.
 
-Estas son sólo algunas de las funciones de la clase vector, cuya referencia puedes encontrar <a href=http://www.cplusplus.com/reference/vector/vector/>aquí</a>. Además de estas, los vectores tienen funciones para ordenar sus elementos siguiendo el criterio que elijamos, para borrar un elemento redimensionando su tamaño, etc.
+These are just some of the functions of the vector class, whose reference can be found <a href=http://www.cplusplus.com/reference/vector/vector/> here</a>. In addition to these, vectors have functions to sort their elements following the criteria that we choose, to erase an element and be resized automatically, etc.
 
-En Programación 2 trabajaremos bastante con vectores.
+In Programming 2 we will frequencly use vectors.
 
-#### Tipos enumerados
+#### Enumerated types
 
-Los tipos enumerados se utilizan cuando tenemos un rango determinado de posibles valores para una variable (o constante). A estos posibles valores se les llama enumeradores, y las variables de los tipos enumerados pueden tomar cualquier valor de estos enumeradores, como puede verse en el siguiente ejemplo:
+Enumerated types can be used when we have a certain range of possible values for a variable (or a constant). These possible values are called enumerators, and the variables of enumerated types can take any value from these enumerators, as can be seen in the following example:
 
 ```cpp
-enum colors_e {black, blue, green, red}; // Definición del tipo enumerado
+enum colors_e {black, blue, green, red}; // Type definition
 
-colors_e mycolor; // Declaración de una variable
+colors_e mycolor; // Variable declaration
 
-mycolor = blue; // Asignación de un enumerador
+mycolor = blue; // Enumerator assignment
 
-if (mycolor == green) { // Comparación con un enumerador
+if (mycolor == green) { // Comparison with an enumerator
 	mycolor = red;
 }
-if (mycolor == 0) {  // Comparación con un entero (internamente, black)
+if (mycolor == 0) {  // Comparison with an integer (internally, black)
 	cout << "Black" << endl;
 }
 ```
 
-Internamente, los enumeradores se convierten implícitamente a números enteros y viceversa, como puede verse en el ejemplo anterior.
+Internally, enumerators are implicitly converted to integers and vice versa, as can be seen in the previous example.
 
+#### Functions
 
-#### Funciones
-
-Una función es un conjunto de líneas de código que realizan una tarea y, opcionalmente, puede devolver un valor. También puede recibir (opcionalmente) una serie de parámetros, por valor o por referencia.
-
+A function is a set of code lines that perform a task and, optionally, can return a value. They can also receive (optionally) a series of parameters, by value or by reference.
 
 
 ```cpp
-// Función que recibe dos parámetros por valor y uno por referencia, y devuelve un número entero
+// Function that receives two parameters by value and one by reference, and returns an integer number
 
-int funcion(int a, int b, int &c) {
-	int ret = 0; // Declaramos una variable del tipo de retorno
+int function(int a, int b, int &c) {
+	int ret = 0; // We declare a variable of the type of return
 
-	// Instrucción 1
-	// Instrucción 2
+	// Instruction 1
+	// Instruction 2
 	// ...
 
-	return ret; // Devolvemos el resultado
+	return ret; // Return the result
 }
 ```
 
-Como puedes ver en el ejemplo anterior, cuando una función devuelve un valor, normalmente se declara la variable al principio y se hace un único return al final.
+As can be seen in the previous example, when a function returns a value the variable is usually declared at the beginning and a single return is made at the end.
 
-Una función no debería tener mucho código. Lo normal es que el código de la función "quepa" en la pantalla cuando se visualice con un editor (unas 50 líneas máximo). Si la función es más larga, lo recomendable es dividirla en varias funciones más cortas.
+A function should not have much code. Typically, the function code should "fit" on the screen when viewed with an editor (about 50 lines maximum). If the function is longer, it is advisable to divide it into several shorter functions.
 
-A veces no tenemos claro cuándo hay que crear una nueva función. Hay varios casos en los que hace falta, pero existe una regla sencilla: **si tienes que hacer copy-paste, entonces necesitas una función**. Cuando copiamos un trozo de código para pegarlo en otro lugar, es porque lo estamos usando dos veces. Cuando esto ocurre, es mejor crear una función para este trozo, de forma que el código quede más compacto, y además sea más fácil de mantener (si queremos hacer un cambio en el código de la función, sólo lo tendremos que hacer en un sitio, en lugar de en dos si no la hemos creado).  
+Sometimes we do not know when to create a new function. There are several cases in which it is necessary, but there is a simple rule: **if you have to copy/paste code then you need a function**. When we copy a piece of code to paste it somewhere else, it's because we're using it twice. When this happens, it is better to create a function for this piece, so that the code is more compact and also easier to maintain (if we want to make a change in the code of the function, we will only have to do it in one place, instead of several times if we did not create it).
 
-> Importante: Es muy recomendable compilar y probar las funciones por separado, no esperar a tener todo
-el programa para empezar a compilar y probar. Cada vez que tengamos una nueva función, hay que comprobar que funcione correctamente con cualquier número de parámetros, y cuando esté probada pasar a escribir la siguiente.
+> Important: It is highly recommended to compile and test the functions separately, instead of waiting to finish the program to start compiling and testing. Every time we have a new function, we have to check that it works correctly with any number of parameters, and when it is tested, we can go on writing the next one.
 
-El compilador de C/C++ lee el código desde el principio al final, por lo que si hacemos una llamada a una función que está declarada más adelante obtendremos un error de compilación. Para evitarlo, se puede mover la función antes de su llamada, o bien indicar su declaración (también llamada cabecera o prototipo) antes. Este es un ejemplo del segundo tipo (declaración de cabecera):
+The C/C++ compiler reads the code from the beginning to the end, so if we call a function that is declared later than the call we will get a compilation error. To avoid this, you can move the function before your call, or indicate your declaration (also called header or prototype) before. This is an example of the second type (header declaration):
 
 ```cpp
-// Prototipo / cabecera / declaración de la función
-int funcion(bool,char,double []);
+// Prototype / header / function declaration
+int function(bool, char, double []);
 
-char otraFuncion() {
-   double vr[MAXNOTAS];
-   a = funcion(true,'a',vr);  // Llamada a la función
+char anotherFunction() {
+   double vr[MAXMARKS];
+   a = function(true,'a',vr);  // Function call
 }
 
-// Cuerpo / implementación de la funcion
-int funcion(bool comer,char opcion,double vectorNotas[]) {
-  // Instrucciones
+// Body / implementation of the function
+int function(bool eat, char option, double vectorMarks[]) {
+  // Instructions
 }
 ```
 
-En Programación 2, tal como hace la mayoría de desarrolladores en C++, cuando tenemos todo el código en un único fichero recomendamos mover el código de la función en lugar de indicar su cabecera:
+In Programming 2, as most C++ developers do, when we have all the code in a single source file we recommend moving the function code before  instead of indicating its header:
 
 ```cpp
-// Cuerpo / implementación de la funcion
-int funcion(bool comer,char opcion,double vectorNotas[]) {
-  // Instrucciones
+// Body / function implementation
+int function(bool eat, char option, double vectorMarks[]) {
+  // Instructions
 }
 
-char otraFuncion() {
-   double vr[MAXNOTAS];
-   a = funcion(true,'a',vr);  // Llamada a la función
+char otherFunction() {
+   double vr[MAXMARKS];
+   a = function(true,'a',vr);  // function call
 }
 ```
 
-Esta segunda forma agiliza la escritura del código, ya que cuando vayamos a cambiar los parámetros de una función sólo tendremos que hacerlo en el cuerpo, en lugar de en dos sitios (cuerpo y declaración).
+This second form speeds up the writing of the code, since if we wanted  to change the parameters of a function we should only have to do it in the body, instead of in two places (body and declaration).
 
-En C++, las funciones aceptan parámetros pasados por valor o por referencia (con `&`). Internamente, cuando una función recibe un parámetro por valor, ésta se **copia** en una variable local que se destruye cuando termina la función. De este modo, los cambios que se hagan sobre los valores de esta variable no tendrán efecto a la salida de la función. Cuando un parámetro se pasa por **referencia** no se hace una copia del mismo, por lo que los cambios realizados durante la función sí que afectarán a esta variable.
+In C++, functions accept parameters passed by value or by reference (with `&`). Internally, when a function receives a parameter by value, it is **copied** into a local variable that is destroyed when the function ends. This way, changes made to the values ​​of this variable will have no effect on the output of the function. When a parameter is passed by **reference** a copy is not made, so changes made during the function will affect this variable.
 
-El problema surge cuando queremos pasar por valor una variable muy grande (por ejemplo, una cadena de 1 millón de caracteres). Si el compilador hace una copia, el rendimiento del programa se verá seriamente afectado (además de que necesitaremos mucha más memoria). Para evitar esto, en C++ se puede pasar un parámetro por referencia con `const`, como en el siguiente ejemplo:
+The problem arises when we want to pass by value a very large variable (for example, a string of 1 million characters). If the compiler makes a copy, the performance of the program will be seriously affected (in addition, we will need much more memory). To avoid this, in C++ you can pass a parameter by reference with `const`, as in the following example:
 
 ```cpp
-void funcion(const string &s)  {
-	// El compilador no hace copia de s, pero si intentamos modificar esta variable nos da un error
+void function(const string &s)  {
+	// The compiler does not make a copy of s, but if we try to modify this variable a compilation error will be given
 }
 ```
 
-Lo que le decimos al compilador con esta declaración es: "No hagas una copia de la variable, pero prometo no modificarla dentro de la función". De hecho, si la intentamos modificar nos saldrá un error de compilación.
+What we say to the compiler with this statement is: "Do not make a copy of the variable, but I promise not to modify it within the function". In fact, if we try to modify it, we will get a compilation error.
 
-> Por motivos pedagógicos en Programacón 2 no se deben pasar parámetros por referencia cuando no es necesario hacerlo, excepto si es con `const`.
+> For pedagogical reasons, in Programming 2 parameters must not be passed by reference when it is not necessary to do so, except if it is with `const`.
 
-En C/C++ hay un caso particular de paso por valor o referencia. Se trata de los _arrays_ y matrices, ya que estos siempre se pasan por referencia. La explicación la veremos en el tema de memoria dinámica, pero básicamente esto sucede porque internamente son punteros y en realidad lo que pasamos por valor o referencia es el puntero en sí.
+In C/C++ there is a particular situation: The arrays and matrices are **always** passed by reference. The explanation will be given in the dynamic memory unit, but basically this happens because internally they are pointers and in reality what we pass by value or reference is the pointer itself.
+
 
 ```cpp
-int sumaVM(int v[],int m[][MAXCOL]) {  // el tamano de la primera dimension no se indica
-  // Instrucciones
+int sumVM(int v[],int m[][MAXCOL]) {  // the size of the first dimension is not indicated
+  // Instructions
 }
 
-sumaVM(vector,matriz);  // llamada, sin corchetes  
+sumVM(vector,matrix);  // call, without brackets  
 ```
 
-Como ves, tampoco hay que indicar el tamaño de la primera dimensión, pero si hay más dimensiones C++ obliga a ponerlas.
+As you can see, in C++ it is not necessary to indicate the size of the first dimension, but if there are more dimensions it is necessary to put them.
 
-Existe también una función especial en C/C++, llamada `main`. La función `main` es la primera que se invoca cuando comienza un programa. Puede recibir parámetros (veremos cómo hacerlo en el tema de paso de parámetros), y devuelve un valor (aunque se puede dejar sin indicar, normalmente devuelve 0). Por ejemplo:
+There is also a special function in C/C++, called `main`. The `main` function is the first one invoked when a program starts. You can receive parameters (we'll see how to do it in the parameter passing section), and it returns a value (although it can be ommitted, it usually returns 0). For example:
+
 
 ```cpp
 int main() {
-  // Instrucciones
+  // Instructions
 
-  return 0; // Opcional
+  return 0; // Optional
 }
 ```
 
-¿Cómo debe ser una función `main`?. Lo ideal es que viendo la función se sepa cuál va a ser el flujo del programa. Un ejemplo de una función `main` adecuada:
+How should a `main` function be? Ideally, by looking at this function you should understand the basic program flow. An example of a proper `main` function:
+
 
 ```cpp
 int main() {
 	int n;
-	leer(n);
+	read(n);
 
 	if (n<0)
-		cout << "Error, no puede ser negativo";
-	else procesar(n);
+		cout << "Error, the number cannot be negative";
+	else process(n);
 }
 ```
 
-Como puedes ver, hay poco código y se entiende qué hace más o menos el programa. A veces no es tan sencillo cuando el programa es muy largo, pero la idea es esta. Lo que **nunca** debe hacerse es **hacer todo el código en el main**, ni tampoco dejar un `main` con una sola llamada a una función que lo hace todo:
+As you can see, there is little code and it is understood what the program does (approximately). Sometimes it is not so simple when the program is very long, but the idea is this. What **never** should be done is to **do all the code inside the main**, or leave a `main` which contains a single call to a function that implements everything:
 
 ```cpp
 int main() {
-	principal();  // Incorrecto
+	function();  // Wrong
 }
 ```
 
-### Argumentos del programa
+### Program arguments
 
-La función `main` también puede recibir parámetros. Cuando lo hacemos, estamos pasando argumentos a nuestro programa, y esto sirve para la ejecución en lotes (de forma no interactiva). Un ejemplo de paso de argumentos es el que usa el programa `ls`:
+The `main` function can also receive parameters. Doing this, we are passing arguments to our program, and this serves for execution in batches (in a non-interactive way). An example of argument passing by the `ls` program:
 
 ```bash
 ls -l -a
 ```
 
-En este caso, pasamos dos parámetros: `-l` y `-a`. Con esta información, el programa `ls` mostrará los datos de una forma determinada. Imagínate que `ls` no admitiera parámetros. Cada vez que lo ejecutáramos, nos preguntaría si queremos mostrar los archivos ocultos, si queremos mostrar la información por líneas, etc, lo cual sería muy tedioso para el usuario.
+In this case, we passed two parameters: `-l` and `-a`. With this information, the `ls` program will display the data in a certain way. Let's consider that `ls` did not admit parameters. Every time we run it, it would ask us if we want to show the hidden files, if we want to show the information by lines, etc., which would be very tedious for the user.
 
-Vamos a ver un ejemplo de un programa que admite parámetros desde la función `main`:
+Let's see an example of a program that allows parameters in the `main` function:
 
 ```cpp
 int main(int argc, char *argv[]) {
-	// En este punto, argc contiene el numero de parametros, y argv su valor.
+	// At this point, argc contains the number of parameters, and argv their value.
 	for (unsigned i=0; i<argc; i++) {
 		cout << "Argv[" << i << "]=" << argv[i] << endl;
 	}
 }
 ```
 
-Si ejecutamos el programa de esta forma:
+If we execute the program in this way:
 
 ```bash
-./programa uno dos tres
+./program one two three
 ```
 
-Se imprimirá lo siguiente:
+It will print:
 
 ```bash
-Argv[0]=./programa
-Argv[1]=uno
-Argv[2]=dos
-Argv[3]=tres
+Argv[0]=./program
+Argv[1]=one
+Argv[2]=two
+Argv[3]=three
 ```
 
-Por tanto, la variable `argc` contiene el número de parámetros que ha introducido el usuario, y `argv` es un array de cadenas de caracteres y en cada posición contiene un valor introducido por el usuario.
+Therefore, the variable `argc` contains the number of parameters that the user has entered, and `argv` is an array of arrays of characters containing in each position the value entered by the user.
 
-En principio parece sencillo, pero se complica cuando tenemos muchos parámetros y pueden ir en cualquier orden. Por ejemplo, `g++` admite muchísimos parámetros y el orden puede ser importante:
+At first it seems simple, but it gets more complicated when we have many parameters and can be given in any order. For example, `g++` allows many parameters and the order can be important:
 
 ```bash
-g++ -Wall -o programa programa.cc -g
+g++ -Wall -o program program.cc -g
 ```
 
-Gestionar toda esta variabilidad es algo complicado. Por ejemplo, si queremos un programa que acepte tres parámetros ("uno","dos" y "tres"), podemos usar un bucle como este:
+It is somewhat complicated to manage all this variability. For example, if we wanted to make a program that accepts three parameters ("one", "two" and "three"), we could use a loop like this:
 
 ```cpp
 int main(int argc, char *argv[]) {
 
 	  if (argc>4) {
-			cout << "Sintaxis: " << argv[0] << " [uno | dos | tres]" << endl;
+			cout << "Syntax: " << argv[0] << " [one | two | three]" << endl;
 			return(-1);
 		}
 
 		for (unsigned i=1; i<argc; i++) {
 			string arg = argv[i];
 
-			if (arg=="uno")  {
-				// Hacer algo con argumento uno
+			if (arg=="one")  {
+				// Do something with the argument one
 			}
-			else if (arg=="dos") {
-				// Hacer algo con argumento dos
+			else if (arg=="two") {
+				// Do something with the argument two
 			}
 			else if (arg=="tres") {
-				// Hacer algo con argumento tres
+				// Do something with the argument three
 			}
 			else {
-				cout << "Sintaxis: " << argv[0] << " [uno | dos | tres]" << endl;
+				cout << "Syntax: " << argv[0] << " [one | two | three]" << endl;
 				return(-1);
 			}
 		}
 }
 ```
 
-A veces se puede complicar tanto que conviene usar una función aparte para gestionar los parámetros.
+Sometimes it can be so complicated that it is convenient to use a separate function to manage the parameters.
 
-#### Ejercicio (argumentos)
+#### Exercise (arguments)
 
-Vamos a hacer un programa que imprima por pantalla los _n_ primeros números primos. Por defecto (si no se indican parámetros), el programa debe imprimir los primeros 10 números primos separados por espacios. Ejemplo:
+We are going to make a program to print on the screen the first _n_ prime numbers. By default (if no arguments are given), the program should print the first 10 prime numbers separated by blank spaces. Example:
 
 ```bash
-./primos
+./primes
 1 2 3 5 7 11 13 17 19 23
 ```
 
-El usuario debe poder también indicar las opciones `-L` y/o `-N n`.
+The user must also be able to indicate the `-L` and/or `-N n` options.
 
-La opción `-L` es para mostrar cada número en un linea distinta, y la opción `-N` seguida de un número es para mostrar los primeros `n` primos. Por ejemplo:
+The `-L` option is to display each number on a different line, and the `-N` option followed by a number is to show the first `n` primes. For example:
 
 ```bash
-./primos -N 3
+./primes -N 3
 1 2 3
-./primos -L -N 2
+./primes -L -N 2
 1
 2
 ```
 
-Si los parámetros indicados por el usuario no son correctos debe mostrarse un mensaje de error de sintaxis y finalizar el programa. Lo complicado es esta parte, es decir, comprobar que los parámetros son adecuados.
+If the parameters indicated by the user are not correct, a syntax error message must be displayed and the program should end. The complicated part of this exercise is checking that all parameters are correct.
 
-### Estructura tipica de un programa en C++
+### Typical structure of a C ++ program
 
-Para repasar, veamos la estructura típica de un programa en C++:
+For review, let's see the typical structure of a C++ program:
 
 ```cpp
-#include <ficheros de cabecera estandar>
+#include <standard header files>
 ...
-#include "ficheros de cabecera propios"
+#include "own header files"
 ...
-using namespace std; // permite usar bool (y string)
+using namespace std; // this allows to use bool (and string)
 ...
-const ... // Declaración de constantes
+const ... // Constant declaration (if they are not in the header file)
 ...
-typedef ... // Declaración de tipos de datos propios
+typedef ... // types not previously defined
 ...
-// declaración de variables globales ¡¡¡PROHIBIDO!!!
+// declaration of global variables FORBIDDEN in P2!!!
 ...
-// funciones
+// functions
 ...
 int main() {
 ...
 }
 ```
 
-### Compilación
+### Compilation
 
-El compilador de C++ que usaremos en la asignatura es GNU GCC, que viene por defecto en Linux. Podemos llamar al compilador desde un terminal poniendo `g++`. El compilador de C++ admite muchos parámetros, vamos a ver los más importantes:
+The C ++ compiler that we will use in this subject is GNU GCC, which is installed by default in Linux. We can call the compiler from a terminal by typing `g++`. The C ++ compiler supports many parameters, let's see the most important ones:
 
-* `-Wall` : Muestra todos los warnings, no sólo los más importantes (**recomendado en P2**).
-* `-g` : Compila en un modo que facilita encontrar los errores mediante un depurador (**recomendado en P2**).
-* `-o`: Sirve para indicar el nombre del ejecutable, que es el parámetro que viene a continuación de esta opción.
-* `--version`: Muestra la versión actual del compilador.
-* `-std=c++0x`: Usa el nuevo estándar de C++ que permite programación no tipada con `auto`, funciones `lambda`, bucles `for_each`, y funciones de concurrencia, entre otras. No lo usaremos en P2.
+* `-Wall` : Shows all warnings, instead of only those that are more relevant (**recommended in P2**)
+* `-g` : Compiles in a mode which allows to easily find errors using a debugger (**recommended in P2**).
+* `-o`: Sets the name of the executable file given after this option.
+* `--version`: Shows the current version of the compiler.
+* `-std=c++0x`: Uses the new C++ standard which allows using weakly typed variables with `auto`, `lambda` functions, `for_each` loops, and concurrence functions, among others. We are not using these functionalities in P2.
 
-
-La forma recomendada en Programación 2 para compilar un programa es la siguiente:
+The recommended way in Programming 2 to compile a program is as follows:
 
 ```bash
-g++ -Wall -g programa.cc -o programa
+g++ -Wall -g program.cc -o program
 ```
 
-Es muy importante que justo a continuación de `-o` vaya el nombre del ejecutable, **no** el del código fuente. Si ponemos `-o programa.cc`, se nos borrará todo nuestro código fuente (es habitual perderlo en los primeros cursos, así que ten cuidado).
+It is very important that just after `-o` there will be the name of the executable, **not** the source code file. If we write `-o program.cc`, we will erase all our source code (it is usual to lose it in the first courses, so be careful).
 
+### Debugging
 
-### Depuración
+Sometimes the program compiles but it fails during execution. In some situations it is very complicated to find which line of the code has caused the execution error. Fortunately, there are **debuggers**, tools that make this task much easier.
 
-En algunas ocasiones el programa compila pero falla durante la ejecución. A veces es muy complicado encontrar qué línea del código ha provocado el error de ejecución. Afortunadamente, existen los **depuradores** (en inglés _debuggers_), unas herramientas que nos facilitan mucho esta tarea.
-
-
-> Se llaman _debuggers_ porque encuentran _bugs_, que es como se conocen popularmente los errores de código. Este término viene porque en 1946, una polilla se introdujo accidentalmente en un circuito provocando errores en su programa. Cuando encontraron el problema, la pegaron con celo en el correspondiente informe de errores y escribieron: _First actual case of bug being found_.
+> They are called _debuggers_ because they find _bugs_, which is how code errors are popularly known. This term comes because in 1946, a moth was accidentally introduced into a circuit causing errors in its program. When they found the problem, they hit it with adhesive tape in the corresponding error report and wrote: _First current case of bug being found_.
 
 ![Bug](bug.jpg "Bug")
 
-A continuación se indican algunos depuradores muy usados:
+Here are some widely used debuggers:
 
-* <a href="http://valgrind.org">Valgrind</a>. Es el depurador que usaremos en los correctores de las prácticas. Detecta errores de memoria (acceso a componentes fuera de un vector, variables usadas sin inicializar, punteros que no apuntan a una zona reservada de memoria, etc.).
-* <a href="https://www.gnu.org/software/gdb/">GDB</a>. Este depurador inicia nuestro programa, lo para cuando lo pedimos y mira el contenido de las variables. Si nuestro ejecutable da un fallo de segmentación, nos dice la línea de código dónde está el problema.
-* Más ejemplos en Linux: <a href="https://www.gnu.org/software/ddd/">DDD</a>, <a href="https://wiki.gnome.org/Apps/Nemiver">Nevimer</a>, <a href="http://elinux.org/Electric_Fence">Electric Fence</a>, <a href="http://duma.sourceforge.net">DUMA</a>, etc.
+* <a href="http://valgrind.org">Valgrind</a>. It is the debugger that we will use in the "corrector" of the assignments. It detects memory errors (access to components outside a vector, variables used without initialization, pointers that do not point to a reserved area of memory, etc.).
+* <a href="https://www.gnu.org/software/gdb/">GDB</a>. This debugger starts our program, stops it when we ask for it and looks at the content of the variables. If our executable gives a segmentation fault, it tells us the line of code where the problem can be found.
+* More examples in Linux: <a href="https://www.gnu.org/software/ddd/">DDD</a>, <a href="https://wiki.gnome.org/Apps/Nemiver">Nevimer</a>, <a href="http://elinux.org/Electric_Fence">Electric Fence</a>, <a href="http://duma.sourceforge.net">DUMA</a>, etc.
 
-Casi todos estos depuradores se pueden instalar desde el instalador de paquetes de Linux (es mejor así que hacerlo desde su web).
+Almost all these debuggers can be installed from the Linux package installer (better than installing them from their website).
 
+### Remainder
 
-### Recordatorio
+For pedagogical reasons, in Program 2 it is **strictly forbidden to use global variables**.
 
-Por motivos pedagógicos, en Programacón 2 está **terminantemente prohibido usar   variables globales**.
+### References
 
-
-### Referencias
-
-Para aprender más sobre C++ recomendamos consultar las siguientes referencias:
+To learn more about C ++ we recommend checking the following references:
 
 <a href="http://www.cplusplus.com">http://www.cplusplus.com</a>
 
