@@ -1,27 +1,27 @@
 # Unit 1 - Introduction
 
-In this unit, we review of the contents of Programming 1 adding concepts on design of algorithms and programs, methodology and C ++ syntax.
+In this unit we will review the topics given in Programming 1, adding concepts on algorithm design, methodology and C++ syntax.
 
 ## Design of algorithms and programs
 
-In order to develop a program it is necessary to create one or several source code files written in a programming language. Once we have the code, using a compiler we can transform it into an executable program that the computer can run.
+As you know, in order to develop a program it is necessary to create one or several source code files written in a programming language. Once we have the code, through a compiler we can transform it into an executable program that the computer can run.
 
-Therefore, it is necessary to write source code, compile it and as a result we can execute our program. However, before starting to write the code we need to analyze the **requirements** and think about the **design** of our algorithm.
+Therefore, it is necessary to write source code, compile it and as a result we can execute our program. However, before starting to write code we need to analyze first the **requirements** and think about the **design** of our algorithm.
 
 The development phases of a program are the following:
 
 1. Study of the requirements of the problem
-1. Algorithm design (maybe on paper)
+1. Algorithm design (can be done on paper)
 1. Writing the source code on the computer
 1. Compilation of the program and correction of errors
 1. Execution of the program
-1. Test of all possible cases (or almost)
+1. Test of all (or almost) possible cases
 
-The process of writing, compiling, executing and testing should be iterative, checking independent functions or modules from the program.
+The process of writing, compiling, executing and testing should be iterative, evaluating independent functions or modules.
 
 ### 1. Requirements
 
-To start a program we ned to know in advance the ** requirements **, that is, ** what ** our program should do. In some cases this is simple. For example, if we wanted to make a program to show the first _n_ numbers. However in other cases it is much more complicated, for example, if we are planning to develop an accounting software for a company.
+To start a program we ned to know in advance the **requirements**, that is, **what** our program should do. In some cases this is simple. For example, if we wanted to make a program to show the first _n_ numbers. However in other cases it is much more complicated, for example, if we are planning to develop an accounting software for a company.
 
 Before starting to design the program, it is necessary to have a list of requirements with all the options that it will contain. This is a sample list for a game:
 
@@ -33,21 +33,21 @@ Before starting to design the program, it is necessary to have a list of require
 * The user can touch a bird in flight to make special actions depending on the bird's type.
 * etc...
 
-As you can see, the list of requirements can be very long. In the assignments of Programming 2 (P2) we will give you the list of requirements in a clear manner to avoid doubts about what the program should do and how the user should interact with it.
+As you can see, the list of requirements can be very long. In the assignments of Programming 2 (P2) we will clearly provide the list of requirements to avoid questions about what the program should do and how the user could interact with it.
 
 ### 2. Algorithm design
 
-Once we know the requirements, we have to think about ** how ** are we going to implement our program. This is done in the design phase, and includes detecting the necessary data types, deciding the functions that we need and  developing a program flow.
+Once we know the requirements, we have to think about **how** are we going to implement our program. This is done in the design phase, and includes detecting the necessary data types, deciding the functions that we need and developing a program flow.
 
-The design stage is very important, and it can be done on paper. For this, it is advisable to first think about what data do we have (in the previous example, birds, pigs, objects, levels, background landscapes) and what are we going to do with them (launchBird, impactWithPig, touchBird, etc.) to obtain the functions.
+The design stage is very important, and it can be done on paper. For this, first it is advisable to think about what **data** do we have (in the previous example, birds, pigs, objects, levels, background would be structs and/or classes if the program is object-oriented). Also, we need to think about what are we going to do with them (launchBird, impactWithPig, touchBird, etc., which will be our  **functions** or methods in object-oriented programming).
 
-In the case of programs with a graphical interface (for example, smartphone apps), we can perform the design using a programming environment for adding screens, buttons, views, etc. In the case of a program without graphics (as in this subject), the design is limited to creating the types of data needed and the necessary functions to work with them.
+In the case of programs with a graphical interface (for example, an smartphone app), we can perform the design using a programming environment (also known as IDE) for adding screens, buttons, views, etc. In the case of a program without graphics (as in this subject), the design is limited to creating the types of data needed and the necessary functions to work with them.
 
-In theory, with a good design we can already implement the code, and it is not necessary to redesign the program. In reality, for complicated programs it is likely that, although the initial design will be good, we need to redo some parts. For example, we could make a smartphone app and realize that a button is not as adequate in a certain location as we thought, and this may force us to change the design. Anyway, it is clear that if we make a good initial design it will be easier to continue with the following phases, so it is advisable to dedicate time to think this stage properly.
+In theory, with a good design we can already implement the code, and it is not necessary to redesign the program. In reality, for complicated programs it is likely that, although the initial design is good, we need to redo some parts. For example, we could make a smartphone app and realize that a button is not as adequate in a certain location as we thought, and this may force us to change the design. Anyway, it is clear that if we make a good initial design it will be easier to continue with the following phases, so it is advisable to dedicate time to think this stage properly.
 
 ### 3. Writing the code
 
-Once we are clear about how we are going to make the program, we can proceed to ** write its source code ** using a text editor, or alternatively an integrated development environment (IDE, _Integrated Development Environment_).
+Once we are clear about how we are going to make the program, we can proceed to **write its source code** using a text editor, or alternatively an integrated development environment (IDE, _Integrated Development Environment_).
 
 It is very important not to write too much code (for example more than 50 lines) at once. Instead, you should  write a few lines of code (or a function), and then compile it. After fixing the compilation errors and testing that the code fragment does what is expected, we can continue writing.
 
@@ -55,7 +55,7 @@ If we make a lot of code without checking it, when we try to compile it it will 
 
 ### 4. Compilation and error correction
 
-A compiler interprets or converts source code into a program that the computer can execute. In most cases, after writing code we can get some compilation errors. These errors must be corrected and the code should be rewritten and compiled until no more errors occur.
+A compiler interprets or converts source code into a program that the computer can run. In most cases, after writing code we can get some compilation errors. These errors must be corrected and the code should be rewritten and compiled until no more errors occur.
 
 There are two types of errors: compilation errors, which prevent generating an executable, and compilation _warnings_, which allow us to generate the executable but warn us that something may be wrong. It is convenient to fix all _warnings_, since many times they indicate that something is not right and ends up producing errors during the next stage, the execution of the program.
 
@@ -120,46 +120,6 @@ float division(int a, int b) {
 
 In this section we will focus on the C ++ language, which is the one used in Programming 2. There are many C++ references, but if you want to complement this book we recommend <a href="http://www.cplusplus.com">cplusplus</a> and <a href="http://www.minidosis.org">minidosis</a>.
 
-<!---
-XXX: FALTA INTEGRAR ESTO AQUI
-
-\begin{frame}[fragile]
-\frametitle{Funciones (4/4)}
-\begin{itemize}
-
-
-\subsection{Estructura de un programa}
-
-\begin{frame}[fragile]
-  \frametitle{Estructura típica de un programa}
-v
-
-\begin{footnotesize}
-\begin{tabular}{l}
-\verb!#include <!ficheros de cabecera estandar\verb!>! \\
-... \\ \pause
-\verb!#include "!ficheros de cabecera propios\verb!"!  \\
-... \\ \pause
-\verb!using namespace std;! \emph{permite usar bool (y string)} \\
-... \\ \pause
-\verb!const! ...  \emph{si no estan en el fichero de cabecera} \\
-... \\
-typedef ...  \emph{tipos no definidos previamente} \\
-... \\ \pause
-declaración de variables globales  \alert{¡¡¡PROHIBIDO!!!} \\
-... \\
-funciones \\
-... \\
-\verb!int main()! \\
-\verb!{! \\
-... \\
-\verb!}! \\
-\end{tabular}
-\end{footnotesize}
-\end{frame}
--->
-
-
 ### Basic elements
 
 In a source code we can find different basic elements:
@@ -171,7 +131,7 @@ In a source code we can find different basic elements:
 * Operators: ++, --, +, \*, /, etc.
 * Data types: `int`, `char`, `float`, `double`, `bool`, `void`, etc.
 
-For example, in this fragment:
+For example, in this code snippet:
 
 ```cpp
 int main() {
@@ -181,7 +141,7 @@ int main() {
 ```
 
 * Identifiers: `i`
-* Constants: 0, 10, `"Hola mundo"`
+* Constants: 0, 10, `"Hello world"`
 * Reserved words: `for`, `main`, `std::cout`, `std::endl`
 * Symbols: `(`, `)`, `;``
 * Operators: =, <, ++, <<
@@ -200,19 +160,19 @@ int numberStudents = 0;
 void viewStudents(...)
 ```
 
-In C++, notation _lowerCamelCase_ is usually followed, that is, the name of the variables and functions must start with a lowercase letter, and if there is more than one word, each first letter must be uppercase as in the previous example.
+In C++, _lowerCamelCase_ notation is usually followed. This means that  the name of the variables and functions must begin with a lowercase letter, and if there is more than one word, each first letter must be uppercase as in the previous example.
 
 These are examples of wrong names:
 
 ```cpp
-const int kOCHO=8; // A constant should not be named with its value
+const int kEIGHT=8; // A constant should not be named with its value
 int p,q,r,a,b; // A unique letter is not relevant
 int counter1,counter2; // better int i,j;
 ```
 
 Also by agreement, counters in C++ begin with the letter _i_. Therefore, if we have several counters we should call them _i,j,k_, etc.
 
-Obviously, there are reserved words that can not be used as user-defined names. For example, in C ++ we can not name a variable as `int`, `long`, `friend`, `for`, etc.
+Obviously, there are reserved words that can not be used as user-defined names. For example, in C++ we can not name a variable as `int`, `long`, `friend`, `for`, etc.
 
 Constant names are usually capitalized, to distinguish them from variables.
 
@@ -225,7 +185,7 @@ We can have constants of different types:
 | int    | 123, 007, -4               |
 | float  | 123.0, -0.4, .3, 1.23e-12  |
 | char   | 'a', '1', ';', '\''        |
-| char[] | "hola","","doble: \""      |
+| char[] | "hello","","message: \""      |
 | bool   | true, false                |
 
 When the constants appear directly in the code with their value, as in the following example, they are said to be **implicit**.
@@ -250,9 +210,9 @@ if (i<kMAXVALUE) {
 We can declare explicit constants of any type:
 
 ```cpp
-const int MAXALUMNOS=600;
+const int MAXSTUDENTS=600;
 const double PI=3.141592;
-const char DESPEDIDA[] = "ADIOS";
+const char MESSAGE[] = "BYE";
 ```
 
 The question is, when should we do it? And the answer is: **almost always**, since we should declare as constants those values that we might want to change in future versions of the program. For example, we may want to change the text of a message, so we must declare it as constant.
@@ -268,13 +228,13 @@ It is highly recommended that whenever a variable (of simple type) is declared, 
 ```cpp
  int numProfessors=0; // Initialization in the same instruction
 
- int numeroAlumnos;
- numeroAlumnos = 10; // Initialization in the next instruction
+ int numStudents;
+ numStudents = 10; // Initialization in the next instruction
 ```
 
 If you do not initialize a variable of simple type, its value will be the one in memory at that moment, that is, anything (we can not control it).
 
-> The most common simple types in C / C ++ are `int`, `char`, `float`, `double`, `unsigned` and `bool`.
+> The most common simple types in C/C++ are `int`, `char`, `float`, `double`, `unsigned` and `bool`.
 
 This code would be wrong:
 
@@ -283,7 +243,7 @@ int i;
 cout << i << endl; // The value of i is "random" 
 ```
 
-##### Scopes
+##### Scope
 
 All the variables (and constants) that declared in our code have a scope. The scope of a variable or constant begins when it is declared, and ends when the braces (block) that contains it ends. Therefore, we can only use the variables or constants during their scope.
 
@@ -305,15 +265,14 @@ i = 2; // We cannot use the variable i here because it was removed
 
 We can declare (although it is not convenient) two variables that have the same name within the same function, as long as they have a different scope. For example, this would compile:
 
-
 ```cpp
-int ncajas=0;
+int nboxes=0;
 if (i<10) {
-  // we can use ncajas
-  int ncajas=100; // and another variable can be declared using the same name (not recommended!)
-  cout << ncajas << endl; // prints 100
+  // we can use nboxes
+  int nboxes=100; // and another variable can be declared using the same name (not recommended!)
+  cout << nboxes << endl; // prints 100
 }
-cout << ncajas << endl; // prints 0, as this instruction is printing the first variable
+cout << nboxes << endl; // prints 0, as this instruction is printing the first variable
 ```
 
 ##### Global variables
@@ -321,7 +280,6 @@ cout << ncajas << endl; // prints 0, as this instruction is printing the first v
 Variables are usually declared within a function, but when they are declared outside they are called global variables. In general, it is recommended not to use global variables (they are dangerous) and in Programming 2 they are strictly forbidden.
 
 Why do we forbid these variables? Let's see an example of code in which you can see how complicated could be to manage them.
-
 
 ```cpp
 #include <iostream>
@@ -558,7 +516,7 @@ In C++, operands are grouped two by two. Therefore, to know if `a<b<c`, we have 
 
 ```cpp
 if (a < b && b < c) {
-	// relation is met
+	// relation is true
 }
 ```
 
@@ -592,13 +550,12 @@ Also, when we have a condition `&&`, if the left operand is `false` then the rig
 char v[] = "Hello world";
 const char search = 'k';
 
-for (int i = 0; i < strlen(v) && v[i]!=search; i++) {
- 	cout << v[i];   // Loop prints "Hello world"
+for (int i = 0; i<strlen(v) && v[i]!=search; i++) {
+ 	cout << v[i];   // The loop prints "Hello world"
 }
 ```
 
-This code snippet prints a string until it finds the letter `'k'`.  Look at the condition `&&`. When `i==strlen(v)`, this expression will be `false` and therefore `v[i]!=search` will not be checked. If the short-circuit evaluation did not exist and this second condition would be checked, a segmentation fault (_segmentation fault_) would occur when trying to look at a position in the array that is beyond its size. If we implemented the condition backwards, `v[i]!=search && i<strlen(v)`, we would get this error. Therefore, **the order of the operands in a logic expression is important**.
-
+This code snippet prints the contents of an array until the letter `'k'` is found.  Look at the condition `&&`. When `i==strlen(v)`, this expression will be `false` and therefore `v[i]!=search` will not be checked. If short-circuit evaluation did not exist and this second condition would be checked, a segmentation fault (_segmentation fault_) would occur when trying to look at a position in the array that is beyond its size. If we implemented the condition backwards, `v[i]!=search && i<strlen(v)`, we would get this error. Therefore, **the order of the operands in a logic expression is important**.
 
 #### Input / output
 
@@ -663,13 +620,13 @@ int main() {
 	int n;
 	char c;
 	cin >> n >> c; // We read an integer value and a character
-	cout << "I read" << n << " and " << c << endl;
+	cout << "I read " << n << " and " << c << endl;
 }
 ```
 
 When we run this program, it will wait for us to enter an integer number and then a character.
 
-> Every time we read something with `cin >>`, it is convenient to write `cin.get();`, `cin.ignore();` or call a function `cleanBuffer()` so that the line break character will be removed from the _buffer_, since it can give problems if a string is read afterwards as we will see in the `strings` unit.
+> Every time we read something with `cin>>`, it is convenient to write `cin.get();`, `cin.ignore();` or call a function `cleanBuffer()` so that the line break character will be removed from the _buffer_, since it can give problems if a string is read afterwards as we will see in the `strings` unit.
 
 We will execute the previous program redirecting the standard input. With any text editor we create a new file called `input.txt`, and write the following:
 
@@ -905,9 +862,7 @@ The peculiarity is that these C arrays add the null character at the end: `'\0'`
 
 
 | H | e | l | l | o |\0 |
-
-<!---|:---|:---|:---|:---|:---|--->
-
+|:---|:---|:---|:---|:---|:---|
 | <sub>0</sub> | <sub>1</sub> | <sub>2</sub> | <sub>3</sub> | <sub>4</sub> | <sub>5</sub> |
 
 It is required that all the C character arrays end with the null character so that the functions that work on them (such as `strlen`, `strcpy`, etc.) could be executed correctly.
