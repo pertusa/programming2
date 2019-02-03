@@ -1042,11 +1042,11 @@ int main() {
 
 	if (n<0)
 		cout << "Error, the number cannot be negative";
-	else process(n);
+	else getMultiples(n);
 }
 ```
 
-As you can see, there is little code and it is understood what the program does (approximately). Sometimes it is not so simple when the program is very long, but the idea is this. What **never** should be done is to **do all the code inside the main**, or leave a `main` which contains a single call to a function that implements everything:
+As you can see, there is little code and it is clear what the program does. Sometimes it is not so simple when the program is very long, but the idea is this. What **never** should be done is to **do all the code inside the main**, or leave a `main` which contains a single call to a function that implements everything:
 
 ```cpp
 int main() {
@@ -1117,7 +1117,7 @@ int main(int argc, char *argv[]) {
 			else if (arg=="two") {
 				// Do something with the argument two
 			}
-			else if (arg=="tres") {
+			else if (arg=="three") {
 				// Do something with the argument three
 			}
 			else {
