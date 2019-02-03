@@ -522,7 +522,7 @@ if (a < b && b < c) {
 
 ##### Logic expressions
 
-Logic expressions evaluate an expression of logical type, returning either `true` or `false`. The main logical operators in C++ are `!`, `&&`, `||`. Denial (`!`) returns `true` if what follows afterwards is `false`, or `false` if what follows is `true`. For example:
+Logic expressions evaluate an expression of logical type, returning either `true` or `false`. The main logical operators in C++ are `!`, `&&`, `||`. Negation (`!`) returns `true` if what follows afterwards is `false`, or `false` if what follows is `true`. For example:
 
 ```cpp
 int i = 2;
