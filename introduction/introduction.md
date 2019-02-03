@@ -858,14 +858,14 @@ const char myarray[]="Hello";
 
 To represent a character string we use double quotes (`"`), whereas to represent a single character we use single quotes (`'`).
 
-The peculiarity is that these C arrays add the null character at the end: `'\0'`.
+The peculiarity is that C arrays add the null character at the end: `'\0'`.
 
 
 | H | e | l | l | o |\0 |
 |:---|:---|:---|:---|:---|:---|
 | <sub>0</sub> | <sub>1</sub> | <sub>2</sub> | <sub>3</sub> | <sub>4</sub> | <sub>5</sub> |
 
-It is required that all the C character arrays end with the null character so that the functions that work on them (such as `strlen`, `strcpy`, etc.) could be executed correctly.
+**It is mandatory that all C character arrays end with the null character** so that the functions that work on them (such as `strlen`, `strcpy`, etc.) could be executed correctly.
 
 Like any other array, if we declare it without initialization we must specify its size:
 
