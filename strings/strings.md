@@ -1,22 +1,22 @@
 # Unit 2 - Strings
 
-Most programs have to deal at some time with text data. We need to manipulate strings when displaying a message on the screen to a user or reading the name of a client entered via a keyboard, for example.
+Most programs have to deal with text data. We need to manipulate strings when displaying a message on the screen or reading the name of a client entered from the keyboard, for example.
 
-The C ++ language provides two ways to work with text strings:
+The C++ language provides two ways to work with text strings:
 
 * C-style arrays of characters
 
 * C++ `string` class
 
-In this topic we will first see the C-style arrays of characters, and then focus on how to work with the `string` class in C ++.
+In this unit we will first review the C-style arrays of characters, and then focus on how to work with the `string` class in C++.
 
-The `string` class makes working with text much easier, so it will be our preferred option in Programming 2. The only circumstance in which we will necessarily need to use C-style arrays will be when we dealing with binary files. We will explain the reason for this in the next unit (Unit 3).
+The `string` class makes working with text much easier, so it will be our preferred option in Programming 2. The only circumstance in which we will necessarily need to use C-style arrays will be when dealing with binary files. We will explain the reason for this in the Unit 3.
 
 ## Arrays of characters in C
 
 ### Declaration and initialization
 
-This way of manipulating text is native to the C language but can also be used in C++.
+Arrays of characters are native to the C language but can also be used in C++.
 
 Text in C is represented by arrays of characters \(that is, of type `char`\) ending in the null character \(`'\0'`\). Like all arrays, they have a fixed size that is established at compilation time it and it can no longer vary throughout the execution of the program.
 
@@ -26,7 +26,7 @@ Example:
 char cad[10];
 ```
 
-This code declares an array of characters, called `cad`, of 10 elements. Since you have to reserve a space to enter the null end-of-string character, the `CAD` variable in the previous example could store a maximum of 9 characters.
+This code declares an array of characters of 10 elements called `cad`. Since it is required to reserve a space to enter the null end-of-string character, the `cad` variable in the previous example could store a maximum of 9 effective characters.
 
 The C/C++ language allows us to initialize character arrays using text between double quotes \(`""`\).
 
@@ -37,17 +37,17 @@ char cad1[6] = "hello";
 char cad2[] = "hello";
 ```
 
-The two previous instructions are equivalent. In the first case, we assign the size `6` to `cad1` in order to store the five characters of `"hello"` together with the null character. In the second case with `cad2`, it can be seen that it is not necessary to indicate the size of the array when we make a declaration with initialization: the compiler will assign the array the exact size it needs to store the string with which it is initialized \(in this case, `6`\).
+The two previous instructions are equivalent. In the first case, we assign the size `6` to `cad1` in order to store the five characters of `"hello"` together with the null character. In the second case with `cad2`, it can be seen that it is not necessary to indicate the size of the array when we make a declaration with initialization: the compiler will assign the array the exact size with which it is initialized \(in this case, `6`\).
 
-Another important detail that this example shows is that it is not needed to explicitly set the null character at the end of the constant string when it is declared with double quotes. The compiler automatically adds the `'\0'` at the end of the array when it is initialized.
+Another important detail shown in this example is that it is not required to explicitly set the null character at the end of a constant string when it is declared with double quotes. The compiler automatically adds the `'\0'` at the end of the array when initialized.
 
-For example, here you can see the memory contents in C/C ++ of a character array containing `"Hola"`:
+For example, here you can see the memory contents of an array of characters containing `"Hola"`:
 
 ![Memory contents](./images/fig_1.jpg "Memory contents with the array ''Hola''")
 
-The upper numbering \(from 0 to 4\) indicates the index that would occupy each of the characters in the array. The lower numbering \(from 1001 to 1005\) represents the memory address that each character would occupy. In this example, simplified fictitious memory addresses were used \(actually a valid address would look something like this: `0x7ffef832d670`\). The point is to see that each element of an array is stored in consecutive memory positions, which always happens whatever their type.
+The upper numbering \(from 0 to 4\) indicates the index that would occupy each of the characters in the array. The lower numbering \(from 1001 to 1005\) represents the memory address in which each character would be stored. In this example, simplified fictitious memory addresses were used \(actually a valid address would look something like this: `0x7ffef832d670`\). The point is to see that each element of an array is stored in consecutive memory positions, which always happens whatever its type.
 
-Another way to initialize a string is to do it character by character.
+Another way to initialize a string is character by character.
 
 Example:
 
@@ -63,7 +63,7 @@ This initialization would be equivalent to that of the previous example. In this
 char cad[]={'h','e','l','l','o'};
 ```
 
-... then we would be declaring an array of five characters with the elements `'h'`,`'e'`,`'l'`,`'l'` and `'o'`, but it would not be considered a "well-formed" array of characters, since it would not end with the null character. Therefore, we could not correctly use it with the functions provided by the C and C++ language to handle character arrays \(as we will detail below in this same unit\).
+... then we would be declaring an array of five characters containing `'h'`,`'e'`,`'l'`,`'l'` and `'o'`, but it would not be considered a "well-formed" array of characters, since it would not end with the null character. Therefore, we could not correctly use the functions provided by the C and C++ language to handle character arrays \(as we will detail below in this unit\).
 
 As it also happens with arrays of other types, it is not necessary to use all the space reserved for the array of characters.
 
@@ -103,7 +103,7 @@ This code would display `Hello everybody!`.
 
 An array can be read by keyboard with `cin` and the input operator `>>`  in a similar way than other simple types, but with some differences:
 
-* Blank spaces before the first valid character are ignored. For example, if the user writes `"   hello"`, with three blank spaces in front, `cin` will ignore them and start storing characters from the `h` character
+* Blank spaces before the first valid character are ignored. For example, if the user writes `"   hello"`, with three blank spaces in front, `cin` will ignore them and store characters starting from  `h`
 * After reading a valid character, the program stops reading when the first _blank_ is found \(blank space, tabulator or end of line\). This blank is left in the keyboard buffer for the next reading
 
 Example:
@@ -113,31 +113,30 @@ char cad[20];
 cin >> cad;
 ```
 
-This program would wait for the user to enter the array of characters by keyboard.
+This program would wait for the user to enter the array by keyboard.
 
 #### Reading with `cin` and `getline`
 
-Reading from keyboard using `cin` and `>>` can generate two problems:
+Reading with `cin` and `>>` can generate two problems:
 
+* Problem 1: What happens if the array has blank spaces? If, for example, the user typed `hello everybody`, the previous program would only read `hello` since a blank space is found
+* Problem 2: The `>>` operator does not limit the number of characters that are read. Therefore, what happens if the typed text does not fit in the array? Here we can have a serious problem, because we will be trying to write something in memory positions that are outside the array. In the previous example, if the user wrote `supercalifragilisticoespialidoso` there would be a memory error after exceeding the size of the array.
 
-* Problem 1: What if the chain has blank spaces? If, for example, the user typed `hello everybody`, the previous program would only read `hello` since a blank space is found
-* Problem 2: The `>>` operator does not limit the number of characters that are read. Therefore, what happens if the typed text does not fit in the array? Here we can have a serious problem, because we will be trying to write in memory positions that are outside the array. If in the previous example the user wrote `supercalifragilisticoespialidoso`, there would be a memory error after exceeding the size of the array.
-
-One way to solve these two problems is to use the `getline` function, which can read arrays with blanks and also control the number of characters that are stored.
+One way to solve these two problems is to use the `getline` function, which can read arrays with blanks and also control the maximum number of characters that are stored.
 
 Example:
 
 ```cpp
-const int TAM = 10;
-char cad[TAM];
-cin.getline(cad,TAM);
+const int kSIZE = 10;
+char cad[kSIZE];
+cin.getline(cad,kSIZE);
 ```
 
-In this example, `getline` reads at most `TAM-1` characters or until it reaches the end of the line. The `'\n'` from the end of line is read, but is not stored into `cad`. The `getline` function automatically adds `'\0'` to the end of the contents that were read. For that reason, it only reads as a maximum `TAM-1` characters, leaving a memory position for the null character.
+In this example, `getline` reads at most `kSIZE-1` characters or until it reaches the end of the line. The `'\n'` from the end of line is read, but is not stored into `cad`. The `getline` function automatically adds `'\0'` to the end of the contents that were read. For that reason, it only reads as a maximum `kSIZE-1` characters, leaving a memory position for the null character.
 
 If the user enters `hello everybody`, the program will store into `cad` the array `hello eve` \(blank spaces are counted like any other character\).
 
-This function also has a problem. What happens if the user enters more characters than the array size? In this case, the remaining characters will be kept in the keyboard buffer and cause a failure in the next reading.
+This function also has a problem. What happens if the user enters more characters than the array size? In this case, the remaining characters will be left in the buffer, causing a failure in the next reading.
 
 Example:
 
@@ -151,7 +150,7 @@ cin.getline(cad2,10);
 cout << "Array 2: " << cad2 << endl;
 ```
 
-In this program, if the user enters `hello everybody` the program output would be:
+In this program, if the user enters `hello everybody` the program would output:
 
 ```
 Array 1: hello eve
@@ -160,17 +159,9 @@ Array 2:
 
 #### Problems using `>>` and `getline`
 
-We have seen two ways to read the keyboard: using the `>>` operator and with `getline`. When these two operators are combined, unexpected situations may occur.
+We have seen two ways to read the keyboard: using the `>>` operator and with `getline`. When these two operators are combined, unexpected results may be given.
 
 Example:
-
-
-
-
-
-
-
-
 
 ```cpp
 int num;
@@ -185,7 +176,7 @@ cin.getline(cad,1000);
 cout << "The read array is: " << cad << endl;
 ```
 
-In this example, if the user types `10` after the program shows `Write a number:`, the output would be as follows: 
+In this example, if the user types `10` after the program shows `Write a number:` the output would be as follows: 
 
 ```
 Write a number: 10
@@ -195,7 +186,7 @@ Write an array of characters: The read array is:
 
 As we can see, the user is not asked for the array. Why does this happen?
 
-In the previous code, first an `int` is read by `>>`, and then the program reads an array with `getline`. When `10` is read with the `>>` operator, the program stops reading when it finds the first blank space \(the end of line in this case when the _enter_ key is pressed after typing `10`\), leaving that line break in the buffer. Then, when `getline` is executed, the first thing that appears in the buffer is the line break `'\n'`, therefore the program finishes reading and store an empty array in the variable `cad`.
+In the previous code, first an `int` is read by `>>`, and then the program reads an array with `getline`. When `10` is read with the `>>` operator, the program stops reading when it finds the first blank space \(the end of line in this case when the _enter_ key is pressed after typing `10`\), leaving that line break in the buffer. Then, when `getline` is executed, the first character that appears in the buffer is the line break `'\n'`, therefore the program finishes reading and stores an empty array in the variable `cad`.
 
 One solution to solve this problem is to extract the `'\n'` from the keyboard buffer before the next reading. We can do this with the `ignore` method as follows:
 
@@ -210,13 +201,13 @@ Here, `cin.ignore()` pulls a character from the keyboard buffer and ignores it.
 
 ### Functions of the library `string.h`
 
-The `string.h` standard library of C offers a series of functions to work with arrays of characters. To use them you have to import that  library using the following instruction:
+The standard library of C `string.h` offers a series of functions to work with arrays of characters. To use these functions you have to import that library using the following instruction:
 
 ```cpp
-#include <string.h>
+#include <string.h> // Also works with #include <cstring>
 ```
 
-Among the most important functions provided by this  library, we can find `strlen`, `strcmp` and `strcpy`.
+Among the most important functions provided by this  library we can find `strlen`, `strcmp` and `strcpy`.
 
 #### `strlen`
 
@@ -229,7 +220,7 @@ char cad[20] = "bye";
 cout << strlen(cad);
 ```
 
-This code would print `3` \(instead of `20`, which will be the array size, or `4`, that would be the number of memory bytes taking into account the null character\).
+This code would print `3` \(instead of `20`, which will be the array size, or `4`, that would be the number of initialized positions taking into account the null character\).
 
 #### `strcmp`
 
@@ -240,7 +231,7 @@ This function compares two arrays in lexicographical order, that is, the order t
 * Lowercase letters are greater than their corresponding uppercase letters \('a' &gt; 'A'\)
 * Letters are greater than numbers \('A' &gt; '1'\)
 
-From the previous list, the last two points are not obvious. This behavior is given by the ASCII code of each character. The ASCII code is a numerical representation that each character has in the computer's memory.
+The last two points from the previous list are not obvious. This behavior is given by the ASCII code of each character. The ASCII code is a numerical representation that each character has in the computer's memory.
 
 Below is the ASCII code table of the first 128 characters:
 
@@ -248,7 +239,7 @@ Below is the ASCII code table of the first 128 characters:
 
 The ASCII code of the character '1' is 49, while the code of the letter 'A' is 65 and that of the letter 'a' is 97. Therefore, 'a' &gt; 'A' &gt; '1'.
 
-`strcmp` returns `-1` if the first array is smaller than the second, `0` if they are the same and `1` if the second array is greater. In some g++ versions, a negative value instead of `-1` or a positive value instead of `1` is returned. This number is the difference in the ASCII table between the first characters that are different in both arrays.
+The function `strcmp` returns `-1` if the first array is smaller than the second, `0` if they are the same and `1` if the second array is greater. In some g++ versions, a negative value instead of `-1` or a positive value instead of `1` is returned. This number is the difference in the ASCII table between the first different characters from both arrays.
 
 Example:
 
@@ -271,7 +262,7 @@ This code would show:
 
 Try to run it on your computer, maybe the output you get is different.
 
-Therefore, if we want to check if two arrays of characters are equal, we can do it in the following way:
+Therefore,  we could use `strcmp` to check that two arrays of characters are equal:
 
 ```cpp
 char cad1[1000];
@@ -292,25 +283,25 @@ else
 }
 ```
 
-A more compact way of expressing `strcmp(cad1,cad2)==0` would be `!strcmp(cad1,cad2)`.
+A more compact way of expressing `strcmp(cad1,cad2)==0` is `!strcmp(cad1,cad2)`.
 
 #### `strcpy`
 
-This function allows you to copy one array of characters into another:
+This function allows us to copy one array of characters into another:
 
 ```cpp
 char cad[10];
 strcpy(cad,"hello");
 ```
 
-The character arrays in C, as any other array, can not be assigned directly. The following code would yield a compilation error:
+Character arrays in C, as any other array, can not be assigned directly. The following code would yield a compilation error:
 
 ```cpp
 char cad[10];
 cad = "hello";
 ```
 
-The following code would also give a compilation error:
+This code would also give a compilation error:
 
 ```cpp
 char cad1[10] = "hello";
@@ -330,7 +321,7 @@ char cad[10];
 strcpy(cad,"Today is a fantastic day to go for a walk");
 ```
 
-This code would access to non-reserved memory zones and a segmentation fault would be given when trying to copy an array of larger size than the target variable allows. Also, always keep in mind that there must also be enough space in the array for the `'\0'`.
+This code would access to non-reserved memory zones and a segmentation fault would be given when trying to copy an array of larger size than the target variable allows. Also, always keep in mind that there must also be enough space in the target array to store the `'\0'`.
 
 
 #### Other functions
@@ -343,10 +334,9 @@ strncpy(cad,"Hello, world",4);
 cad[4] = '\0'
 ```
 
-In this example, the first `4` characters of `"Hello, world"` are copied into `cad`. The null character `'\0'` should be excplicitly given at the end. In this example, since we copy `4` characters, they occupy positions 0,1,2 and 3 of the array `cad`. Therefore, the null caracter should be added at the position `4`.
+In this example, the first `4` characters of `"Hello, world"` are copied into `cad`. The null character `'\0'` should be excplicitly copied afterwards. In this example, since we copy `4` characters, they occupy positions 0,1,2 and 3 of the array `cad`. Therefore, the null caracter should be added at position `4`.
 
-Two more examples of interesting functions that work with arrays of characters, although these do not belong to the `stdlib.h` library: `atoi` and `atof`. The first serves to convert an array of character that represents an integer value to its equivalent value of type `int`. The second function, exactly the same but for converting real values. These two functions are defined in the standard library `cstdlib`, so it must be included at the beginning of our code if we want to use them:
-
+Two more examples of interesting functions that work with arrays of characters, although they do not belong to the `stdlib.h` library are `atoi` and `atof`. The first serves to convert an array of characters that represents an integer value to its equivalent `int` value. The second function is exactly the same but for converting real values. These two functions are defined in the standard library `cstdlib`, that should be included at the beginning of our code if we wanted to use them:
 
 ```cpp
 #include <cstdlib>
@@ -368,24 +358,23 @@ In this code, the variable `n` would take the value `100` and `f` would be `10.5
 
 ### Declaration and initialization
 
-The standard C++ library provides the class `string` that supports all operations on text  mentioned above and many other extra functionalities.
+The standard C++ library provides the `string` class that supports all operations on text  mentioned above as well as many other extra functionalities.
 
-The big advantage with respect to the arrays of characters in C is that the `string` class has a dynamic size that can change throughout the execution of the program depending on the contents that we want to store: it may increase if we want to store a larger string or it may decrease so as not to waste memory if we want to store a smaller one.
+The big advantage with respect to the arrays of characters in C is that the `string` class has  dynamic size, which means that it can change throughout the execution of the program depending on the contents that we want to store. It may increase if we wanted to store a larger string or it may decrease so as not to waste memory if we wanted to store a smaller one.
 
-The `string` class internally uses character arrays to store the data, but the handling of the memory and the location of the null character is done in a transparent manner by the class itself, which simplifies its use.
+The `string` class internally uses character arrays to store the data, but the handling of the memory and the location of the null character is done in a transparent manner by the class itself to simplify its usage.
 
-In Unit 5 (object-oriented programming) we will see the concept of "class" and its difference with a simple type. In order to use the appropriate terminology, instead of "variable of type `string`" we should say "object of the class `string`", and instead of "specific functions "of `string`" we should talk about "methods". However, for simplification in this Unit we will continue using the previous terminology and we will talk about "types", "variables" and "functions" instead of "classes", "objects" and "methods" that will be explained in Unit 5.
+In Unit 5 (object-oriented programming) we will see the concept of "class" and its difference with a simple type. In order to use the appropriate terminology, instead of "variable of type `string`" we should say "object of the class `string`", and instead of "specific functions of `string`" we should talk about "methods". However, for simplification, in the current Unit we will continue using the previous terminology and we will talk about "types", "variables" and "functions" instead of "classes", "objects" and "methods", as they will be explained in Unit 5.
 
-
-To use of some of the functions mentioned in this section it is necessary to include the library of the same name:
+To use of some of the functions mentioned in this section it is necessary to include the C++ string library:
 
 ```cpp
-#include <string>
+#include <string> // Without .h!
 ```
 
 Note that for C arrays of characters we should use the library `<string.h>` instead.
 
-The variables of type `string` are declared as any other data type: we write the type, the name given to the variable and optionally an initial value.
+Variables of type `string` are declared as any other data type: we write the type, the name given to the variable and optionally an initial value.
 
 Example:
 
@@ -395,9 +384,9 @@ string s2 = "hello";
 const string s3 = "hello";
 ```
 
-This code shown an unitialized string \(`s1`\), a variable with the initial value `"hello"` \(`s2`\) and a constant with the same initial value \(`s3`\). As you can see in this example, you should not use the brackets nor indicate the size of the string as it was done with the C arrays.
+This code shows an unitialized string \(`s1`\), a variable with the initial value `"hello"` \(`s2`\) and a constant with the same initial value \(`s3`\). As you can see in this example, you should not use the brackets to indicate the size of the string as it was done with the C arrays.
 
-A `string` is passed as a parameter to a function, either by value or reference, the same way as with any simple data \(`int`,`float`, etc. \).
+A `string` is passed as a parameter to a function, \(either by value or by reference\) the same way as with any simple data \(`int`,`float`, etc. \).
 
 Example:
 
@@ -425,13 +414,13 @@ In this code two variables of type `string` are declared in the main function, `
 
 ### Input and output
 
-As with the arrays of characters in C, `cout` is used to display the contents of a `string`.
+As it happens with the arrays of characters in C,  the contents of a `string` can be displayed with `cout`.
 
 Example:
 
 ```cpp
-string cad = "Hello everybody!";
-cout << cad;
+string s = "Hello everybody!";
+cout << s;
 ```
 
 This code would print on the screen `Hello everybody!`.
@@ -439,7 +428,7 @@ This code would print on the screen `Hello everybody!`.
 To read a string from the keyboard you can use  `cin` with the operator `>>`, as it happened with the arrays of characters in C. Their behaviour in this case is the same:
 
 * Blank spaces that are entered before the first valid character of the string are ignored
-* After reading a valid character, cin stops reading whtn it finds the first blank \(space, tab or line break\). This blank will be kept in the keyboard buffer for the next reading
+* After reading a valid character, cin stops reading when it finds the first blank \(space, tab or line break\). This blank will be left in the keyboard buffer for the next readin.
 
 Example:
 
@@ -448,7 +437,7 @@ string s;
 cin >> s;
 ```
 
-If the string contains blank spaces and we want to read them, we can also use the `getline` function that we used for C arrays, although in this case the syntax is different:
+If the string contains blank spaces and we wanted to read them, we could also use the `getline` function, although in this case the syntax is different than the syntax for the C arrays:
 
 ```cpp
 string s;
@@ -516,7 +505,7 @@ string a = "There is a cup in this kitchen with cups";
 string b = "cup";
 
 // Length of a
-unsigned int tam = a.length();
+unsigned int size = a.length();
 
 // We wearch for the first "cup" within the string  "There is a cup..."
 unsigned int found = a.find(b);
@@ -534,17 +523,17 @@ else
     cout << "Substring " << b << " not found";
 ```
 
-`find` ends when it finds the first occurrence of the substring. The first search \(`a.find(b)`\) starts from the beginning of the string. The second search \(`a.find(b,encontrado+b.length())`\) begins just after the first substring appears, so it will return the second occurrence of cup. This process could be repeated unsing a loop if we were interested in gathering all occurrences of one  substring within another.
+The method `find` returns the position where it finds the first occurrence of the substring. The first search \(`a.find(b)`\) starts from the beginning of the string. The second search \(`a.find(b,found+b.length())`\) begins just after the first substring appears, so it will return the second occurrence of cup. This process could be repeated using a loop if we were interested in gathering all occurrences of one  substring within another.
 
 #### `replace`
 
-This function allows us to replace a substring within a string. Its prototype is:
+This function allows us to replace a substring within another string. Its prototype is:
 
 ```cpp
 string& replace(unsigned int pos, unsigned int size, const string str);
 ```
 
-The first parameter indicates the position in the string where characters will begin to be replaced. The second parameter indicates the number of characters to be replaced. Finally, the third parameter indicates the substring to be inserted as a replacement. The function directly modifies the string on which it is applied, so it is not necessary to assign the return value to another variable.
+The first parameter indicates the position in the string where characters will start to be replaced. The second parameter indicates the number of characters to be replaced. Finally, the third parameter indicates the substring to be inserted as a replacement. The function directly modifies the string on which it is applied, so it is not necessary to assign the return value to another variable.
 
 
 Example:
@@ -609,7 +598,7 @@ cout << s3;
 
 This code would show `Hello, world!`.
 
-To compare strings, you can use the same operators  used to compare numbers: `==`, `!=`, `>`, `<`, `>=` and `<=`.
+In order to compare strings, you can use the same operators than when comparing simple types: `==`, `!=`, `>`, `<`, `>=` and `<=`.
 
 Example:
 
@@ -730,7 +719,7 @@ while(ss >> s)
 }
 ```
 
-In this code, for each iteration of the `while` loop, the operator `>>` reads from `ss` until it finds a blank space, storing the result in `s`. `stringstream` reads the input the same way than using `cin`, as both of them are streams.
+In this code, for each iteration of the `while` loop, the operator `>>` reads from `ss` until it finds a blank space, storing the result in `s`. The class `stringstream` reads the input the same way than using `cin`, as both of them are streams.
 
 ## Conversion between C arrays and `string`
 
