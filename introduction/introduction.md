@@ -180,7 +180,7 @@ Constant names are usually capitalized, to distinguish them from variables.
 
 We can have constants of different types:
 
-| Tipo   | Ejemplos                   |
+| Type   | Examples                   |
 |--------|----------------------------|
 | int    | 123, 007, -4               |
 | float  | 123.0, -0.4, .3, 1.23e-12  |

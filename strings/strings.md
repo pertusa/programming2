@@ -1,128 +1,131 @@
-# Tema 2 - Cadenas de caracteres
+# Unit 2 - Strings
 
-La mayoría de programas que desarrollamos tienen que trabajar en algún momento con datos textuales. Por ejemplo, mostrar un mensaje por pantalla a un usuario o leer el nombre de un cliente introducido por teclado implica manipular cadenas de texto.
+Most programs have to deal at some time with text data. We need to manipulate strings when displaying a message on the screen to a user or reading the name of a client entered via a keyboard, for example.
 
-El lenguaje C++ nos proporciona dos formas de representar las cadenas de texto:
+The C ++ language provides two ways to work with text strings:
 
-* Cadenas de caracteres al estilo C
+* C-style arrays of characters
 
-* La clase `string` de  C++
+* C++ `string` class
 
-En este tema veremos en primer lugar las cadenas en estilo C, para luego centrarnos en cómo trabajar con la clase `string` de C++.
+In this topic we will first see the C-style arrays of characters, and then focus on how to work with the `string` class in C ++.
 
-La clase `string` facilita mucho el trabajo con cadenas, por lo que será nuestra opción preferida en la asignatura de Programación 2. La única circunstancia en la que tendremos que utilizar necesariamente cadenas al estilo C será cuando trabajemos con ficheros binarios. Veremos el por qué en el Tema 3.
+The `string` class makes working with text much easier, so it will be our preferred option in Programming 2. The only circumstance in which we will necessarily need to use C-style arrays will be when we dealing with binary files. We will explain the reason for this in the next unit (Unit 3).
 
-## Cadenas de caracteres en C
+## Arrays of characters in C
 
-### Declaración e inicialización
+### Declaration and initialization
 
-Esta forma de manipular texto es originaria del lenguaje C pero puede utilizarse también en C++.
+This way of manipulating text is native to the C language but can also be used in C++.
 
-Las cadenas en C se representan con un array de caracteres \(es decir, de tipo `char`\) terminado en el carácter nulo \(`'\0'`\). Como todo array, tienen un tamaño fijo que se establece en el momento de declararlo y ya no puede variar a lo largo de la ejecución del programa.
+Text in C is represented by arrays of characters \(that is, of type `char`\) ending in the null character \(`'\0'`\). Like all arrays, they have a fixed size that is established at compilation time it and it can no longer vary throughout the execution of the program.
 
-Ejemplo:
+Example:
 
 ```
 char cad[10];
 ```
 
-Este código define una cadena de caracteres, llamada `cad`, de 10 elementos. Como hay que reservar un espacio para introducir el carácter nulo de final de cadena, la variable `cad` del ejemplo anterior podría almacenar como máximo 9 caracteres.
+This code declares an array of characters, called `cad`, of 10 elements. Since you have to reserve a space to enter the null end-of-string character, the `CAD` variable in the previous example could store a maximum of 9 characters.
 
-El lenguaje C/C++ nos permite inicializar las cadenas de caracteres con texto dentro de comillas dobles \(`""`\).
+The C/C++ language allows us to initialize character arrays using text between double quotes \(`""`\).
 
-Ejemplo:
+Example:
 
 ```cpp
-char cad1[5] = "hola";
-char cad2[] = "hola";
+char cad1[6] = "hello";
+char cad2[] = "hello";
 ```
 
-Las dos declaraciones anteriores son equivalentes. En el primer caso, a `cad1` le asignamos el tamaño `5` para poder almacenar los cuatro caracteres de `"hola"` junto con el carácter nulo. En el segundo caso con `cad2`, se puede ver que no es necesario indicar el tamaño de la cadena cuando hacemos una declaración con inicialización: el compilador asignará al array el tamaño exacto que necesita para almacenar la cadena con la que se inicializa \(en este caso `5`\).
+The two previous instructions are equivalent. In the first case, we assign the size `6` to `cad1` in order to store the five characters of `"hello"` together with the null character. In the second case with `cad2`, it can be seen that it is not necessary to indicate the size of the array when we make a declaration with initialization: the compiler will assign the array the exact size it needs to store the string with which it is initialized \(in this case, `6`\).
 
-Otro detalle importante que muestra este ejemplo es que no hace falta poner explícitamente el carácter nulo al final de la cadena constante definida con comillas dobles. El compilador automáticamente coloca el `'\0'` al final de la cadena cuando se inicializa el array.
+Another important detail that this example shows is that it is not needed to explicitly set the null character at the end of the constant string when it is declared with double quotes. The compiler automatically adds the `'\0'` at the end of the array when it is initialized.
 
-A continuación se muestra cómo sería la representación en memoria en C/C++ de cualquiera de las dos cadenas del ejemplo anterior:
+For example, here you can see the memory contents in C/C ++ of a character array containing `"Hola"`:
 
-!\[Falta imagen\]\(./images/fig\_1.jpg "Representación en memoria de la cadena ''Hola''"\)
+![Memory contents](./images/fig_1.jpg "Memory contents with the array ''Hola''")
 
-La numeración superior \(de 0 a 4\) indica el índice que ocuparía cada uno de los caracteres en el array. La numeración inferior \(de 1001 a 1005\) representa la posición de memoria que ocuparía cada carácter. Se trata de direcciones de memoria ficticias simplificadas para este ejemplo \(en realidad una dirección válida sería algo como esto: `0x7ffef832d670`\). Lo importante es ver que cada caracter de una cadena se almacena en posiciones consecutivas de la memoria, cosa que sucede siempre con los elementos de un array, sean del tipo que sean.
+The upper numbering \(from 0 to 4\) indicates the index that would occupy each of the characters in the array. The lower numbering \(from 1001 to 1005\) represents the memory address that each character would occupy. In this example, simplified fictitious memory addresses were used \(actually a valid address would look something like this: `0x7ffef832d670`\). The point is to see that each element of an array is stored in consecutive memory positions, which always happens whatever their type.
 
-Otra forma de inicializar una cadena es hacerlo carácter a carácter.
+Another way to initialize a string is to do it character by character.
 
-Ejemplo:
+Example:
+
 
 ```cpp
-char cad1[5] = {'h','o','l','a','\0'};
-char cad2[] = {'h','o','l','a','\0'};
+char cad1[5] = {'h','e','l','l','o','\0'};
+char cad2[] = {'h','e','l','l','o','\0'};
 ```
 
-Esta inicialización sería equivalente a la del ejemplo anterior. En este caso sí que sería necesario introducir explícitamente el carácter `'\0'` al final de la cadena. Si declaráramos lo siguiente:
+This initialization would be equivalent to that of the previous example. In this case, it would be necessary to explicitly enter the `'\0'` character at the end of the array. If we declare the following...
 
 ```cpp
-char cad[]={'h','o','l','a'};
+char cad[]={'h','e','l','l','o'};
 ```
 
-estaríamos definiendo un array de cuatro caracteres con los elementos `'h'`, `'o'`, `'l'` y `'a'`, pero no se consideraría una cadena de caracteres "bien formada", ya que no acaba en el carácter nulo y por lo tanto no podríamos aplicar correctamente sobre ella las funciones que nos facilita el lenguaje C y C++ para el manejo de cadenas \(y que veremos más adelante en este mismo tema\).
+... then we would be declaring an array of five characters with the elements `'h'`,`'e'`,`'l'`,`'l'` and `'o'`, but it would not be considered a "well-formed" array of characters, since it would not end with the null character. Therefore, we could not correctly use it with the functions provided by the C and C++ language to handle character arrays \(as we will detail below in this same unit\).
 
-Al igual que para arrays de otros tipos, no es necesario usar todo el espacio reservado para la cadena cuando se declara.
+As it also happens with arrays of other types, it is not necessary to use all the space reserved for the array of characters.
 
-Ejemplo:
+Example:
 
 ```cpp
-char cad[100] = "Hola";
+char cad[100] = "Hello";
 ```
 
-Aquí estaríamos reservando `100` posiciones de memoria, aunque solo estaríamos ocupando 5 en este momento \(4 letras más el carácter nulo\). Las otras 95 posiciones quedarían reservadas pero sin inicializar.
+Here we would be allocating `100` memory positions, although we would only be occupying 6 at this time \(5 letters plus the null character\). The remaining 94 positions would be reserved but not initialized.
 
-La cadena vacía se representa con las comillas dobles, una a continuación de la otra y sin espacio en medio:
+The empty string is represented by double quotes without any space in between:
+
 
 ```cpp
-char cadenaVacia[] = "";
+char emptyCharArray[] = "";
 ```
 
-El array `cadenaVacia` tendría tamaño 1, ya que solo almacenaría el carácter `'\0'`.
+The array `emptyCharArray` would be of size 1, as it only stores the character `'\0'`.
 
-### Entrada y salida
+### Input and output
 
-#### Salida por pantalla con `cout`
+#### Output with `cout`
 
-Para mostrar cadenas por pantalla se puede utilizar `cout`, como con cualquier otro tipo simple \(`int`, `float`, etc.\).
+We can use `cout` to show arrays of characters on the screen as with any other simple type \(`int`, `float`, etc.\).
 
-Ejemplo:
+Example:
 
 ```cpp
-char cad[] = "Hola a todo el mundo";
+char cad[] = "Hello everybody!";
 cout << cad;
 ```
 
-Este código mostraría por pantalla `Hola a todo el mundo`.
+This code would display `Hello everybody!`.
 
-#### Lectura de teclado con `cin` y `>>`
+#### Reading with `cin >>`
 
-La lectura de información por teclado se realiza con `cin` y el operador `>>`, de manera similar a como se hace con el resto de tipos simples, pero con alguna particularidad:
+An array can be read by keyboard with `cin` and the input operator `>>`  in a similar way than other simple types, but with some differences:
 
-* Ignora los espacios en blanco que se introducen antes del primer carácter válido de la cadena. Es decir, si el usuario escribe `"   hola"`, con tres espacios en blanco delante, `cin` los ignorará y empezará a almacenar caracteres a partir de la `h`
-* Después de haber leído un carácter válido, termina de leer cuando encuentra el primer _blanco_ \(espacio, tabulador o salto de línea\). Ese blanco se deja en el buffer de teclado para la siguiente lectura
+* Blank spaces before the first valid character are ignored. For example, if the user writes `"   hello"`, with three blank spaces in front, `cin` will ignore them and start storing characters from the `h` character
+* After reading a valid character, the program stops reading when the first _blank_ is found \(blank space, tabulator or end of line\). This blank is left in the keyboard buffer for the next reading
 
-Ejemplo:
+Example:
 
 ```cpp
 char cad[20];
 cin >> cad;
 ```
 
-Este programa quedaría a la espera de que el usuario introdujera la cadena por teclado.
+This program would wait for the user to enter the array of characters by keyboard.
 
-#### Lectura de teclado con `cin` y `getline`
+#### Reading with `cin` and `getline`
 
-Leer de teclado usando `cin` y `>>` puede generar dos problemas:
+Reading from keyboard using `cin` and `>>` can generate two problems:
 
-* Problema 1: ¿Y si la cadena tiene espacios en blanco? Si por ejemplo el usuario escribiera `hola a todos`, el programa anterior leería `hola`, hasta encontrar el primer espacio en blanco, y dejaría de leer
-* Problema 2: El operador `>>` no limita el número de caracteres que se leen. ¿Y si la cadena escrita no cabe en el vector? Aquí podemos tener un problema serio, porque estaremos tratando de escribir en zonas de memoria fuera del vector. Si en el ejemplo anterior el usuario escribiera `supercalifragilisticoespialidoso`, se produciría un error en la memoria al haber sobrepasado el tamaño del vector.
 
-Una forma de solucionar estos dos problemas es utilizar la función `getline`, que pueden leer cadenas con blancos y controlar el número de caracteres que se almacenan.
+* Problem 1: What if the chain has blank spaces? If, for example, the user typed `hello everybody`, the previous program would only read `hello` since a blank space is found
+* Problem 2: The `>>` operator does not limit the number of characters that are read. Therefore, what happens if the typed text does not fit in the array? Here we can have a serious problem, because we will be trying to write in memory positions that are outside the array. If in the previous example the user wrote `supercalifragilisticoespialidoso`, there would be a memory error after exceeding the size of the array.
 
-Ejemplo:
+One way to solve these two problems is to use the `getline` function, which can read arrays with blanks and also control the number of characters that are stored.
+
+Example:
 
 ```cpp
 const int TAM = 10;
@@ -130,116 +133,124 @@ char cad[TAM];
 cin.getline(cad,TAM);
 ```
 
-En este ejemplo, `getline` lee como máximo `TAM-1` caracteres o hasta que llegue al final de línea. El `'\n'` del final de línea se lee pero no se mete en la cadena `cad`. La función `getline` se encarga de añadir `'\0'` al final de lo que ha leído. Por esa razón solo lee `TAM-1` caracteres, dejando un espacio reservado para el carácter nulo.
+In this example, `getline` reads at most `TAM-1` characters or until it reaches the end of the line. The `'\n'` from the end of line is read, but is not stored into `cad`. The `getline` function automatically adds `'\0'` to the end of the contents that were read. For that reason, it only reads as a maximum `TAM-1` characters, leaving a memory position for the null character.
 
-Si el usuario introdujera `hola a todos`, el programa almacenariá en `cad` la cadena `hola a to` \(los espacios en blanco cuentan como un carácter más\).
+If the user enters `hello everybody`, the program will store into `cad` the array `hello eve` \(blank spaces are counted like any other character\).
 
-Esta función tiene también un problema. ¿Qué sucede si el usuario escribe más caracteres de los que caben en la cadena? En este caso, los caracteres sobrantes se quedan en el buffer de teclado y probocan un fallo en la siguiente lectura.
+This function also has a problem. What happens if the user enters more characters than the array size? In this case, the remaining characters will be kept in the keyboard buffer and cause a failure in the next reading.
 
-Ejemplo:
+Example:
 
 ```cpp
 char cad1[10];
 char cad2[10];
 
 cin.getline(cad1,10);
-cout << "Cadena 1: " << cad1 << endl;
+cout << "Array 1: " << cad1 << endl;
 cin.getline(cad2,10);
-cout << "Cadena 2: " << cad2 << endl;
+cout << "Array 2: " << cad2 << endl;
 ```
 
-En este programa, si el usuario introdujera `hola a todos` la salida mostrada por pantalla sería:
+In this program, if the user enters `hello everybody` the program output would be:
 
 ```
-Cadena 1: hola a to
-Cadena 2:
+Array 1: hello eve
+Array 2:
 ```
 
-#### Problemas del uso combinado de `>>` y `getline`
+#### Problems using `>>` and `getline`
 
-Hemos visto dos formas de hacer lectura de teclado: mediante el operador `>>` y mediante `getline`. Cuando estos dos operadores se combinan, se pueden dar situaciones no deseadas.
+We have seen two ways to read the keyboard: using the `>>` operator and with `getline`. When these two operators are combined, unexpected situations may occur.
 
-Ejemplo:
+Example:
+
+
+
+
+
+
+
+
 
 ```cpp
 int num;
 char cad[1000];
 
-cout << "Escribe un numero: ";
+cout << "Write a number: ";
 cin >> num;
-cout << "El numero leido es " << num << endl;
+cout << "The number is " << num << endl;
 
-cout << "Escribe una cadena: " ;
+cout << "Write an array of characters: " ;
 cin.getline(cad,1000);
-cout << "La cadena leida es: " << cad << endl;
+cout << "The read array is: " << cad << endl;
 ```
 
-En este ejemplo, si cuando el programa muestra por pantalla `Escribe un numero:` el usuario escribe `10`, por ejemplo, la salida completa por pantalla que se produce sería:
+In this example, if the user types `10` after the program shows `Write a number:`, the output would be as follows: 
 
 ```
-Escribe un numero: 10
-El numero leido es 10
-Escribe una cadena: La cadena leida es:
+Write a number: 10
+The number is 10
+Write an array of characters: The read array is:
 ```
 
-Vemos que no se le llega a preguntar al usuario por la cadena. ¿Por qué sucede esto?
+As we can see, the user is not asked for the array. Why does this happen?
 
-En el código anterior, primero se lee un `int` mediante `>>`, para luego leer una cadena con `getline`. Cuando se lee `10` con el operador `>>`, éste deja de leer cuando encuentra el primer espacio en blanco \(el salto de línea en este caso, cuando se pulsa la tecla _intro_ después de escribir el `10`\) y deja ese salto de línea en el buffer. Cuando ejecuta `getline`, lo primero que se encuentra en el buffer es el salto de línea `'\n'`, por lo que termina de leer y almacena en la variable `cad` una cadena vacía.
+In the previous code, first an `int` is read by `>>`, and then the program reads an array with `getline`. When `10` is read with the `>>` operator, the program stops reading when it finds the first blank space \(the end of line in this case when the _enter_ key is pressed after typing `10`\), leaving that line break in the buffer. Then, when `getline` is executed, the first thing that appears in the buffer is the line break `'\n'`, therefore the program finishes reading and store an empty array in the variable `cad`.
 
-Una solución para solucionar este problema es extraer el `'\n'` del buffer de teclado antes de hacer la siguiente lectura. Esto lo podemos hacer con el método `ignore` de la siguiente manera:
+One solution to solve this problem is to extract the `'\n'` from the keyboard buffer before the next reading. We can do this with the `ignore` method as follows:
 
 ```cpp
 ...
 cin >> num;
-cin.ignore();
+cin.ignore(); // Also works with cin.get();
 ...
 ```
 
-Aquí, `cin.ignore()` saca un carácter del buffer de teclado y lo descarta.
+Here, `cin.ignore()` pulls a character from the keyboard buffer and ignores it.
 
-### Funciones de la librería `string.h`
+### Functions of the library `string.h`
 
-La librería estándar `string.h` de C ofrece una serie de funciones para trabajar con cadenas de caracteres. Para poder utilizarlas hay que importar la librería correspondiente al comienzo de nuestro código utilizando la siguiente instrucción:
+The `string.h` standard library of C offers a series of functions to work with arrays of characters. To use them you have to import that  library using the following instruction:
 
 ```cpp
 #include <string.h>
 ```
 
-Entre las funciones más importantes que proporciona la librería estándar, tenemos `strlen`, `strcmp` y `strcpy`.
+Among the most important functions provided by this  library, we can find `strlen`, `strcmp` and `strcpy`.
 
 #### `strlen`
 
-Esta función devuelve un `int` con  el número de caracteres que contiene la cadena.
+This function returns an `int` with the number of characters contained in the array (ignoring the null character `'\0'`).
 
-Ejemplo:
+Example:
 
 ```cpp
-char cad[20] = "adios";
+char cad[20] = "bye";
 cout << strlen(cad);
 ```
 
-Este ejemplo devolvería `5`, que es el número de caracteres que contiene `cad` \(no `20` que sería el tamaño del array, ni `6` que sería el número de espacios de memoria ocupados si tenemos en cuenta que hay un `'\0'` al final\).
+This code would print `3` \(instead of `20`, which will be the array size, or `4`, that would be the number of memory bytes taking into account the null character\).
 
 #### `strcmp`
 
-Esta función compara dos cadenas en orden lexicográfico, es decir, el orden que se da en un diccionario:
+This function compares two arrays in lexicographical order, that is, the order that is given in a dictionary:
 
-* La letra 'a' es más pequeña que la letra 'b'
-* La cadena "adeu" es más pequeña que "adios", porque los dos primeros caracteres son iguales pero en la tercera posición 'i' es mayor que 'e' y ya no se miran los caracteres restantes
-* Las letras minúsculas son mayores que sus correspondientes mayúsculas \('a' &gt; 'A'\)
-* Las letras son mayores que los números \('A' &gt; '1'\)
+* The letter 'a' is smaller than 'b'
+* The array "adeu" is smaller than "adios", since it would appear first in a dictionary
+* Lowercase letters are greater than their corresponding uppercase letters \('a' &gt; 'A'\)
+* Letters are greater than numbers \('A' &gt; '1'\)
 
-De la lista anterior, los dos últimos puntos no son obvios. Este comprtamiento viene dado por el código ASCII de cada caracter. El código ASCII es una representación numérica que tiene cada carácter en la memoria del ordenador.
+From the previous list, the last two points are not obvious. This behavior is given by the ASCII code of each character. The ASCII code is a numerical representation that each character has in the computer's memory.
 
-A continuación se muestra la tabla de códigos ASCII de los 128 primeros caracteres:
+Below is the ASCII code table of the first 128 characters:
 
-![Falta imagen](./images/fig_2.png "Tabla ASCII")
+![Falta imagen](./images/fig_2.png "ASCII Table")
 
-El código ASCII del carácter '1' es 49, mientras que el de la letra 'A' es 65 y el de la letra 'a' es 97. Por esta razón, 'a' &gt; 'A' &gt; '1'.
+The ASCII code of the character '1' is 49, while the code of the letter 'A' is 65 and that of the letter 'a' is 97. Therefore, 'a' &gt; 'A' &gt; '1'.
 
-`strcmp` devuelve `-1` si la primera cadena es menor que la segunda, `0` si son iguales y `1` si la segunda cadena es mayor.
+`strcmp` returns `-1` if the first array is smaller than the second, `0` if they are the same and `1` if the second array is greater. In some g++ versions, a negative value instead of `-1` or a positive value instead of `1` is returned. This number is the difference in the ASCII table between the first characters that are different in both arrays.
 
-Ejemplo:
+Example:
 
 ```cpp
 char cad1[] = "adios";
@@ -250,7 +261,7 @@ cout << strcmp(cad2,cad1) << endl;
 cout << strcmp(cad1,cad1) << endl;
 ```
 
-Este código mostraría por pantalla:
+This code would show:
 
 ```
 1
@@ -258,85 +269,90 @@ Este código mostraría por pantalla:
 0
 ```
 
-Por tanto, si queremos comprobar si dos cadenas introducidas por teclado son iguales, lo podemos hacer de la siguiente manera:
+Try to run it on your computer, maybe the output you get is different.
+
+Therefore, if we want to check if two arrays of characters are equal, we can do it in the following way:
 
 ```cpp
 char cad1[1000];
 char cad2[1000];
 
-cout << "Introduce la cadena 1: ";
+cout << "Enter array 1: ";
 cin >> cad1;
-cout << "Introduce la cadena 2: ";
+cout << "Enter array 2: ";
 cin >> cad2;
 
 if(strcmp(cad1,cad2)==0)
 {
-    cout << "Las cadenas son iguales" << endl;
+    cout << "Arrays are equal" << endl;
 }
 else
 {
-    cout << "Las cadenas son diferentes" << endl;
+    cout << "Arrays are different" << endl;
 }
 ```
 
-Otra manera más compacta de expresar `strcmp(cad1,cad2)==0` sería `!strcmp(cad1,cad2)`.
+A more compact way of expressing `strcmp(cad1,cad2)==0` would be `!strcmp(cad1,cad2)`.
 
 #### `strcpy`
 
-Esta función permite copiar una cadena en otra:
+This function allows you to copy one array of characters into another:
 
 ```cpp
 char cad[10];
-strcpy(cad,"hola");
+strcpy(cad,"hello");
 ```
 
-Las cadenas de caracteres en C son arrays y por tanto no se pueden asignar directamente. El siguiente código produciría un error de compilación:
+The character arrays in C, as any other array, can not be assigned directly. The following code would yield a compilation error:
 
 ```cpp
 char cad[10];
-cad = "hola";
+cad = "hello";
 ```
 
-El siguiente código también daría error de compilación:
+The following code would also give a compilation error:
 
 ```cpp
-char cad1[10] = "hola";
+char cad1[10] = "hello";
 char cad2[10];
 cad2 = cad1;
 ```
 
-Al tratarse de arrays, debería de hacerse la copia elemento a elemento \(carácter a carácter\) de una cadena a otra. La función `strcpy` nos evita tener que hacer ese tedioso proceso.
+Since these are arrays, you should copy element by element \(character by character\) from one array to the other one. The `strcpy` function does this process for us.
 
-Un detalle importante es que la cadena receptora tiene que tener tamaño suficiente para almacenar la cadena que queremos guardar.
+An important detail is that the target array must have enough size to store the source array. 
 
-Ejemplo:
+Example:
+
 
 ```cpp
 char cad[10];
-strcpy(cad,"Hoy es un dia fantastico para salir de paseo");
+strcpy(cad,"Today is a fantastic day to go for a walk");
 ```
 
-Este código produciría accesos a zonas de memoria no reservadas y un más que probable fallo de segmentación, al tratar de copiar una cadena de mayor tamaño de lo que admite la variable. Hay que tener siempre en cuenta que tiene que haber también espacio suficiente en la cadena para el `'\0'`.
+This code would access to non-reserved memory zones and a segmentation fault would be given when trying to copy an array of larger size than the target variable allows. Also, always keep in mind that there must also be enough space in the array for the `'\0'`.
 
-#### Otras funciones
 
-Las funciones `strncmp` y `strncpy` son similares a las dos funciones anteriores, pero con la diferencia de que solo comparan o copian los `n` primeros caracteres. Por ejemplo:
+#### Other functions
+
+The `strncmp` and `strncpy` functions are similar to the previous two functions, but with the difference that they only compare or copy the `n` first characters. For example:
 
 ```cpp
 char cad[10];
-strncpy(cad,"Hola, mundo",4);
+strncpy(cad,"Hello, world",4);
 cad[4] = '\0'
 ```
 
-En este ejemplo, se copian los `4` primeros caracteres de `"Hola, mundo"` en `cad`. El carácter nulo `'\0'` se debe de añadir explícitamente al final de los caracteres copiados. En este ejemplo, al copiar `4` caracteres, estos ocuparn las posiciones 0, 1, 2 y 3 del array `cad`, por eso el carácter nulo se añade en la posición siguiente, en la `4`.
+In this example, the first `4` characters of `"Hello, world"` are copied into `cad`. The null character `'\0'` should be excplicitly given at the end. In this example, since we copy `4` characters, they occupy positions 0,1,2 and 3 of the array `cad`. Therefore, the null caracter should be added at the position `4`.
 
-Dos ejemplos más de funciones interesantes que trabajan con cadenas de caracteres, aunque estas no pertenecen a la librería `stdlib.h`, son `atoi` y `atof`. La primerar sirve para convertir una cadena de texto que representa un valor entero a su equivalente valor de tipo `int`. La segunda función, exactamente igual pero para el caso de valores reales. Estas dos funciones están definidas en la librería estándar `cstdlib`, por lo que habrá que incluirla al comienzo de nuestro código si queremos poder utilizarlas:
+Two more examples of interesting functions that work with arrays of characters, although these do not belong to the `stdlib.h` library: `atoi` and `atof`. The first serves to convert an array of character that represents an integer value to its equivalent value of type `int`. The second function, exactly the same but for converting real values. These two functions are defined in the standard library `cstdlib`, so it must be included at the beginning of our code if we want to use them:
+
 
 ```cpp
 #include <cstdlib>
 ```
 
-Ejemplo:
+Example:
 
 ```cpp
 char cad1[] = "100";
@@ -346,41 +362,44 @@ char cad2[] = "10.5";
 float f = atof(cad2);
 ```
 
-En este código, la variable `n` tomará el valor `100` y la variable `f` el valor `10.5`.
+In this code, the variable `n` would take the value `100` and `f` would be `10.5`.
 
-## La clase `string` en C++
+## The `string` class in C++
 
-### Declaración e inicialización
+### Declaration and initialization
 
-La librería C++ estándar proporciona la clase `string` que da soporte a todas las operaciones sobre cadenas de texto mencionadas anteriormente, además de muchas otras funcionalidades.
+The standard C++ library provides the class `string` that supports all operations on text  mentioned above and many other extra functionalities.
 
-La gran ventaja con respecto a las cadenas de caracteres en C es que la clase `string` tiene un tamaño variable que puede cambiar a lo largo de la ejecución del programa en función de la cadena que queramos almacenar: puede aumentar si queremos almacenar una cadena más grande o puede disminuir para no desperdiciar memoria si queremos almacenar una más pequeña.
+The big advantage with respect to the arrays of characters in C is that the `string` class has a dynamic size that can change throughout the execution of the program depending on the contents that we want to store: it may increase if we want to store a larger string or it may decrease so as not to waste memory if we want to store a smaller one.
 
-La clase `string` usa intérnamente arrays de caracteres para almacenar los datos, pero el manejo de la memoria y la localización del carácter nulo lo hace de manera transparente la propia clase, que es lo que simplifica su uso.
+The `string` class internally uses character arrays to store the data, but the handling of the memory and the location of the null character is done in a transparent manner by the class itself, which simplifies its use.
 
-El concepto de "clase" y su diferencia con un tipo simple lo veremos en el Tema 5, cuando nos adentremos en el paradigma de programación orientada a objetos. Para utilizar la terminología adecuada, en lugar de "variable de tipo `string`" deberíamos decir "objeto de la clase `string`", y en lugar de "funciones específicas" de `string` deberíamos de hablar de "métodos". No obstante, para no anticiparnos a los contenidos sobre programación orientada a objetos, en este tema seguiremos utilizando la terminología habitual y hablaremos de "tipos", "variables" y "funciones" en lugar de "clases", "objetos" y "métodos".
+In Unit 5 (object-oriented programming) we will see the concept of "class" and its difference with a simple type. In order to use the appropriate terminology, instead of "variable of type `string`" we should say "object of the class `string`", and instead of "specific functions "of `string`" we should talk about "methods". However, for simplification in this Unit we will continue using the previous terminology and we will talk about "types", "variables" and "functions" instead of "classes", "objects" and "methods" that will be explained in Unit 5.
 
-Para hacer uso de algunas de las funciones que vamos a mencionar en este apartado es necesario incluir la librería del mismo nombre:
+
+To use of some of the functions mentioned in this section it is necessary to include the library of the same name:
 
 ```cpp
 #include <string>
 ```
 
-Las variables de tipo `string` se declaran como cualquier otro tipo de dato: ponemos el tipo, el nombre dado a la variable y opcionalmente un valor de inicialización.
+Note that for C arrays of characters we should use the library `<string.h>` instead.
 
-Ejemplo:
+The variables of type `string` are declared as any other data type: we write the type, the name given to the variable and optionally an initial value.
+
+Example:
 
 ```cpp
-string cad1;
-string cad2 = "hola";
-const string cad3 = "hola";
+string s1;
+string s2 = "hello";
+const string s3 = "hello";
 ```
 
-Este código muestra una variable sin inicializar \(`cad1`\), una variable con el valor inicial `"hola"` \(`cad2`\) y una constante con ese mismo valor inicial \(`cad3`\). Como puede verse en este ejemplo, no se debe usar la sintaxis de corchetes ni indicar el tamaño de la cadena como se hacía con las cadenas en C.
+This code shown an unitialized string \(`s1`\), a variable with the initial value `"hello"` \(`s2`\) and a constant with the same initial value \(`s3`\). As you can see in this example, you should not use the brackets nor indicate the size of the string as it was done with the C arrays.
 
-El paso de parámetros a una función, ya sea por valor o referencia, es como con cualquier dato simple \(`int`, `float`, etc.\).
+A `string` is passed as a parameter to a function, either by value or reference, the same way as with any simple data \(`int`,`float`, etc. \).
 
-Ejemplo:
+Example:
 
 ```cpp
 #include <iostream>
@@ -388,369 +407,376 @@ Ejemplo:
 
 using namespace std;
 
-void analizarCadena(string cad1, string &cad2)
+void analyzeString(string s1, string &s2)
 {
     ...
 }
 
 int main()
 {
-    string cad1 = "hola";
-    string cad2 = "adios";
+    string s1 = "hello";
+    string s2 = "bye";
 
-    analizarCadena(cad1,cad2);
+    analyzeString(s1,s2);
 }
 ```
 
-En este código se declaran dos variables de tipo `string` en la función principal, `cad1` y `cad2`. Ambas se pasan a la función `analizarCadena`, la primera por valor y la segunda por referencia.
+In this code two variables of type `string` are declared in the main function, `s1` and `s2`. Both are passed to the `analyzeString` function, the first by value and the second by reference.
 
-### Entrada y salida
+### Input and output
 
-Al igual que con las cadenas de caracteres de C, se utiliza `cout` para mostrar el contenido de un `string` por pantalla.
+As with the arrays of characters in C, `cout` is used to display the contents of a `string`.
 
-Ejemplo:
+Example:
 
 ```cpp
-string cad = "Hola a todo el mundo";
+string cad = "Hello everybody!";
 cout << cad;
 ```
 
-Este código mostraría por pantalla `Hola a todo el mundo`.
+This code would print on the screen `Hello everybody!`.
 
-Para leer información de teclado, se puede utilizar `cin` y el operador `>>`, como ocurría con las cadenas en C, produciéndose el mismo resultado:
+To read a string from the keyboard you can use  `cin` with the operator `>>`, as it happened with the arrays of characters in C. Their behaviour in this case is the same:
 
-* Ignora los espacios en blanco que se introducen antes del primer carácter válido de la cadena
-* Después de haber leído un carácter válido termina de leer cuando encuentra el primer blanco \(espacio, tabulador o salto de línea\). Ese blanco se deja en el buffer de teclado para la siguiente lectura
+* Blank spaces that are entered before the first valid character of the string are ignored
+* After reading a valid character, cin stops reading whtn it finds the first blank \(space, tab or line break\). This blank will be kept in the keyboard buffer for the next reading
 
-Ejemplo:
-
-```cpp
-string cad;
-cin >> cad;
-```
-
-Si la cadena contiene espacios en blanco y queremos leerla entera, podemos utilizar también la función `getline` que utilizábamos para cadenas de C, aunque en este caso la sintaxis es diferente:
+Example:
 
 ```cpp
-string cad;
-getline(cin,cad);
+string s;
+cin >> s;
 ```
 
-La ventaja que tiene usar `getline` con el tipo `string` es que no limita el número de caracteres leídos y, por tanto, no debe de indicarse este número como parámetro de la función.
-
-Si queremos leer hasta la aparición de un determinado carácter \(por defecto lee hasta que encuentra el salto de línea `'\n'`\), podemos indicarlo como parámetro de `getline`.
-
-Ejemplo:
+If the string contains blank spaces and we want to read them, we can also use the `getline` function that we used for C arrays, although in this case the syntax is different:
 
 ```cpp
-string cad;
-getline(cin,cad,',');
+string s;
+getline(cin,s);
 ```
 
-En este ejemplo se leería de teclado hasta la primera aparición del carácter `','`.
+The advantage of using `getline` with `string` is that the number of characters to be read is not limited and, therefore, the maximum size should not be indicated as a parameter of the function.
 
-Hay que tener en cuenta que, en caso de combinar lecturas de teclado con el operador `>>` y con `getline`, tendríamos el mismo problema que ya se mencionó con las cadenas en C.
+If we want to read until a certain character appears \(by default `getline` reads until it finds the line break `'\n'`\), we can indicate it as a parameter. For example:
 
-### Funciones de la librería `string`
+```cpp
+string s;
+getline(cin,s,',');
+```
 
-La librería estándar `string` proporciona una serie de funciones que facilitan el trabajo con cadenas.
+In this example, `getline` would read characters from the keyboard until the first occurrence of the character `','`.
 
-Al tratarse de una clase en lugar de un tipo simple, las funciones \(en realidad se llaman _métodos_ a las funciones de una clase\) de la clase `string` se invocan poniendo un `.` detrás del nombre de la variable. Como se comentó más arriba, veremos esto con detalle en el Tema 5, cuando introduzcamos la programación orientada a objetos.
+Keep in mind that, in case of combining keyboard readings with the `>>` operator and with `getline`, we would have the same problem that was mentioned with the C arrays.
 
-Entre las funciones más importantes que proporciona la librería `string`, tenemos `length`, `find`, `replace` y `erase`.
+
+### Functions of the `string` library
+
+The standard library `string` contains a series of functions that facilitate handling strings.
+
+As `string` is a class instead of a simple type, its functions \(actually the functions of a class should be called _methods_\) are invoked by putting a `.` after the variable name. As discussed above, we will see this in detail in Unit 5, when  object-oriented programming will be introduced.
+
+Among the most important functions provided by the `string` library, we have `length`, `find`, `replace` and `erase`.
 
 #### `length`
 
-Esta función permite obtener el número de caracteres que contiene una cadena. Su prototipo es el siguiente:
+This function (equivalent to the method `size()`) allows us to obtain the number of characters that a string contains. Their prototype is as follows:
 
 ```cpp
 unsigned int length();
+unsigned int size();
 ```
 
-No recibe ningún parámetro y devuelve como resultado un valor de tipo `unsigned int`, es decir, un entero sin signo, ya que el número de caracteres de una cadena nunca puede ser un valor negativo. La palabra reservada `unsigned` del lenguaje C/C++ es un modificador de tipo que indica que el valor almacenado es siempre positivo \(no puede tener signo negativo\).
+These methods do not receive any parameter and return as a result a value of type `unsigned int`,  since the number of characters in a string can never be a negative number.
 
-Ejemplo:
+Example:
 
 ```cpp
-string cad = "hola";
-unsigned int tam = cad.length();
+string s = "hello";
+unsigned int size = s.length(); 
+// Equivalent to:
+unsigned int size = s.size();
 ```
 
-Este ejemplo almacenaría el valor `4` en la variable `tam`.
+This example would store `5` in the variable `size`.
 
 #### `find`
 
-Esta función permite buscar una subcadena dentro de otra. El prototipo de la función es el siguiente:
+This function allows us to search for one substring inside another one. The prototype of the function is the following:
 
 ```cpp
 unsigned int find(const string str, unsigned int pos = 0);
 ```
 
-El primer parámetro es la subcadena que se quiere buscar, mientras que el segundo parámetro indica a partir de qué posición de la cadena queremos comenzar la búsqueda de la subcadena \(si no se indica nada ese valor será `0` y empezará a buscar por el principio de la cadena\). La función devuelve un valor entero indicando la posición dentro de la cadena \(`0` es la primera posición\) donde ha encontrado la subcadena. Si no encuentra la subcadena buscada, devuelve la constante `string::npos`.
+The first parameter is the substring that we want to search, while the second parameter indicates from what position of the string we want to start  searching \(if nothing is indicated that value will be `0` and it will start searching by the beginning of the string\). The function returns an integer value indicating the position of the string \(`0` is the first position\) where the substring was found. If the substring was not found, the function returns the constant `string::npos`.
 
-Ejemplo:
+Example:
 
 ```cpp
-string a = "Hay una taza en esta cocina con tazas";
-string b = "taza";
+string a = "There is a cup in this kitchen with cups";
+string b = "cup";
 
-// Longitud de a
+// Length of a
 unsigned int tam = a.length();
 
-// Buscamos la primera aparición de la subcadena "taza" dentro de la cadena "Hay una taza..."
-unsigned int encontrado = a.find(b);
+// We wearch for the first "cup" within the string  "There is a cup..."
+unsigned int found = a.find(b);
 
-if(encontrado != string::npos)
-    cout << "Encontrada primera << b << en la posición " << encontrado << endl;
+if(found != string::npos)
+    cout << "Found first " << b << " in the position " << found << endl;
 else
-    cout << "Palabra << b << no encontrada";
+    cout << "Substring " << b << " not found";
 
-// Buscamos la segunda aparición de la subcadena "taza"
-encontrado = a.find(b,encontrado+b.length());
-if(encontrado != string::npos)
-    cout << "Encontrada segunda << b << en la posición " << encontrado << endl;
+// We search for the second "cup"
+found = a.find(b,found+b.length());
+if(found != string::npos)
+    cout << "Found second" << b << " at position " << found << endl;
 else
-    cout << "Palabra << b << no encontrada";
+    cout << "Substring " << b << " not found";
 ```
 
-`find` termina cuando encuentra la primera aparición de la subcadena. En la primera búsqueda \(`a.find(b)`\) se empieza desde el inicio de la cadena, por lo que para al encontrar la primera aparición de la subcadena. En la segunda búsqueda \(`a.find(b,encontrado+b.length())`\), se comienza justo a continuación de la aparición de la primera subcadena, por lo que devolverá la segunda subcadena que pueda encontrar en la cadena. Este proceso se podría repetir introduciéndolo dentro de un bucle si nos interesara recuperar todas las apariciones de una subcadena dentro de otra.
+`find` ends when it finds the first occurrence of the substring. The first search \(`a.find(b)`\) starts from the beginning of the string. The second search \(`a.find(b,encontrado+b.length())`\) begins just after the first substring appears, so it will return the second occurrence of cup. This process could be repeated unsing a loop if we were interested in gathering all occurrences of one  substring within another.
 
 #### `replace`
 
-Esta función permite reemplazar una subcadena dentro de una cadena. Su prototipo es:
+This function allows us to replace a substring within a string. Its prototype is:
 
 ```cpp
-string& replace(unsigned int pos, unsigned int tam, const string str);
+string& replace(unsigned int pos, unsigned int size, const string str);
 ```
 
-El primer parámetro indica la posición dentro de la cadena donde comenzarán a reemplazarse caracteres. El segundo parámetro indica el número de caracteres que se van a reemplazar. Finalmente, el tercer parámetro indica la subcadena que se va a insertar como reemplazo. La función modifica directamente la cadena sobre la que se aplica, por lo que no es necesario asignar el valor que devuleve a otra variable.
+The first parameter indicates the position in the string where characters will begin to be replaced. The second parameter indicates the number of characters to be replaced. Finally, the third parameter indicates the substring to be inserted as a replacement. The function directly modifies the string on which it is applied, so it is not necessary to assign the return value to another variable.
 
-Ejemplo:
+
+Example:
 
 ```cpp
-string a = "Hay una taza en esta cocina con tazas";
+string a = "There is a cup in this kitchen with cups";
 
-a.replace(8,4,"botella");
+a.replace(11,3,"bottle");
 cout << a << endl;
 ```
 
-La salida por pantalla de este ejemplo sería `Hay una botella en esta cocina con tazas`.
+The output of this example would be `There is a bottle in this kitchen with cups`.
 
-En este ejemplo, se han sustituido dentro de la cadena `a` un total de `4` caracteres comenzando en la posición `8` y se ha insertado en su lugar la subcadena `"botella"`.
+In this example we replaced from `a` a total of `3` characters beginning at the position `11`, and then we inserted the substring `"bottle"` instead.
 
 #### `erase`
 
-Esta función permite eliminar un conjunto de caracteres de una cadena, o eliminarla por completo. Su prototipo es el siguiente:
+This function allows us to delete a series of characters from a string, or erase it completely. Its prototype is the following:
 
 ```cpp
-string& erase(unsigned int pos = 0, unsigned int tam = npos);
+string& erase(unsigned int pos = 0, unsigned int size = npos);
 ```
 
-El primer parámetro indica a partir de qué posición se empieza la eliminación de caracteres. El segundo parámetro indica cuántos caracteres se van a eliminar. Si no se indica ningún parámetro, `erase` elimina todos los caracteres de la cadena.
+The first parameter indicates from which position the deletion begins. The second parameter indicates how many characters are to be deleted. If no parameter is indicated, `erase` removes all  characters from the string.
 
-Ejemplo:
+Example:
 
 ```cpp
-string cad = "Hola a todo el mundo";
-cad.erase(3,11);
-cout << cad;
+string s = "Hello everybody";
+s.erase(6,5);
+cout << s;
 ```
 
-La salida por pantalla de este código sería `Hola mundo`.
+The output of this code would be `Hello body`.
 
-### Operaciones con `string`
+### Operations with `string`
 
-A las variables de tipo `string` se les pueden aplicar una serie de operadores aritméticos y de comparación.
+Arithmetic and comparison operators can be used with variables of type `string` .
 
-Para asignar una cadena a otra, basta con usar el operador de igualdad `=`.
+To assign a string to another, just use the assignment operator `=`.
 
-Ejemplo:
+Example:
 
 ```cpp
-string cad1 = "Hola";
-string cad2;
-cad2 = cad1;
+string s1 = "Hello";
+string s2;
+s2 = s1;
 ```
 
-Recuerda que esto no se podía hacer directamente con cadenas de caracteres en C y tenía que utilizarse la función `strcpy`.
+Remember that this could not be done directly with character arrays in C and the `strcpy` function had to be used instead.
 
-La concatenación de cadenas \(es decir, añadir una cadena a continuación de otra\) se lleva a cabo con el operador `+`.
+String concatenation \(that is, adding one string after another\) is done with the `+` operator.
 
-Ejemplo:
+Example:
 
 ```cpp
-string cad1 = "Hola";
-string cad2 = "mundo";
-string cad3 = cad1 + ", " + cad2 + "!";
-cout << cad3;
+string s1 = "Hello";
+string s2 = "world";
+string s3 = s1 + ", " + s2 + "!";
+cout << s3;
 ```
 
-Este código mostraría por pantalla `Hola, mundo!`
+This code would show `Hello, world!`.
 
-Para comparar cadenas, se pueden usar los mismos operadores que utilizamos para comparar números: `==`, `!=`, `>`, `<`, `>=` y `<=`.
+To compare strings, you can use the same operators  used to compare numbers: `==`, `!=`, `>`, `<`, `>=` and `<=`.
 
-Ejemplo:
+Example:
 
 ```cpp
-string cad1;
-string cad2;
+string s1;
+string s2;
 
-cin >> cad1;
-cin >> cad2;
+cin >> s1;
+cin >> s2;
 
-if(cad1 > cad2)
+if(s1 > s2)
 {
-    cout << "La primera cadena es mayor que la segunda" << endl;
+    cout << "The first string is greater than the second one" << endl;
 }
-else if(cad1 < cad2)
+else if (s1 < s2)
 {
-    cout << "La primera cadena es menor que la segunda" << endl;
+    cout << "The first string is lower than the second one" << endl;
 }
-else if(cad1 == cad2)
+else if (s1 == s2)
 {
-    cout << "Ambas cadenas son iguales" << endl;
-}
-```
-
-Para acceder a los distintos caracteres de un `string` podemos utilizar la misma sintaxis que utilizamos para acceder a cualquier array, mediante `[]`.
-
-Ejemplo:
-
-```cpp
-string cad = "Hola";
-
-for(int i = 0;i < cad.length();i++)
-{
-    cout << cad[i] << endl;
+    cout << "Both strings are the same" << endl;
 }
 ```
 
-Este código realiza un bucle que muestra por pantalla una cadena carácter a carácter:
+We can access the different characters of a `string` the same way than with an array, using `[]`.
+
+Example:
+
+```cpp
+string s = "Hello";
+
+for (unsigned i = 0; i<s.length(); i++)
+{
+    cout << s[i] << endl;
+}
+```
+
+This code performs a loop that shows on the screen a string character by character:
 
 ```
 H
-o
+e
 l
-a
+l
+o
 ```
 
-También se puede cambiar el valor de un carácter concreto del `string` utilizando esta sintaxis.
+You can also change the value of a particular character in the `string` using this syntax.
 
-Ejemplo:
+Example:
 
 ```cpp
-string cad = "hola";
-cad[0] = 'p';
-cad[3] = 'o';
-cout << cad;
+string s = "hello";
+s[0] = 's';
+s[4] = 'a';
+cout << s;
 ```
 
-Este código sustituye el primer y cuarto carácter de la cadena y muestra por pantalla `polo`.
+This code replaces the first and fourth characters of the string and displays on the screen `sella`.
 
-Es importante tener en cuenta aquí que solo podemos asignar caracteres a posiciones de la cadena que ya existan.
+It is important to bear in mind here that we can only assign characters to positions in the string that already exist.
 
-Ejemplo:
+Example:
 
 ```cpp
-string cad = "hola";
-cad[5] = '!';
-cout << cad;
+string s = "hello";
+s[5] = '!';
+cout << s;
 ```
 
-En este ejemplo se está tratando de cambiar el valor del carácter en la posición `5` de la cadena, pero dicha posición no existe, ya que la variable `string` solo tiene reservado espacio para almacenar la cadena `"hola"`, que va de la posición 0 a la 3.
+In this example we are trying to change the value of the character in the position `5` of the string, but this position does not exist as the variable `s` only allocated space to store the string `"hello"`, ranging from position 0 to 4.
 
-La salida por pantalla sería `Hola`, ya que el carácter `!` no se puede almacenar en la posición especificada.
+Maybe you will get a segmentation fault, or sometimes you will get as output `hello`, as the character `!` can not be stored. 
 
-### Conversión entre `string` y números
+### Conversion between `string` and numbers
 
-Para convertir un número entero o real a `string` podemos utilizar la función `to_string`.
+We can convert an integer or float number into a `string` using the function `to_string`.
 
-Ejemplo:
+Example:
 
 ```cpp
 int n = 100;
-string numero = to_string(n);
+string number = to_string(n);
 ```
 
-Esta función pertenece a la versión C++11 del lenguaje, por lo que para poder utilizarla en nuestro código habría que compilar añadiendo a `g++` el parámetro `std=c++11`. Por ejemplo, si nuestro código se llama`prog.cc` deberíamos de compilarlo con el comando `g++ -std=c++11 prog.cc`.
+This function belongs to the C++11 version, so in order to use it in our code we should compile our program adding the parameter `std=c++11` to `g++`. For example, if our code is called `prog.cc` we should compile it with the command `g++ -std=c++11 prog.cc`.
 
-Para convertir de cadena a número entero o real, podemos utilizar las mismas funciones que vimos para cadenas en C, `atoi` y `atof`, pero teniendo en cuenta que estas funciones esperan como entrada un array de caracteres y no un tipo `string`. Por ello, habrá que hacer una conversión previa utilizando la función `c_str` de la clase `string`, que permite convertir un `string` a cadena de caracteres en C. Este método, cuando se aplica a una variable de tipo `string`, devuelve una cadena de caracteres con su contenido.
+To convert from a string to an integer or a real number, we can use the same functions than in C arrays: `atoi` and `atof`. However, bear in mind that these functions expect as input an array of characters and not a type `string`. Therefore, a  conversion must be done using the `c_str` function of the `string` class, which allows to convert a `string` to an array of characters in C. This method, when applied to a variable of type `string`, returns an array of characters with its contents.
 
-Ejemplo:
+Example:
 
 ```cpp
-string cad1 = "100";
-int n1 = atoi(cad1.c_str());
+string s1 = "100";
+int n1 = atoi(s1.c_str());
 
-string cad2 = "10.5";
-float n2 = atof(cad2.c_str());
+string s2 = "10.5";
+float n2 = atof(s2.c_str());
 ```
 
-### Sacar las palabras de un `string`
+### Extract words from a `string`
 
-Dada una cadena de texto almacenada en un `string`, podemos extraer cada una de las palabras que contiene \(asumiendo que están separadas por espacios en blanco\) utilizando la clase `stringstream`. Para poder utilizar esta clase hay que importar la correspondiente librería al comienzo de nuestro código:
+Given a text stored in a `string`, we can extract each of the words it contains \(assuming they are separated by blank spaces\) using the `stringstream` class. In order to use this class you have to import the corresponding library at the beginning of our code:
+
 
 ```cpp
 #include <sstream>
 ```
 
-Ejemplo:
+Example:
 
 ```cpp
-stringstream ss("Hola mundo cruel 1 32 2.3");
+stringstream ss("Hello cruel world 1 32 2.3");
 string s;
 
 while(ss >> s)
 {
-    cout << "Palabra: " << s << endl;
+    cout << "Word: " << s << endl;
 }
 ```
 
-En este código, para cada iteración del bucle `while`, el operador `>>` lee de `ss` hasta que encuentra un espacio en blanco y lo almacena en `s`. `stringstream` se comporta como `cin` y se lee de la misma manera, ya que ambos representan flujos de caracteres.
+In this code, for each iteration of the `while` loop, the operator `>>` reads from `ss` until it finds a blank space, storing the result in `s`. `stringstream` reads the input the same way than using `cin`, as both of them are streams.
 
-## Conversión entre cadenas en C y `string`
+## Conversion between C arrays and `string`
 
-Para convertir una cadena en C a un `string`, podemos crear una variable de tipo `string` y utilizar directamente el operador `=` para asignarle su valor.
+In order to convert a C array into a `string`, we can create a `string` variable and use the operator `=` directly.
 
-Ejemplo:
-
-```cpp
-char cad1[] = "hola";
-string cad2 = cad1;
-```
-
-Para convertir un `string` a cadena de caracteres en C, podemos usar la función `c_str` de la clase `string` que mencionamos más arriba, junto con la función `strcpy` para hacer la copia entre cadenas.
-
-Ejemplo:
+Example:
 
 ```cpp
-string cad1 = "hola";
-char cad2[10];
-strcpy(cad2,cad1.c_str());
+char cad[] = "hello";
+string s = cad;
 ```
 
-## Comparativa entre cadenas de caracteres en C y `string`
+In order to convert a `string` into an array of characters in C, we can use the function `c_str` from the `string` class previously mentioned, along with the function `strcpy` to make the copy between arrays.
 
-Resumimos en la siguiente tabla cómo se hacen las mismas cosas utilizando cadenas de caracteres en C y utilizando el tipo `string`.
+Example:
 
-| vectores de caracters | `string` |
+```cpp
+string s = "hello";
+char cad[10];
+strcpy(cad,s.c_str());
+```
+
+Warning: Note that `cad` should have enough space to store all the characters from `s`.
+
+## Comparison between arrays of characters in C and `string`
+
+We summarize in the following table the main differences between C arrays of characters and `string`.
+
+
+| arrays of characters | `string` |
 | ---: | :--- |
-| `char cad[TAM];` | `string s;` |
-| `char cad[] = "hola";` | `string s = "hola";` |
+| `char cad[kSIZE];` | `string s;` |
+| `char cad[] = "hello";` | `string s = "hello";` |
 |  |  |
-| `strlen(cad);` | `s.length();` |
-| `cin.getline(cad,TAM);` | `getline(cin,s);` |
-| `if (!strcmp(c1,c2)){...}` | `if (s1 == s2){...}` |
-| `strcpy(c1,c2);` | `s1 = s2;` |
-| `strcat(c1,c2);` | `s1 = s1 + s2;` |
+| `strlen(cad);` | `s.length();` / `s.size();` |
+| `cin.getline(cad,kSIZE);` | `getline(cin,s);` |
+| `if (!strcmp(cad1,cad2)){...}` | `if (s1 == s2){...}` |
+| `strcpy(cad1,cad2);` | `s1 = s2;` |
+| `strcat(cad1,cad2);` | `s1 = s1 + s2;` |
 |  |  |
 | `strcpy(cad,s.c_str());` | `s = cad;` |
 |  |  |
-| Terminan con `\0` | NO terminan con `\0` |
-| Tamaño reservado fijo | El tamaño reservado puede crecer |
-| Tamaño ocupado variable | Tamaño ocupado = tamaño reservado |
+| They end with `\0` | They DO NOT end with `\0` |
+| Constant size in memory | Dynamic size in memory |
+| Variable occupied size | Occupied size = Reserved size |
 |  |  |
-| Se usan en ficheros binarios | NO se pueden usar en ficheros binarios |
-
+| They are used with binary files | They SHOULD NOT be used in binary files |
 
 
