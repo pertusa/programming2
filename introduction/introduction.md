@@ -1136,7 +1136,7 @@ We are going to make a program to print on the screen the first _n_ prime number
 
 ```bash
 ./primes
-1 2 3 5 7 11 13 17 19 23
+2 3 5 7 11 13 17 19 23 29
 ```
 
 The user must also be able to indicate the `-L` and/or `-N n` options.
@@ -1145,10 +1145,10 @@ The `-L` option is to display each number on a different line, and the `-N` opti
 
 ```bash
 ./primes -N 3
-1 2 3
+2 3 5
 ./primes -L -N 2
-1
 2
+3
 ```
 
 If the parameters indicated by the user are not correct, a syntax error message must be displayed and the program should end. The complicated part of this exercise is checking that all parameters are correct.
