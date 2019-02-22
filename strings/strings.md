@@ -768,4 +768,119 @@ We summarize in the following table the main differences between C arrays of cha
 |  |  |
 | They are used with binary files | They SHOULD NOT be used in binary files |
 
+# Exercises
+
+## Exercise 1 
+
+Design a function called _subString_ to extract
+a substring of length _n_ starting from the position _p_ of the input string. Both the argument and the return variable must be strings.
+
+Prototype
+
+```
+string subString(string input, int n, int p);
+```
+
+Output example:
+
+```cpp
+string s = subString("heeeello", 2, 5);
+cout << s << endl; // Prints "ll"
+```
+
+Take into account that _n+p_ could be longer than the string size.
+
+## Exercise 2
+
+Design a function called _eraseCharFromString_. Given a string and a character, the function must delete all the occurrences of the character in the string. 
+
+Prototype:
+
+```
+string eraseCharFromString(string input, char c);
+```
+
+Output example:
+
+```cpp
+string s = eraseCharFromString("hello, world!",'o');
+cout << s << endl; // Prints "hell, wrld!"
+```
+
+Take into account that the character may not appear in the input string.
+
+## Exercise 3
+
+Design a function caled _searchSubstring_ to find the first occurrence of the substring _a_ into the string _b_, returning its position or −1 if it is not found. Variables _a_ and _b_ must be strings.
+
+Prototype:
+
+
+```
+int searchSubString(string a, string b);
+```
+
+Output example:
+
+```cpp
+int n = searchSubString("eeel", "heeeello");
+cout << n << endl; // Prints 2
+```
+
+## Exercise 4
+
+Design a function called _encrypt_ for encrypting a string by adding a constant value _c_ to the ASCII code of each character. It must be considered that the result should be a letter.
+
+For instance, if _n = 3_, 'a' would be encoded as 'd', 'b' as 'e', ..., 'x' as 'a', 'y' as 'b', and 'z' as 'c'.
+
+The function should consider uppercase and lowercase letters. The non-letter characters should not be encrypted.
+
+Prototype:
+
+```cpp
+string encrypt(string input, int n);
+```
+
+Output example:
+
+
+```cpp
+string s = encrypt("hola, mundo", 3);
+cout << s << endl; // Prints "krod, pxqgr"
+```
+
+## Exercise 5
+
+Design a function called _isPalindromic_ to return _true_ if the string passed as parameter is palindromic. 
+
+Prototype:
+
+```cpp
+bool isPalindromic(string input);
+```
+
+Output example:
+
+```cpp
+bool a = isPalindromic("hola,aloh"); // a is true 
+bool b = isPalindromic("hola, aloh") // b is false
+```
+
+## Exercise 6
+
+Design a function called _createPalindromic_ for appending to a given string the same string but reversed, in such a way that the output string will be palindromic.
+
+Prototype:
+
+```cpp
+createPalindromic(string &s);
+```
+
+Output example:
+
+```cpp
+string s = "hola, mundo";
+createPalindromic(s);
+cout << s << endl; // Prints "hola, mundoodnum ,aloh"
+```
 
