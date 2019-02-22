@@ -698,7 +698,7 @@ string s2 = "10.5";
 float n2 = atof(s2.c_str());
 ```
 
-We also could use the functions _stoi_ and _stof_ (string to integer and string to float) if we compile our code with `std=c++11`.
+We could also use the functions _stoi_ and _stof_ (string to integer and string to float) which receive directly C++ strings as parameters, but for this we should compile our code with `std=c++11`.
 
 ### Extracting words from a `string`
 
