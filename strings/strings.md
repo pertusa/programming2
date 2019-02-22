@@ -754,7 +754,7 @@ We summarize in the following table the main differences between C arrays of cha
 | `char cad[kSIZE];` | `string s;` |
 | `char cad[] = "hello";` | `string s = "hello";` |
 |  |  |
-| `strlen(cad);` | `s.length();` / `s.size();` |
+| `strlen(cad);` | `s.length();` or `s.size();` |
 | `cin.getline(cad,kSIZE);` | `getline(cin,s);` |
 | `if (!strcmp(cad1,cad2)){...}` | `if (s1 == s2){...}` |
 | `strcpy(cad1,cad2);` | `s1 = s2;` |
@@ -817,8 +817,7 @@ Design a function caled _searchSubstring_ to find the first occurrence of the su
 
 Prototype:
 
-
-```
+```cpp
 int searchSubString(string a, string b);
 ```
 
@@ -875,7 +874,7 @@ Design a function called _createPalindromic_ for appending to a given string the
 Prototype:
 
 ```cpp
-createPalindromic(string &s);
+void createPalindromic(string &s);
 ```
 
 Output example:
