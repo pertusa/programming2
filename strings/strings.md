@@ -698,7 +698,9 @@ string s2 = "10.5";
 float n2 = atof(s2.c_str());
 ```
 
-### Extract words from a `string`
+We also could use the functions _stoi_ and _stof_ (string to integer and string to float) if we compile our code with `std=c++11`.
+
+### Extracting words from a `string`
 
 Given a text stored in a `string`, we can extract each of the words it contains \(assuming they are separated by blank spaces\) using the `stringstream` class. In order to use this class you have to import the corresponding library at the beginning of our code:
 
