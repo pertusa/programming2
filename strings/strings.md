@@ -772,12 +772,12 @@ We summarize in the following table the main differences between C arrays of cha
 
 ## Exercises
 
-### Exercise 1 
+### Exercise 1
 
 Design a function called _subString_ to extract
 a substring of length _n_ starting from the position _p_ of the input string. Both the argument and the return variable must be strings.
 
-Prototype
+Prototype:
 
 ```
 string subString(string input, int n, int p);
