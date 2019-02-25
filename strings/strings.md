@@ -508,12 +508,12 @@ string b = "cup";
 unsigned int size = a.length();
 
 // We wearch for the first "cup" within the string  "There is a cup..."
-unsigned int found = a.find(b);
+size_t found = a.find(b); // size_t is a data type that represents a number
 
 if(found != string::npos)
     cout << "Found first " << b << " in the position " << found << endl;
 else
-    cout << "Substring " << b << " not found";
+    cout << "Substring " << b << " not found" << endl;
 
 // We search for the second "cup"
 found = a.find(b,found+b.length());
@@ -886,4 +886,3 @@ string s = "hola, mundo";
 createPalindromic(s);
 cout << s << endl; // Prints "hola, mundoodnum ,aloh"
 ```
-
