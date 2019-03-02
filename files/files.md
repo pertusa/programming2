@@ -1,290 +1,393 @@
-#Tema 3 - Ficheros
+# Unit 3 - Files
 
-En este tema veremos como trabajar con ficheros de texto y también con ficheros binarios. Aprenderemos a realizar las operaciones básicas: apertura, lectura, escritura y cierre. Además veremos los principales problemas que nos podemos encontrar al trabajar con ficheros y sus soluciones.
+In this unit we will learn to work with both text and binary files to perform basic operations: opening, reading, writing and closing. In addition we will discuss the main problems that we can find when working with files, and their solutions.
 
-##Ficheros de texto
+A file is a series of data on a storage device under a single identifying name and a path.
 
-###Definición
+## Text files
 
-Los ficheros de texto (también llamados **ficheros con formato**) son aquellos cuyo contenido solo son caracteres imprimibles (en código ASCII son los caracteres a partir del código 32, el cual corresponde al espacio en blanco: ' '). Éstos pueden estar creados con diversos juegos de caracteres: ASCII (el código por defecto de los ficheros de texto), EBCDIC, Unicode (en su codificación más comúnmente usada, UTF-8).
-Un juego de caracteres o código de caracteres consiste en asignar un número a cada símbolo escrito: letras, números, símbolos, etc.
-Su contenido no tiene porque seguir ningún formato o disposición especial (no se puede 'decorar' el texto). En algunos casos tienen caracteres especiales para indicar los finales de linea (EOLN por *End of line*) y para señalar el final de fichero (EOF por *End of File*).
+Text files (also called **files with format**) are those that contain only printable characters. In ASCII code, they are the characters from code 32, which corresponds to the blank space: ' '. We can view the contents of text files using any text editor, unlike it happens with binary files.
 
-Ejemplos de ficheros de texto:
+Text files can be created with different character sets: ASCII (the default code for text files), EBCDIC, Unicode (in its most commonly used coding, UTF-8). A character set (also code character code) encodes each written symbol (letters, numbers, symbols, etc.) using a number. The file contents do not need to follow any format or special layout (you can not 'decorate' the text). In some cases they have special characters to indicate end of line (EOLN by _End Of line_) and to mark the end of file (EOF by *End of File*).
 
-* Un programa en C++, concretamente el fichero que contiene su código fuente sin compilar
-* Una página web, cuyo contenido está escrito en HTML
-* Un fichero de configuración de un sistema operativo (.ini en windows, .conf en Unix)
-* Un fichero 'makefile' de dependencias de compilación de un proyecto en C++
+Examples of text files:
 
-###Declaración
+* A C++ source code file
+* A webpage written in HTML
+* A config file of an operating system (.ini in Windows, .conf in Unix)
+* A README.txt file
 
-Para poder trabajar con ficheros de texto, debemos incluir la biblioteca de funciones *fstream*:
+### Reading example
+
+This is an example code to read a file contents line by line. All the instructions needed (declaration, opening, reading and closing) are detailed in the next sections.
+
+```cpp
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+int main() 
+{
+      ifstream fi("myfile.txt"); // We declare a read-only file and open it from the disk
+      if (fi.is_open()) // We check that the file could be opened
+      {
+            string s;
+            while (getline(fi,s))  // Read line by line until the end of file is found
+            {
+                  cout << "Line read from file: " << s << endl;
+            }
+            fi.close(); // Close the file
+      }
+      else cout << "Error opening file" << endl; // An error should always be given if the file could not be opened
+}
+```
+
+### Declaration
+
+We must include the _fstream_ library to work with files:
+
 ```cpp
 #include <fstream>
 ```
-Para declarar una variable de tipo fichero tenemos varias opciones, según el uso que le vayamos a dar.
 
-* Si solo queremos acceder para leer el contenido del fichero:
-```cpp
-ifstream fich_lectura;
-```
-* Si solo vamos a usar el fichero para escribir en él:
-```cpp
-ofstream fich_escritura;
-```
-* Si necesitamos acceder para ambas operaciones (lectura y escritura)
-```cpp
-fstream fich_txt_lect_escr;
-```
-Aunque usar ficheros de texto en ambos modos simultáneamente es algo poco frecuente.
+Then, we have several options to declare a variable for a file.
 
-###Operaciones de apertura y cierre
+```cpp
+ifstream readFile;  // If we only want to access the file for reading its contents
+ofstream writeFile; // If we only want to access the file for writing on it
+fstream readWriteFile; // If we want to perform both operations (reading and writing)
+```
 
-Para trabajar con un fichero, es necesario abrirlo, y para ello se usa la función
-```cpp
-open(const char[] nombre, const int modo)
-```
-Por ejemplo:
-```cpp
-ifstream fichero; // declaramos la variable del fichero
-const char nombre[]="mifichero.txt"; // declaramos una variable con el nombre del fichero
-fichero.open(nombre,ios::in); // abrimos el fichero en modo lectura
-```
-Si tenemos el nombre del fichero almacenado en una variable de tipo *string*, entonces deberemos usar la función de conversión ```c_str()```, por ejemplo:
-```cpp
-ifstream fichero; // variable del fichero
-string nombre="mifichero.txt"; // variable tipo string con el nombre del fichero
-fichero.open(nombre.c_str(),ios::in); // abrimos el fichero en modo lectura
-```
-En función de como vayamos a trabajar con el fichero (sólo lectura, sólo escritura, lectura y escritura, añadir al final, etc.), tendremos que utilizar un modo de apertura diferente. En C++ tenemos los siguientes modos de apertura:
+Take into account that is very unusual to need a text file that uses both modes simultaneously (reading and writing).
 
-| Modo | Observaciones | Constante en C++ |
-| -- | -- | -- |
-| Lectura | Sólo consultas, coloca el cursor al principio | ```ios::in``` |
-| Escritura | Sólo escritura, colocando el cursor al principio, puede sobreescribir contenidos | ```ios::out``` |
-| Lectura y escritura | Permite leer y escribir contenidos en el fichero | <code>ios::in &#124; ios::out</code> |
-| Añadir al final | Sólo escritura y coloca el cursor al final del fichero para añadir contenidos | <code>ios::out &#124; ios::app</code> |
-| Ir al final | Este modo permite moverse al final del fichero tras abrirlo | ```ios::ate``` |
-| Fichero binario | Este modo permite abrir ficheros binarios, lo veremos en el siguiente apartado | ```ios::binary``` |
-| Truncar/eliminar contenido | Este modo permite borrar TODO el contenido del fichero tras abrirlo en modo escritura | ```ios::trunc``` |
+### Opening and closing operations
 
-Existe una forma de realizar una declaración y apertura de un fichero con una sola instrucción.
-```cpp
-ifstream fichero("datos.txt");
-```
-Con esta instrucción abrimos un fichero llamado *datos.txt* en modo lectura (```ios::in```) y lo asignamos a la variable ```fichero```.
-```cpp
-ofstream ficheroSalida("resultado.txt");
-```
-Esta instrucción nos permite abrir un fichero llamado *resultado.txt* en modo escritura (```ios::out```) y queda asignado a la variable ```ficheroSalida```.
+Once a file variable is declared it is necessary to open it (tell the filename on disk). The function ```open``` can be used for this task:
 
-La operación de abrir un fichero es delicada en tanto que puede producir errores en tiempo de ejecución. Por lo que es importante, tras intentar abrir un fichero, comprobar si éste está correctamente abierto y listo para trabajar. Con la función ```is_open()``` podemos verificar si efectivamente nuestro fichero está abierto o no.
 ```cpp
-if (fichero.is_open()) {
-   // ya se puede trabajar con el ...
-} else {
-   // error de apertura
+bool open(const char[] filename, ios_base::openmode mode);  // Before C++11
+bool open(const string &filename, ios_base::openmode mode); // Since C++11
+```
+
+For example:
+```cpp
+ifstream fi; // We declare a read-only file variable
+fi.open("myfile.txt"); // We open the file called "myfile.txt" from the current path
+```
+
+Declaration and initialization can also be done in a single line:
+
+```cpp
+ifstream fi("myfilename.txt"); // We declare the variable and open it in read-only mode
+```
+
+Opening a file may yield some errors in runtime, for example when the file does not exist but it was opened for reading, or when the file is in a restricted path (we do not have permissions there) and is opened for writing. Therefore, after opening a file it is important to always check that this operation succeeded. This can be done with the function ```is_open()```:
+
+```cpp
+if (fi.is_open()) 
+{
+   // We can read from the file...
+} 
+else 
+{
+   // Opening error
 }
 ```
-Finalmente, tras trabajar con un fichero, tenemos que cerrarlo, para liberar recursos y permitir que otros procesos/programas puedan trabajar con el. Para ello, usamos la función ```close()```:
+
+Finally, once we are done with the file, we have to close it to free resources and allow other programs to work with that file. For this, we use the function ```close()```:
+
 ```cpp
 fichero.close();
 ```
-###Lectura de ficheros de texto
-####Detección de final de fichero
-Durante el trabajo (consulta de contenidos) con un fichero tenemos que saber en qué momento hemos llegado al final del mismo y parar de leer (para no incurrir en un error). Para saber si estamos en el final de un fichero tras una o varias operaciones de lectura, se usa el método ```eof()```. Por tanto la forma típica de recorrer el contenido de un fichero es mediante un bucle que tras cada operación de lectura, comprueba si estamos al final del fichero:
-```cpp
-ifstream fichero;
-...
-while(!fichero.eof()) { ... }
-```
-Éste método devuelve un valor booleano (*true* o *false*) en función de si estamos o no al final. Cuando realizamos una operación de lectura de un dato (carácter, número, etc.) que no está en el fichero, devuelve *true*. Pero, **cuidado**, despues de haber leido **el último dato válido** todavía devolverá *false*. Por tanto, hace falta realizar una lectura adicional (cuyo resultado se debe descartar, pues son datos no válidos) para provocar la detección del final de fichero, y por tanto que la función retorne *true*.
-####Ejemplos de lectura de un fichero
-Vamos a ver varias formas de leer el contenido de un fichero de texto:
-#####Primer ejemplo
-```cpp
-...
-if (fichero.is_open()) {
-   string s="";
-   getline(fichero,s);
-   // otra opción: fichero.getline(cad,tCAD);
-   // siendo ’cad’ de tipo ’char []’ y tCAD el tamaño de la cadena 'cad'.
-   while (!fichero.eof()) {
-      // hacer algo con 's'
-      getline(fichero,s);
-   }
-   fichero.close();
-}
-```
-Éste código se puede simplificar más. Además el bucle tiene un problema al final, si el fichero finaliza con un '\n' entonces produce una iteración de más. Eso se podría solucionar añadiendo una instrucción *if* que compruebe el contenido de la variable *s* antes de hacer algo con ella, antes de utilizarla.
-#####Segundo ejemplo, más compacto
-```cpp
-ifstream fichero("datos.txt");
 
-if (fichero.is_open()) {
+### Opening modes
+
+There are different modes that can be specified when opening the file, for example:
+
+```cpp
+// Declaration and initialization 
+ifstream fi;
+fi.open("myfilename.txt", ios::binary);
+// Equivalent to:
+ifstream fi("myfilename.txt, ios::binary);
+```
+
+The opening modes can be as follows:
+
+| Mode | Description | Constant in C++ |
+| -- | -- | -- |
+| Reading | Only reading, starting from the beginning of the file (not necessary when using `ifstream`) | ```ios::in``` |
+| Writing | Only writing, starting from the beginning of the file and overriting the file contents (not necessary when using `ofstream`) | ```ios::out``` |
+| Reading and writing | Allows us to read and write contents to the file (not necessary when using `fstream`) | <code>ios::in &#124; ios::out</code> |
+| Appending at the end of the file | Start writing from the end of the file without erasing its previous contents | <code>ios::app</code> |
+| Move to the end of file | This option allows us to start reading or writing from the end of the file after opening it | ```ios::ate``` |
+| Binary file | This mode allows us to use binary files. We will see this in detail in the binary files section | ```ios::binary``` |
+| Truncate/erase contents | This mode allows us to erase all the contents of the file after opening it in write mode | ```ios::trunc``` |
+
+### Reading text files
+
+#### Detecting the end of file
+
+When reading a file we need when we have reached the end of it to stop reading.
+
+To know if we are at the end of a file after a reading operations, one possibility is to use the ```eof()``` method. For example, we could read the contents of a file through a loop that after each reading operation checks if the end of the file was reached:
+
+```cpp
+ifstream fi("myfile.txt");
+if (fi.is_open())
+{
+      while(!fi.eof())
+      {
+            // Read file contents
+      }
+      fi.close();
+}
+else cout << "Error opening file" << endl;
+```
+
+This method returns a _Boolean_ value (*true* or *false*) depending on whether or not we are at the end. When we perform a reading operation (for example, with _cin_ or _getline_) of any data (character, integer, etc.) that cannot be done, ```eof``` returns *true*. But, **careful**, after having read **the last valid data** the method will still return *false*. Therefore, it is necessary to perform an additional reading (which result must be discarded, since it contains  invalid data) to cause the detection of the end of the file and make the ```eof``` function return *true*.
+
+#### Reading line by line
+
+There are alternative ways of reading a text file. For example, if wanted to read line by line:
+
+```cpp
+if (file.is_open()) 
+{
    string s;
-   while (getline(fichero,s)) {
-      // hacer algo con ’s’
+   getline(file,s);
+   while (!file.eof()) 
+   {
+      // do something with s
+      getline(file,s);
    }
-   fichero.close();
+   flie.close();
 }
 ```
-Esta otra forma de leer un fichero es más sencilla y **recomendable**. Aquí no usamos ```eof()``` porque la misma función ```getline()``` cuando no puede leer *'falla'* y devuelve un valor *false* que provoca la salida del bucle.
-#####Lectura carácter a carácter
-```cpp
-ifstream fichero("datos.txt");
 
-if (fichero.is_open()) {
-   char c; // Tambien puede ser de otros tipos: int, float, etc.
-   while (fichero >> c) {
-      // hacer algo con ’c’
+Note that we perform a reading operation before the while, and then we repeat the reading at the end of the loop. The following alternative is completely wrong:
+
+```cpp
+if (file.is_open()) 
+{
+   string s;
+   while (!file.eof()) 
+   {
+      getline(file,s); // WRONG!
+      // do something with s 
    }
-   fichero.close();
+   flie.close();
 }
 ```
-Este ejemplo muestra como trabajar con un fichero leyendolo carácter a carácter. Los ficheros en C++ son objetos de la clase *stream*, los cuales permiten ser accedidos como buffers de entrada/salida, usando los operadores ```>>``` y ```<<```, de la misma forma que hacemos con los buffers *cin* y *cout* de entrada/salida estándar.
 
-Otro ejemplo, similar al anterior, leemos el fichero carácter a carácter, pero cuyo contenido tiene espacios en blanco:
+Why is it wrong? Consider for example that the file to be read is empty, or that we are in the last line of the file. With the second code, the end of file will be read first and we would process the string _s_, even if it is empty because ```getline``` could not read anything. In contrast, the first code deals correctly with this situation.
+
+However, there is an alternative for reading a file which is easier and **recommended** when possible (in some situations it cannot be used). Here we do not need the ```eof()``` method because the function ```getline()``` already returns *false* when it cannot read anything else:
 
 ```cpp
-if (fichero.is_open())   {
+if (file.is_open()) 
+{
+   string s;
+   while (getline(file,s)) 
+   {
+      // do something with s
+   }
+   file.close();
+}
+```
+
+
+#### Reading char, int, double, etc.
+
+The following example shows how to read character by character. C++ files are objects of the class *stream*, therefore they can be accessed as input/output buffers using the ```>>``` and ```<<``` operators, in the same way what we do with *cin* and *cout* standard input / output buffers.
+
+```cpp
+if (file.is_open())
+{
+   char c; // This could also be int, float, etc.
+   while (file >> c)
+   {
+      // do something with c
+   }
+   file.close();
+}
+```
+
+In the following example we also read character by character, but considering that the file may contain blank spaces and we want to read them too (remember than blank spaces are ignored by the operator ```>>```):
+
+```cpp
+if (file.is_open())   
+{
    char c;
-   while (fichero.get(c)) {
-      // hacer algo con ’c’
+   while (file.get(c)) 
+   {
+      // do something with c
    }
- fichero.close();
+   file.close();
 }
 ```
 
-#####Lectura de ficheros de texto con contenido 'conocido'
-En este ejemplo leeremos el contenido de un fichero que tiene una o más lineas cuyo contenido es un *string* y a continuación dos números enteros. Por ejemplo, un fichero con esta estructura seria:
+#### Reading with known mixed data types
+
+Consider that we want to read the contents of a file that has several lines containing a string followed by two integers, for example:
+
 ```
 hola 123 1024
 mundo 43 23
 ```
-El código:
-```cpp
-ifstream fichero("ejemplo.txt");
 
-if (fichero.is_open()) {
+To read a file like this we could use the following code:
+
+```cpp
+ifstream file("example.txt");
+
+if (file.is_open())
+{
    string s;
    int i,j;
-   while (fichero >> s) {// Leer string 
-      fichero >> i; // Leer primer numero
-      fichero >> j; // Leer segundo numero
+   while (file >> s) // Read string
+   {
+      file >> i; // Read first number
+      file >> j; // Read second number
       cout << "Read: " << s << "," << i << "," << j << endl;
    }
+   file.close();
 }
 ```
 
-Otro ejemplo más:
-En este ejemplo leemos los datos de un fichero cuya estructura es: primero un número entero, que indica los nombres que hay a continuación y luego una sucesión de nombres separados por espacios o retornos de carro, por ejemplo:
+Alternative code (more compact):
+
+```cpp
+ifstream file("example.txt");
+
+if (file.is_open())
+{
+   string s;
+   int i,j;
+   while (file >> s >> i >> j) // Read string, first number and second number
+   {
+      cout << "Read: " << s << "," << i << "," << j << endl;
+   }
+   file.close();
+}
+```
+
+This is another example for a mixed-type contents (only a line with a number indicating the number of words, and then the words):
+
 ```
 3 pedro antonio jordi
 ```
-Y el código
+
+The code to read this file could be:
+
 ```cpp
-if (fichero.is_open()) {
+if (file.is_open())
+{
    string s;
-   int cuantos;
-   fichero >> cuantos;
-   for(int i=0; i<cuantos; i++) {
-      fichero >> s;
-      cout << "Nombre(" << i+1 << ")=" << s << endl;
+   int n;
+   file >> n;
+   for(int i=0; i<n; i++) {
+      file >> s;
+      cout << "Name(" << i+1 << ")=" << s << endl;
    }
-   fichero.close();
+   file.close();
 }
 ```
-Lo primero que hacemos tras abrir el fichero es leer el número para saber cuantos nombres tenemos que leer. A continuación, mediante un bucle *for* leemos tantas *strings* como nos indica *cuantos* y los mostramos en pantalla.
 
-###Escritura de ficheros de texto
-Para escribir en un fichero de texto usaremos el operador de volcado ```<<```, porque tal y como dijimos anteriormente, los ficheros son objetos *stream* y pueden ser usados como buffers de entrada/salida de datos.
-```cpp
-ofstream fich_salida;
-...
-fich_salida.open("resultados.txt",ios::out);
-if (fich_salida.is_open()) {
-   fich_salida << "El resultado es: " << numentero << endl;
-   ...
-   fich_salida.close();
-}
-```
-En este ejemplo, simplemente abrimos un fichero en modo escritura y volvamos o escribimos en él una frase y una variable llamada *numentero*. Se debe tener en cuenta que tal y como está escrito este ejemplo, el contenido del fichero será eliminado en cada ejecución y sustituido por el nuevo resultado.
+### Writing
 
-Otro Ejemplo:
+To write in a text file we can use the output operator ```<<```, because as previously explained, files are *stream* objects and can be used as data input/output buffers.
+
 ```cpp
-ofstream fich_salida;
-...
-fich_salida.open("resultados.txt",ios::out | ios::app);
-if (fich_salida.is_open()) {
-   fich_salida << "Datos: ";
-   for (int i=0; i<totales; i++) {
-      fich_salida << resultados[i] << " ";
+ofstream fo("results.txt"); // ofstream for writing
+
+if (fo.is_open()) 
+{
+   const unsigned n = 10;
+   for (unsigned i = 0; i < n; i++)
+   {
+         fo << "Printed: " << n << endl;
    }
-   fich_salida << endl; // fin de linea al final del volcado de datos
-   ...
-   fich_salida.close();
+   fo.close();
 }
 ```
-En este otro ejemplo:
 
-* volcamos una línea de texto con el literal 'Datos: ' seguido de una sucesión de datos obtenidos durante el recorrido de un array llamado 'resultados'. Cada dato estará separado por un espacio en blanco.
-* además, el fichero no será truncado en la apertura y su contenido se mantendrá. Los datos de sucesivas ejecuciones serán añadidos al final del mismo.
+In this example, we simply open a file and write there "Printed: " and a variable called *n*. It must be taken into account that **the first writing operation erases all the previous contents of the file**. If we do not want to do so, we should use ```ios::app```.
 
-###Ejercicios
+Another writing example:
 
-####Ejercicio 3.1:
+```cpp
+ofstream fo("results.txt", ios::app); // ios::app means that the new contents will be appended at the end of the existing contents of the file
+if (fo.is_open())
+{
+   fo << "Write something."
+   fo << "Something else" << endl;
 
-#####Implementa un programa que lea un fichero llamado 'fichero.txt' e imprima por pantalla las lineas del fichero que contienen la cadena 'Hola'.
+   fo.close();
+}
+```
 
-####Ejercicio 3.2:
+### Exercises
 
-#####Escribe un programa que lea un fichero llamado 'fichero.txt' y escriba en un segundo fichero, llamado 'FICHERO.TXT' el contenido del primero con todas sus letras (carácteres alfanuméricos) pasados a mayúsculas. Ejemplo:
+#### Exercise 1
 
-| fichero.txt | FICHERO.TXT |
+Make a program that reads a file called _myfile.txt_ and prints on screen only those lines containing the substring "Hello".
+
+#### Exercise 2
+
+Make a program for reading a file called _myfile.txt_, writing in another file _myfileUpper.txt_ the same content of the input file but with all the letters in uppercase. Example:
+
+| myfile.txt | myfileUpper.txt |
 | --- | --- |
-| Hola, mundo. | HOLA, MUNDO. |
-| Como estamos? | COMO ESTAMOS? |
-| Adios y 1000 veces adios | ADIOS Y 1000 VECES ADIOS |
+| Hello, world. | HELLO, WORLD. |
+| How are you? | HOW ARE YOU? |
+| Bye and 1000 times bye | BYE AND 1000 TIMES BYE |
 
-####Ejercicio 3.3:
+#### Exercise 3
 
-#####Haz un programa que lea dos ficheros de texto llamados 'f1.txt' y 'f2.txt' y escriba por pantalla las lineas que sean distintas en cada fichero (número de línea, y '< ' delante de la linea del primer fichero y '> ' precediendo la linea del segundo. Ejemplo:
+Implement a program for reading two text files, _f1.txt_ and _f2.txt_, writing on the screen those lines that differ in both files. The program should print _<_ when the line corresponds to _f1.txt_, and _>_ when it corresponds to _f2.txt_. Example:
 
 | f1.txt | f2.txt |
 | --- | --- |
-| Hola, mundo. | Hola, mundo. |
-| Me llamo andreu | Me llamo Andreu |
-| Adios, adios | Hasta la vista |
+| Hello, world. | Hello, world. |
+| My name is andrew | My name is Andrew |
+| Bye, bye | See you soon |
 
 El resultado debe ser:
 
 ```
-Línea 2:
-< Me llamo andreu
-> Me llamo Andreu
-Línea 3:
-< Adios, adios
-> Hasta la vista
+Line 2:
+< My name is andreu
+> My name is Andreu
+Line 3:
+< Bye, bye
+> See you soon
 ```
 
-####Ejercicio 3.4:
+#### Exercise 4
 
-#####Diseña una función "finfichero" que reciba dos parámetros: el primero debe ser un número entero positivo *n*, y el segundo el nombre de un fichero de texto. La función deberá mostrar en pantalla las últimas *n* lineas del fichero. Ejemplo:
+Implement a function called _printLastLines_ which receives two arguments: the first one must be a positive integer _n_, and the second the name of a text file. The function must print on the screen the last _n_ lines of the given file. Example:
+
+```cpp
+printLastLines(3, "myfile.txt");
+```
+
+Assuming that the last three lines of the file are as follows, the output of the program should be:
 
 ```
-finfichero(3, "texto.txt");
+with several worlds
+one word
+many, many, many words
 ```
 
-Tenemos dos opciones para implementar esta función:
+This exercise can be solved in two possible ways: 
+* Using "brute force": all the file could be read to count the number of lines, and then read it again to write the last _n_ lines. However, this is not efficient: what happens if the file had millions of lines?
+* Using a vector of strings of size _n_ which stores at every time the last _n_ lines. At the beginning, it will contain less than _n_ lines.
 
-* Solución *bestia*: leer el fichero para contar las líneas que tiene, y volver a leer el fichero para escribir las n líneas finales. Problema: si el fichero tiene **muchas lineas**??
-* Otra solución: Utilizar un vector de string de tamaño *n* que almacene en todo momento las n últimas líneas leídas (aunque al principio tendrá menos de n líneas)
+#### Exercise 5
 
-####Ejercicio 3.5:
-
-#####Dados dos ficheros de texto "f1.txt" y "f2.txt", en los que cada línea es una serie de números separados por ":", y suponiendo que las líneas están ordenadas por el primer número de menor a mayor en los dos ficheros, haz un programa que lea los dos ficheros línea por línea y escriba en el fichero “f3.txt” las líneas comunes a ambos ficheros, como en el siguiente ejemplo:
+We have two text files _f1.txt_ and _f2.txt_ in which each line is a series of numbers separated by ':'. Assuming that the lines are in ascending order by the first number, make a function to read both files line by line, writing the common lines into the file _f3.txt_ like in the following example:
 
 | f1.txt | f2.txt | f3.txt |
 | -------- | -------- | -------- |
@@ -293,89 +396,141 @@ Tenemos dos opciones para implementar esta función:
 | 17:188:22 | 15:881:44 | 20:111:22:454:313 |
 | 20:111:22 | 20:454:313 | |
 
-<!-- TODO: poner los demás ejercicios -->
+<!---
+## Binary files
 
-##Ficheros binarios
+A binary file stores a sequence of bytes. In these files, the data is stored as it is in the computer's memory. Unlike in text files, bytes are not converted into characters when they are saved in the file. For this reason, binary files are also called **files without format**. When we try to open these files using a standard text editor, we can see weird characters.
 
-###Definición
+Examples of binary files:
 
-Un fichero binario es una secuencia de bits (habitualmente agrupados de ocho en ocho, es decir, en bytes). En estos ficheros la información se almacena tal y como estan alojados en la memoria del ordenador, no se convierten en caracteres al gardarlos en el fichero. También son llamados *ficheros sin formato*.
+* An image file
+* A compiled program (executable file)
+* A pdf file
+* An mp3 file
 
-Normalmente, para guardar/leer información en un fichero binario se usan registros (structs). De esta forma, es posible acceder directamente al *n-ésimo* elemento sin tener que leer los *n-1* anteriores. Es por esto que se dice que los ficheros binarios son ficheros de acceso directo (o aleatorio) y los ficheros de texto son de acceso secuencial.
+Usually, when a program works with structs, binary files are used to store their information. One advantage of this is that whether in text files we need to start reading from the beginning of the file (what is called _secuential access_), in binary files we can access directly to the _n_-th element (struct) without reading the previous data. This is why binary files are said to have _direct (random)_ access.
 
-###Declaración
 
-Al igual que con los ficheros de texto, para poder trabajar con este tipo de ficheros, debemos incluir la biblioteca de funciones *fstream*:
+### Reading example
+
+### File reading example
+
+This is an example code to read a file contents of a binary file. All the instructions needed (declaration, opening, reading and closing) are detailed in the next sections.
+
 ```cpp
+#include <iostream>
 #include <fstream>
-```
-Para declarar una variable de tipo fichero binario, según el uso que le vayamos a dar, tenemos:
 
-* Solo para lecturas/consultas al fichero:
-```cpp
-ifstream fich_lectura;
-```
-* Solo para escribir en él:
-```cpp
-ofstream fich_escritura;
-```
-* Si necesitamos acceder para ambas operaciones (lectura y escritura)
-```cpp
-fstream fich_lect_escr;
-```
-###Operaciones de apertura y cierre
+struct Student 
+{
+      char id[10];
+      int group;
+      float mark;
+};
 
-Para abrir un fichero binario, también usamos la función ```open```, pero tenemos que añadir un modo adicional: ```ios::binary```.
+using namespace std;
 
-* Apertura para lectura:
-```cpp
-fich_lectura.open("mifichero.dat", ios::in | ios::binary);
+int main()
+{
+      ifstream fi("myfile.txt", ios::binary); // We declare a read-only binary file and open it from the disk
+      if (fi.is_open()) // We check that the file could be opened
+      {
+           Student student;
+           // Loop for reading all students from a binary file
+           while (fi.read((char *)&student, sizeof(student))) 
+           {
+                  // process ’student’
+           }
+           fi.close(); // Close the file
+      }
+      else cout << "Error opening file" << endl; // An error should always be given if the file could not be opened
+}
 ```
-* Apertura para escritura:
-```cpp
-fich_escritura.open("mifichero.dat", ios:out | ios::binary);
-```
-* Modo abreviado, declaración y apertura en una sola instrucción:
-```cpp
-ifstream fbl("mifichero.dat", ios::binary); // fichero binaro de lectura
-ofstream fbe("otrofichero.dat", ios::binary); // fichero binario de escritura
-```
-Combinando varios modos de apertura podemos obtener:
 
-* Ficheros binarios de lectura y escritura: ```ios::in | ios::out | ios::binary```
-* Ficheros binarios para ascritura/añadir al final: ```ios::out | ios::app || ios::binary```
 
-Finalmente, para cerrar un fichero binario, igual que con los de texto, se usa la función ```close()```.
-```cpp
-fich_binario.close();
-```
-###Lectura de ficheros binarios
+### Declaration
 
-Para leer ficheros finarios se utiliza la función ```read(registro, tamaño)``` a la que le tenemos que pasar dos argumentos:
+Declaration is similar than with text files. 
 
-* El registro donde se almacenarán los datos tras la operación de lectura.
-* La cantidad de bytes que deseamos leer. La cual se obtiene calculando el tamaño del registro con la función ```sizeof()```. 
+### Opening and closing
 
-En el siguiente ejemplo leemos el contenido completo de un fichero binario formado por registros de tipo *TIPOCIUDAD*.
+Here there is a difference, we need to add _ios::binary_ when opening the file:
 
 ```cpp
-typedef struct { ... } TIPOCIUDAD;
-...
-TIPOCIUDAD ciudad;
-ifstream fbl;
+ifstream fi; // We declare a read-only file variable
+fi.open("myfile.dat", ios::binary); // We open the binary file called "myfile.dat" from the current path
+```
 
-fbl.open("mifichero.dat",ios::in | ios::binary);
+Declaration and initialization can also be done in a single line:
 
-if (fbl.is_open()) {
-   while (fbl.read((char *)&ciudad, sizeof(ciudad))) {
-      // procesar ’ciudad’
+```cpp
+ifstream fi("myfilename.dat", ios::binary); // We declare the variable and open it in read-only mode
+```
+
+A binary file can also be opened for writing:
+
+```cpp
+ofstream fo("myfilename.dat", ios::binary);
+```
+
+Or for reading and writing (this is more common than in text files):
+
+```cpp
+fstream fo("myfilename.dat", ios::binary);
+```
+
+Finally, to close a binary file, just as with text files, the function```close()``` is used.
+
+```cpp
+fi.close();
+```
+
+### Reading
+
+For reading binary files we can **only** use the function  ```read```, which receives two parameters:
+
+* The variable (struct or other data type) where the read data will be stored.
+* The amount of bytes to be read from the file. This size can be known using the function ```sizeof()```. 
+
+In the next example we read the contents of a binary file that contains many structs of type *CITY*.
+
+```cpp
+struct City { 
+      char name[20];
+      int population;
+      int extension;
+};
+
+City city;
+ifstream fb;
+
+fb.open("myfile.dat", ios::binary);
+
+if (fb.is_open())
+{
+   while (fb.read((char *)&city, sizeof(city)))
+   {
+      // process variable ’city’
    }
    fbl.close();
 }
 ```
-Una vez comprobado que el fichero ha sido correctamente abierto, leemos su contenido mediante un bucle, invocando a cada iteración a la función *read*, pasándole como argumentos el registro *ciudad* y su tamaño. En el cuerpo del bucle *while* trabajaremos con los datos de la ciudad recien leida. Finalmente, cuando lleguemos al final de fichero, el *while* finalizará y cerraremos el fichero.
 
-`NOTA: Para leer el contenido de un fichero binario, tenemos que saber su estructura (el tipo de resgistro o *struct* usado para almacenar datos en él).`
+As we can see, with the while loop we read structs until the end of file is found. The first parameter of the function **read** is the variable where we will store the data, and the second is the number of bytes that the program should read. 
+
+Note that:
+* The first parameter also contains **(char *)&**. This is required to tell the compiler to read byte by byte, as a _char_ type always occupies one byte. 
+* The second parameter is the size of the struct (in bytes) to be read, which can be calculated with **sizeof**. In this second parameter, instead of _city_ we could also have used _City_, as _sizeof_ returns the same size in both cases.
+
+`IMPORTANT!: To read the contents of a binary file we need to know in advance how was it written (the data type or *struct* that it contains).`
+
+`VERY IMPORTANT: As we need to know the size in bytes of the data to be read, it is mandatory that this data will have a constant size, or alternatively use a variable which tells us how many bytes should the program read.`
+
+For this reason, we cannot store strings into a binary file (ok, actually we could with a trick that we will see later, but in Programming 2 we will only use char arrays in binary files).
+
+### Direct access
+
+If the file contains a series of elements of constant size, we can access directly to an element by calculating its position in function of the data size.
 
 También podemos acceder a un elemento directamente calculando su posición en el fichero en función del tamaño de los datos y la cantidad de elementos que hay antes. Para ello usamos la función ```seekg(posición, desde)```, donde:
 
@@ -392,23 +547,22 @@ Esta puede tener los siguientes valores:
 
 Por ejemplo, si deseamos acceder y leer el tercer elemento, hariamos:
 ```cpp
-...
 if (fbl.is_open()) {
 	// nos posicionamos justo ante el tercer elemento:
 	fbl.seekg( (3-1)*sizeof(ciudad), ios::beg); // contamos el tercer registro de tamaño ciudad desde el principio
 	fbl.read( (char *)&ciudad, sizeof(ciudad) );
 }
-...
+
 ``` 
 En este otro ejemplo, queremos acceder al **último** elemento del fichero:
 ```cpp
-...
+
 if (fbl.is_open()) {
 	// nos posicionamos justo ante el tercer elemento:
 	fbl.seekg( (-1)*sizeof(ciudad), ios::end); 
 	fbl.read( (char *)&ciudad, sizeof(ciudad) );
 }
-...
+
 ``` 
 A la función *seekg* le pasamos una posición negativa, relativa al final del fichero.
 
@@ -422,15 +576,15 @@ Para guardar datos en un fichero binario se usa la función ```write(registro, t
 En el siguiente ejemplo de código escribimos en un fichero binario llamado "mifichero.dat" un registro de tipo *TIPOCIUDAD*.
 
 ```cpp
-typedef struct { ... } TIPOCIUDAD;
-...
+typedef struct {  } TIPOCIUDAD;
+
 TIPOCIUDAD ciudad;
 ofstream fbe("mifichero.dat", ios::binary);
 
 if (fbe.is_open())
 {
 	// introducimos datos en el registro ’ciudad’
-	ciudad... = ...;
+	ciudad = ...;
 	// escribimos en el fichero
 	fbe.write((const char *)&ciudad, sizeof(ciudad));
 	...
@@ -445,13 +599,13 @@ Si deseamos escribir en una posición concreta del fichero, podemos usar la func
 
 Por ejemplo, si deseamos escribir o modificar el quinto elemento de un fichero:
 ```cpp
-...
+
 if (fbe.is_open()) {
 	// nos posicionamos para escribir en el quinto elemento:
 	fbl.seekp( (5-1)*sizeof(ciudad), ios::beg); 
 	fbl.write( (const char *)&ciudad, sizeof(ciudad) );
 }
-...
+
 ``` 
 En este caso, si en el fichero hay 5 o más registros, sobreescribiremos el quinto con el contenido de la variable *ciudad*, pero si hubiera menos de cinco elementos entonces el fichero crecerá para permitir escribir el dato en la quinta posición.
 
@@ -529,7 +683,6 @@ if (fi.is_open()) {
    fi.close();
 }
 ```
-<!-- TODO: transpa 27, exercicis!!! -->
 
 ###Ejercicios
 
@@ -557,3 +710,4 @@ if (fi.is_open()) {
 
 #####Escribe un programa que se encarge de la asignación automática de alumnos en 10 turnos de prácticas. A cada alumno se le asignará el turno correspondiente al último número de su DNI (a los alumnos con DNI acabado en 0 se les asignará el turno 10). Los datos de los alumnos están en un fichero "alumnos.dat" con la misma estructura que en los ejercicios anteriores. La asignación de turnos debe hacerse leyendo el fichero una sola vez, y sin almacenarlo en memoria. En cada paso se leerá la información correspondiente a un alumno, se calculará el turno que le corresponde, y se guardará el registro en la misma posición.
 
+---->
