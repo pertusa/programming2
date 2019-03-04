@@ -98,7 +98,7 @@ else
 Finally, once we are done with the file, we have to close it to free resources and allow other programs to work with that file. For this, we use the function ```close()```:
 
 ```cpp
-fichero.close();
+fi.close();
 ```
 
 ### Opening modes
