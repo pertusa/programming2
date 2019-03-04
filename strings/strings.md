@@ -493,7 +493,7 @@ This example would store `5` in the variable `size`.
 This function allows us to search for one substring inside another one. The prototype of the function is the following:
 
 ```cpp
-unsigned int find(const string str, unsigned int pos = 0);
+size_t find(const string str, unsigned int pos = 0);
 ```
 
 The first parameter is the substring that we want to search, while the second parameter indicates from what position of the string we want to start  searching \(if nothing is indicated that value will be `0` and it will start searching by the beginning of the string\). The function returns an integer value indicating the position of the string \(`0` is the first position\) where the substring was found. If the substring was not found, the function returns the constant `string::npos`.
