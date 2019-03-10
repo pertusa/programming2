@@ -559,20 +559,22 @@ The second parameter could have the following values:
 For example, if we wanted to read the third struct from the file, we could use:
 
 ```cpp
-if (fb.is_open()) {
+if (fi.is_open()) 
+{
 	// We move the pointer just before the third element starting from the beginning:
-	fb.seekg((3-1)*sizeof(city), ios::beg);
-	fbl.read((char *)&city, sizeof(city));
+	fi.seekg((3-1)*sizeof(city), ios::beg);
+	fi.read((char *)&city, sizeof(city));
 }
 
 ``` 
 In the following example we read the **last** element of the file:
 ```cpp
 
-if (fbl.is_open()) {
+if (fi.is_open())
+{
 	// we move the pointer just before the last element starting from the end:
-	fbl.seekg((-1)*sizeof(city), ios::end);
-	fbl.read((char *)&city, sizeof(city));
+	fo.seekg((-1)*sizeof(city), ios::end);
+	fo.read((char *)&city, sizeof(city));
 }
 
 ``` 
@@ -624,12 +626,13 @@ For example, for writing the fifth element of a binary file containing a vector 
 
 ```cpp
 
-if (fb.is_open()) 
+if (fo.is_open())
 {
-	fb.seekp((5-1)*sizeof(city), ios::beg);
-	fb.write((const char *)&city, sizeof(city));
+	fo.seekp((5-1)*sizeof(city), ios::beg);
+	fo.write((const char *)&city, sizeof(city));
 }
 ``` 
+
 In this case, if the file contains 5 or more structs, the program overwrites the fifth one with the contents of the variable _city_. However, if the file contained only 3 structs, it would be enlarged to allow writing into the fifth position, leaving  the bytes of the forth element uninitialized.
 
 #### Converting strings into char arrays
@@ -637,7 +640,7 @@ In this case, if the file contains 5 or more structs, the program overwrites the
 If we wanted to store a struct containing a string into a binary file, we need to create another struct replacing the string by an array of characters and convert each variable from one struct into the another. When doing this conversion, it may happen that the string should be shortened to fit into the array. For example:
 
 ```cpp
-struct City 
+struct City
 {
       char name[MAXLENGTH];
       int population;
@@ -683,7 +686,7 @@ The second case are errors that may occur after opening the file. Consider for e
 ```cpp
 fb.read((char *)&city, sizeof(city));
 if (fb.fail() && !fb.eof())
-{ 
+{
       // If this condition is true, then the reading operation failed 
 }
 ```
@@ -692,7 +695,7 @@ In the following example we read a file until the end, and after each reading op
 
 ```cpp
 ...// we open the file
-if (fi.is_open()) 
+if (fi.is_open())
 {
    bool error=false;
    string s;
@@ -771,4 +774,3 @@ Given a file _students.dat_ from the previous exercises, make a program to conve
 Write a program to automatically assign students to 10 groups. Each student should be assigned to the group corresponding to her/his Id last number (those ending with 0 will be assigned to the group 10). The student data should be stored in a file _students.dat_ with the same structure than in previous exercises.
 
 The student assignation must be done reading the file once (in one pass), without storing the file in memory. At each step, the information for a student will be read, the group will be calculated, and the struct should be stored in the same position.
-
