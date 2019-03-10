@@ -396,39 +396,51 @@ We have two text files _f1.txt_ and _f2.txt_ in which each line is a series of n
 | 17:188:22 | 15:881:44 | 20:111:22:454:313 |
 | 20:111:22 | 20:454:313 | |
 
-<!---
+
 ## Binary files
 
-A binary file stores a sequence of bytes. In these files, the data is stored as it is in the computer's memory. Unlike in text files, bytes are not converted into characters when they are saved in the file. For this reason, binary files are also called **files without format**. When we try to open these files using a standard text editor, we can see weird characters.
+A binary file stores a sequence of bytes. In this kind of files, data is stored as it is in the computer's memory. Unlike in text files, bytes are not converted into characters when they are saved into the file. For this reason, binary files are also called **files without format**. If we open a file using a standard text editor and we can see weird characters, then it is likely a binary file.
 
 Examples of binary files:
 
 * An image file
 * A compiled program (executable file)
-* A pdf file
-* An mp3 file
+* A PDF file
+* An MP3 file
 
-Usually, when a program works with structs, binary files are used to store their information. One advantage of this is that whether in text files we need to start reading from the beginning of the file (what is called _secuential access_), in binary files we can access directly to the _n_-th element (struct) without reading the previous data. This is why binary files are said to have _direct (random)_ access.
+Binary files are frequently used, for example, when a program deals with a vector of structs. One advantage is that whether in text files we need to start reading from the beginning of the file (what is called _secuential access_), in binary files we can access directly to the _n_-th element (struct) without reading the previous data (only if all structs have the same size). This is why binary files are said to have _direct (random)_ access.
 
+For example, if we had a binary file called _students.dat_ which contains a vector of structs _Student_ and this struct has a constant size, we could access to any position of the file without reading the previous contents:
+
+![Binario](binary-crop.png)
+
+Another advantage of binary files over text files is that in some cases they store the information using less bytes. For example, if we wanted to store a vector of float numbers into a file, like:
+
+```
+124.1256 111.5123 7125512.1522123 25.151261
+```
+
+The size into a text file would be 44 bytes, one for each char. However, in a binary file, if the float type was 4 bytes, only 16 bytes would be needed as there are 4 numbers. In addition, when reading the text file the compiler should translate each sequence of chars (for example, "124.1256") into a number, but reading a binary file can be done without doing any type conversion, as data in a binary file is stored the same way than in the memory and therefore it could be copied directly. Moreover, we could access to the _n_-th number directly as we know the size of an integer.
 
 ### Reading example
 
 ### File reading example
 
-This is an example code to read a file contents of a binary file. All the instructions needed (declaration, opening, reading and closing) are detailed in the next sections.
+This is an example code to read a file contents of a binary file sequentially. All the instructions needed (declaration, opening, reading and closing) will be detailed in the next sections.
 
 ```cpp
 #include <iostream>
 #include <fstream>
 
-struct Student 
+using namespace std;
+
+
+struct Student
 {
       char id[10];
       int group;
       float mark;
 };
-
-using namespace std;
 
 int main()
 {
@@ -436,10 +448,10 @@ int main()
       if (fi.is_open()) // We check that the file could be opened
       {
            Student student;
-           // Loop for reading all students from a binary file
+           // Loop for reading all students from the binary file
            while (fi.read((char *)&student, sizeof(student))) 
            {
-                  // process ’student’
+                  // Do something with ’student’
            }
            fi.close(); // Close the file
       }
@@ -447,12 +459,11 @@ int main()
 }
 ```
 
-
 ### Declaration
 
-Declaration is similar than with text files. 
+Declaration is the same than with text files.
 
-### Opening and closing
+### Opening and closing
 
 Here there is a difference, we need to add _ios::binary_ when opening the file:
 
@@ -464,7 +475,7 @@ fi.open("myfile.dat", ios::binary); // We open the binary file called "myfile.da
 Declaration and initialization can also be done in a single line:
 
 ```cpp
-ifstream fi("myfilename.dat", ios::binary); // We declare the variable and open it in read-only mode
+ifstream fi("myfilename.dat", ios::binary); // We declare the binary file variable and open it in read-only mode
 ```
 
 A binary file can also be opened for writing:
@@ -473,13 +484,13 @@ A binary file can also be opened for writing:
 ofstream fo("myfilename.dat", ios::binary);
 ```
 
-Or for reading and writing (this is more common than in text files):
+And for reading and writing (which is more common in binary files than in text files):
 
 ```cpp
 fstream fo("myfilename.dat", ios::binary);
 ```
 
-Finally, to close a binary file, just as with text files, the function```close()``` is used.
+Finally, to close a binary file, the method ```close``` is used as with text files.
 
 ```cpp
 fi.close();
@@ -487,19 +498,22 @@ fi.close();
 
 ### Reading
 
-For reading binary files we can **only** use the function  ```read```, which receives two parameters:
+For reading binary files we can **only** use the method ```read``` (instead of input operators or getline). This method receives two parameters:
 
-* The variable (struct or other data type) where the read data will be stored.
-* The amount of bytes to be read from the file. This size can be known using the function ```sizeof()```. 
+* The variable (struct or other data type) where the data that was read should be stored.
+* The amount of bytes to be read from the file. This size can be known using the function ```sizeof```. 
 
-In the next example we read the contents of a binary file that contains many structs of type *CITY*.
+In the next example we read the contents of a binary file that contains a series of  structs of type *City*.
 
 ```cpp
-struct City { 
+struct City 
+{
       char name[20];
       int population;
       int extension;
 };
+
+....
 
 City city;
 ifstream fb;
@@ -510,204 +524,251 @@ if (fb.is_open())
 {
    while (fb.read((char *)&city, sizeof(city)))
    {
-      // process variable ’city’
+      // Do something with ’city’
    }
-   fbl.close();
+   fb.close();
 }
 ```
 
-As we can see, with the while loop we read structs until the end of file is found. The first parameter of the function **read** is the variable where we will store the data, and the second is the number of bytes that the program should read. 
+As we can see, with the while loop we read structs until the end of file is found. The first parameter of the function **read** is the variable where we want to store the data, and the second is the number of bytes that the program should read.
 
 Note that:
 * The first parameter also contains **(char *)&**. This is required to tell the compiler to read byte by byte, as a _char_ type always occupies one byte. 
-* The second parameter is the size of the struct (in bytes) to be read, which can be calculated with **sizeof**. In this second parameter, instead of _city_ we could also have used _City_, as _sizeof_ returns the same size in both cases.
+* The second parameter is the size of the struct (in bytes) to be read, which can be calculated with **sizeof**. In this second parameter, instead of _city_ we could also have used _City_, as _sizeof_ returns the same value in both cases.
 
-`IMPORTANT!: To read the contents of a binary file we need to know in advance how was it written (the data type or *struct* that it contains).`
+`IMPORTANT: To read the contents of a binary file we need to know in advance how was it written (the data type or struct that it contains). Also, as we need to know the size in bytes of the data to be read, it is mandatory that each data will have a constant size, or alternatively use a variable which tells us how many bytes the program should read.`
 
-`VERY IMPORTANT: As we need to know the size in bytes of the data to be read, it is mandatory that this data will have a constant size, or alternatively use a variable which tells us how many bytes should the program read.`
-
-For this reason, we cannot store strings into a binary file (ok, actually we could with a trick that we will see later, but in Programming 2 we will only use char arrays in binary files).
+For this reason, we cannot store strings or vectors into a binary file. Well, actually we could with a trick that consists of reading a number that stores the length _n_ of the string or vector, and the read the string or vector afterwards by reading _n_ elements, but in Programming 2 we will only use char arrays in binary files.
 
 ### Direct access
 
-If the file contains a series of elements of constant size, we can access directly to an element by calculating its position in function of the data size.
+As previously explained, if a binary file contains a series of elements of constant size, we can access directly to an element by calculating its position in function of the size of the data type.
 
-También podemos acceder a un elemento directamente calculando su posición en el fichero en función del tamaño de los datos y la cantidad de elementos que hay antes. Para ello usamos la función ```seekg(posición, desde)```, donde:
+For this, we can use the function ```seekg``` (meaning _seek get_) which receives two parameters:
+* The position (in bytes) where we should start reading the file by moving the read pointer. This value could be negative in some cases, as we will see later.
+* The reference from where should we start calculating the position, usually the beginning of the file. 
 
-* posición: es la posición (medida en bytes) donde queremos desplazar el cursor o puntero de lectura. Puede tener **un valor negativo**.
-* desde: es la referencia o desplazamiento desde la que calcular la posición anterior. 
+The second parameter could have the following values:
 
-Esta puede tener los siguientes valores:
-
-| Valor | ejemplo | relativo a |
+| Value | Example | Relative to |
 | --- | --- | --- |
-| ios::beg | fi.seekg(pos, ios::beg) | desde el inicio del fichero |
-| ios::cur | fi.seekg(pos, ios::cur) | desde la posición actual del cursor de lectura |
-| ios::end | fi.seekg(pos, ios::end) | desde el final del fichero |
+| ios::beg | fi.seekg(pos, ios::beg) | from the beginning of the file |
+| ios::cur | fi.seekg(pos, ios::cur) | from the current position of the reading pointer |
+| ios::end | fi.seekg(pos, ios::end) | from the end of the file |
 
-Por ejemplo, si deseamos acceder y leer el tercer elemento, hariamos:
+For example, if we wanted to read the third struct from the file, we could use:
+
 ```cpp
-if (fbl.is_open()) {
-	// nos posicionamos justo ante el tercer elemento:
-	fbl.seekg( (3-1)*sizeof(ciudad), ios::beg); // contamos el tercer registro de tamaño ciudad desde el principio
-	fbl.read( (char *)&ciudad, sizeof(ciudad) );
+if (fb.is_open()) {
+	// We move the pointer just before the third element starting from the beginning:
+	fb.seekg((3-1)*sizeof(city), ios::beg);
+	fbl.read((char *)&city, sizeof(city));
 }
 
 ``` 
-En este otro ejemplo, queremos acceder al **último** elemento del fichero:
+In the following example we read the **last** element of the file:
 ```cpp
 
 if (fbl.is_open()) {
-	// nos posicionamos justo ante el tercer elemento:
-	fbl.seekg( (-1)*sizeof(ciudad), ios::end); 
-	fbl.read( (char *)&ciudad, sizeof(ciudad) );
+	// we move the pointer just before the last element starting from the end:
+	fbl.seekg((-1)*sizeof(city), ios::end);
+	fbl.read((char *)&city, sizeof(city));
 }
 
 ``` 
-A la función *seekg* le pasamos una posición negativa, relativa al final del fichero.
 
-###Escritura de ficheros binarios
+As you can see in this case, we use a negative position starting from the end of the file to move back the reading pointer ```sizeof(city)``` bytes.
 
-Para guardar datos en un fichero binario se usa la función ```write(registro, tamaño)```, y de forma parecida a la función de lectura, se le pasan dos parámetros:
+### Writing 
 
-* El registro que contiene los datos que van a enviarse al fichero.
-* La cantidad de bytes que vamos a escribir. Con la función ```sizeof()``` calcularemos la cantidad de bytes a escribir. 
+In order to store data in a binary file we can use the method ```write```. Similarly to the ```read``` method, it receives two parameters: 
 
-En el siguiente ejemplo de código escribimos en un fichero binario llamado "mifichero.dat" un registro de tipo *TIPOCIUDAD*.
+* The variable that contains the data to be written. 
+* The number of bytes to be written. To calculate this, usually the function ```sizeof()``` is used. 
+
+In the next sample code we write a struct of type *City* into a binary file called _myfile.dat_ :
 
 ```cpp
-typedef struct {  } TIPOCIUDAD;
+struct City 
+{ 
+      char name[20];
+      int population;
+      int extension;
+};
 
-TIPOCIUDAD ciudad;
-ofstream fbe("mifichero.dat", ios::binary);
+...
 
-if (fbe.is_open())
+City city;
+ofstream fb("myfile.dat", ios::binary);
+
+if (fb.is_open())
 {
-	// introducimos datos en el registro ’ciudad’
-	ciudad = ...;
-	// escribimos en el fichero
-	fbe.write((const char *)&ciudad, sizeof(ciudad));
-	...
+      // We enter data into the variable ’city’
+      strcpy(city.name,"Alicante");
+      city.population = 330525;
+      city.extension = 201;
+
+      // We write the variable city into the file
+      fb.write((const char *)&city, sizeof(city));
+
+      fb.close();
 }
-fbe.close();
 ```
 
-Si deseamos escribir en una posición concreta del fichero, podemos usar la función ```seekp(posición, desde)```, los argumentos son análogos a la función *seekg*:
+If we wanted to write into a given position of the file, we could use the function ```seekp```, which means _seek put_, to move the writing pointer. As you can see, the reading and writing pointer can have different values. The parameters of ```seekp``` are the same than those of ```seekg```:
 
-* posición: es la ubicación (en bytes) donde queremos mover el cursor o puntero de escritura. Si la posición **no existe** en el fichero, éste se alargará para hacer posible la operación de escritura.
-* desde: es la referencia o desplazamiento desde la que calcular la posición anterior. Puede tener los mismos valores que en la función *seekg*.
+* The position (in bytes) where we should start writing into the file by moving the writing pointer. This value could be negative in some cases. If this position did not exist because it is beyond the current size of the file, the file will be enlarged in order to perform the writing operation, leaving the intermediate bytes uninitialized.
+* The reference from where should we start calculating the position, usually the beginning of the file.
 
-Por ejemplo, si deseamos escribir o modificar el quinto elemento de un fichero:
+For example, for writing the fifth element of a binary file containing a vector of structs of type _City_:
+
 ```cpp
 
-if (fbe.is_open()) {
-	// nos posicionamos para escribir en el quinto elemento:
-	fbl.seekp( (5-1)*sizeof(ciudad), ios::beg); 
-	fbl.write( (const char *)&ciudad, sizeof(ciudad) );
+if (fb.is_open()) 
+{
+	fb.seekp((5-1)*sizeof(city), ios::beg);
+	fb.write((const char *)&city, sizeof(city));
 }
-
 ``` 
-En este caso, si en el fichero hay 5 o más registros, sobreescribiremos el quinto con el contenido de la variable *ciudad*, pero si hubiera menos de cinco elementos entonces el fichero crecerá para permitir escribir el dato en la quinta posición.
+In this case, if the file contains 5 or more structs, the program overwrites the fifth one with the contents of the variable _city_. However, if the file contained only 3 structs, it would be enlarged to allow writing into the fifth position, leaving  the bytes of the forth element uninitialized.
 
-Si tenemos un registro que contiene un campo de tipo cadena de carácteres y queremos almacenarlo en un fichero binario, tenemos que usar un vector de carácteres en lugar de un *string*. Al hacer la conversión puede ser que tengamos que recortar el *string* para adecuarlo al tamaño del vector. Por ejemplo:
+#### Converting strings into char arrays
+
+If we wanted to store a struct containing a string into a binary file, we need to create another struct replacing the string by an array of characters and convert each variable from one struct into the another. When doing this conversion, it may happen that the string should be shortened to fit into the array. For example:
+
 ```cpp
-typedef struct {
-	int codigo;
-	char nombre[MAXLONG];
-} TIPOCIUDAD;
+struct City 
+{
+      char name[MAXLENGTH];
+      int population;
+      int extension;
+};
 
 string s="Alicante";
 ...
-TIPOCIUDAD ciudad;
-ciudad.codigo=3;
-strncpy(ciudad.nombre, s.c_str(), MAXLONG-1); // convertimos el string a vector de carácteres
-ciudad.nombre[MAXLONG-1]='\0'; // strncpy no pone el \0 si no esta en la cadena original.
+City city;
+city.code = 3;
+strncpy(city.name, s.c_str(), MAXLENGTH-1); // we convert the string into an array of characters
+city.name[MAXLENGTH-1]='\0'; // As strncpy does not add the null character if the string is longer than the char array, we have to add it manually.
 ...
-fichero.write((const char *)&ciudad, sizeof(ciudad)); // escribimos el registro
+fb.write((const char *)&city, sizeof(city)); // We write the variable
 ...
 ```
 
-####Funciones tellg() y tellp()
+#### Methods ```tellg()``` and ```tellp()```
 
-Existen dos funciones que nos permiten obtener la posición actual del puntero (el de lectura y de escritura). Devuelven la posición en **bytes**. 
+These two methods allow us to get the current position (in bytes) of the reading or writing pointer, respectively.
 
-* para el puntero de lectura se usa ```tellg()```.
-* para el de escritura usamos ```tellp()```.
+* We use ```tellg()``` to get the reading pointer.
+* We use ```tellp()``` to get the writing pointer.
 
-Por ejemplo, si tenemos un fichero abierto y queremos obtener la cantidad de registros que contiene:
+For example, we can use the following code to know the number of _City_ structs that it contains:
+
 ```cpp
-// Colocamos el puntero de lectura al final:
-fichero.seekg(0, ios::end);
-
-// Obtenemos el número de registros del fichero
-cout << fichero.tellg()/sizeof(elRegistro) << endl;
+// The reading pointer is moved at the end of the file
+fb.seekg(0, ios::end);
+// We get the number of structs of the file
+cout << fb.tellg()/sizeof(City) << endl;
 ```
-###Gestión de errores
 
-Al trabajar con ficheros (tanto de texto como binarios) hay dos operaciones que son especialmente subceptibles de producir un error en tiempo de ejecución, que en ocasiones puede ser fatal:
+### Error management
 
-* en la apertura de un fichero: fichero inexistente, falta de permisos, etc.
-* en las operaciones de lectura/escritura (sobretodo las de escritura): permisos, fichero bloqueado, etc.
+When working with files (both text and binary) there are two operations that are especially susceptible to producing an error at runtime:
 
-Para comprobar si la operación de apertura ha sido exitosa podemos usar la función ```is_open()``` que nos dice si el fichero esta correctamente abierto, tal y como hicimos al principio del capítulo.
+* When opening a file, nonexistent file, lack of permissions, etc. This can be controlled using ```is_open```.
+* In read/write operations: wrong permissions, locked file, etc.
 
-Tras una operación de lectura o escritura, es recomendable comprobar si ha habido algún error, para ello tenemos el método ```fail()``` (entre otras funciones). Un ejemplo de uso:
+The second case are errors that may occur after opening the file. Consider for example that we want to write something but the disk is full. Or that we are reading a file and some process removed that file while we were reading. To avoid these errors, it is recommended to check, after a reading or writing operation, that it succeeded. For this, we can use the method ```fail```. For example:
 
 ```cpp
-fbl.read( (char *)&registro, sizeof(registro) );
-if (fichero.fail() && !fichero.eof() ) {
-   ... // error de lectura 
+fb.read((char *)&city, sizeof(city));
+if (fb.fail() && !fb.eof())
+{ 
+      // If this condition is true, then the reading operation failed 
 }
 ```
 
-En este otro ejemplo más elaborado leemos un fichero hasta el final y en cada operación de lectura comprobamos si se ha producido un error, en ese caso, salimos del bucle, emitimos un mensaje de error y cerramos el fichero.
+In the following example we read a file until the end, and after each reading operation we check that it succeeded. If something failed we break the loop, raise an error message and close the file.
 
 ```cpp
-...//abrimos el fichero
-if (fi.is_open()) {
-   bool error=false; // no hay error por ahora
+...// we open the file
+if (fi.is_open()) 
+{
+   bool error=false;
    string s;
 
-   while (getline(fi,s) && !error) { // acabamos al llegar al final o bien si hay error
-      // leemos y comprobamos si hay error
-      if (fi.fail() && !fi.eof()) {
+   while (getline(fi,s) && !error)
+   {
+      if (fi.fail() && !fi.eof()) // We check that reading succeeded
+      { 
          error=true;
-      } else {
-         // Hacer algo con s
+      } 
+      else 
+      {
+         // Do something with s
       }
    }
 
-   if (error) {
-      cout << "Error de lectura" << endl;
+   if (error) 
+   {
+      cout << "Reading error" << endl;
    }
    fi.close();
 }
 ```
 
-###Ejercicios
+`IMPORTANT: In order to simplify the code, in the P2 assignments (and in the exam) we will not consider reading or writing errors, therefore it is not necessary that you  check them.`
 
-####Ejercicio 3.6:
+### Exercises
 
-#####Dado un fichero binario "alumnos.dat" que tiene registros de alumnos, con la siguiente información por cada alumno:
-| dni | vector de 10 caracteres |
-| ------------- | ----------------------- |
-| apellidos | vector de 40 caracteres |
-| nombre | vector de 20 caracteres |
-| turno | entero |
+#### Exercise 6
 
-**Apartado 1:** Haz un programa que imprima por pantalla el DNI de todos los alumnos del turno 7.
-**Apartado 2:** Haz un programa que intercambie los alumnos de los turnos 4 y 8 (los turnos van del 1 al 10).
+Make a program to write a file called _students.dat_ from a text file called _students.txt_ in which each data (id, surname, name, group) is in a different line as in this example:
 
-####Ejercicio 3.7:
+```
+14231523
+Perez Lopez
+Juan
+3
+24536521
+Smith
+John
+1
+02551255
+Nash
+John
+1
+A5301252
+Highsmith
+A very looooooooooooooooooooooong name
+2
+```
 
-#####Dado el fichero “"lumnos.dat" del ejercicio anterior, haz un programa que pase a mayúsculas el nombre y los apellidos del quinto alumno del fichero, y lo vuelva a escribir en el fichero.
+The binary file should store a vector of structs as follows:
 
-####Ejercicio 3.8:
+```cpp
+struct Student
+{
+      char id[10];
+      char surname[40];
+      char name[20];
+      int group;
+};
+```
 
-#####Diseña un programa que construya el fichero "alumnos.dat" a partir de un fichero de texto "alu.txt" en el que cada dato (dni, nombre, etc) está en una línea distinta. Ten en cuenta que en el fichero de texto el dni, nombre y apellidos pueden ser más largos que los tamaños especificados para el fichero binario, en cuyo caso se deben recortar.
+Take into account that in the text file the id, name and surname may be longer than the maximum size specified in the binary struct that should be used to store each student. In this case, the char array should be shortened as explained in the previous section.
 
-####Ejercicio 3.9:
+#### Exercise 7
 
-#####Escribe un programa que se encarge de la asignación automática de alumnos en 10 turnos de prácticas. A cada alumno se le asignará el turno correspondiente al último número de su DNI (a los alumnos con DNI acabado en 0 se les asignará el turno 10). Los datos de los alumnos están en un fichero "alumnos.dat" con la misma estructura que en los ejercicios anteriores. La asignación de turnos debe hacerse leyendo el fichero una sola vez, y sin almacenarlo en memoria. En cada paso se leerá la información correspondiente a un alumno, se calculará el turno que le corresponde, y se guardará el registro en la misma posición.
+Given a binary file _students.dat_ which contains a vector of structs of students with the same format than in the previous exercise, make a program to print on screen the name of all students that belong to the group 7.
 
----->
+#### Exercise 8
+
+Given a file _students.dat_ from the previous exercises, make a program to convert to uppercase the name and surname of the fifth student from the file, writing again the updated information for that student. For this exercise you should use ```seekg```for reading and ```seekp``` for writing.
+
+#### Exercise 9
+
+Write a program to automatically assign students to 10 groups. Each student should be assigned to the group corresponding to her/his Id last number (those ending with 0 will be assigned to the group 10). The student data should be stored in a file _students.dat_ with the same structure than in previous exercises.
+
+The student assignation must be done reading the file once (in one pass), without storing the file in memory. At each step, the information for a student will be read, the group will be calculated, and the struct should be stored in the same position.
+
