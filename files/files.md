@@ -487,7 +487,7 @@ ofstream fo("myfilename.dat", ios::binary);
 And for reading and writing (which is more common in binary files than in text files):
 
 ```cpp
-fstream fo("myfilename.dat", ios::binary);
+fstream fo("myfilename.dat", ios::binary | ios::in | ios::out); // In some versions of the C++ compiler, using ios::in and ios::out for fstream with binary files is mandatory, since ios::binary alone overwrites these options which are set by default.
 ```
 
 Finally, to close a binary file, the method ```close``` is used as with text files.
