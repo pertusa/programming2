@@ -68,7 +68,7 @@ When a pointer contains a memory address of a given variable (in this example, t
 
 The easiest way to assign a memory address to a pointer is using the **operator &** to set the address of a static variable. This way, we can use a pointer to read or modify an existing variable value as if it were the same variable. Memory locations are determined by the operating system and it is possible that variables' addresses may be different during repeated runs of a program.  
 
-> Now you should understand why are we use ```&``` in C++ to pass a variable by reference: in this case, we are passing the memory address to the function, therefore those changes in the variable value inside the function will remain after the function ends.
+> Now you should understand why we use ```&``` in C++ to pass a variable by reference: in this case, we are passing the memory address to the function, therefore those changes in the variable value inside the function will remain after the function ends.
 
 With the **operator \*** we access to the **contents** of the memory address that a pointer has. For using this operator, we need to be sure that it points  to a valid memory address.
 
@@ -106,7 +106,7 @@ if (pi != NULL)
 
 #### Exercise 1
 
-To solve these exercises, you should write in paper the memory array and update its values as it happens in the memory figures (for example, the figure where i is set to the memory address 11). 
+To solve this exercise, you should write in paper the memory array and update its values as it happens in the memory figures (for example, the figure where i is set to the memory address 11).
 
 Indicate what would be the output of the following two code fragments:
 
@@ -190,7 +190,7 @@ pv = &(v[7]); // pv contains the memory address of the eighth element of the arr
 
 Pointers can also be used to contain memory addresses of structs. Once memory has been assigned to a struct, we can access the fields of that struct using the **dot operator \(.\)** as if it were a normal struct, although for this it is necessary to first access the pointer contents with **\***. For example:
 
-```
+```c++
 struct MyStruct
 {
     char c;
@@ -256,7 +256,7 @@ int main()
 
 > Even if a pointer is passed by value, you can modify the contents of the memory address to which it points, as we are passing by value the memory address where it points to, **not its contents**. This is the reason why C arrays are always passed by reference, since they are actually pointers.
 
-If we pass a pointer by reference, then we are allowing the modification of the **memory address** it contains, being able to point it to another memory area. For example:
+If we pass a pointer by reference, then we are allowing the modification of the **memory address** it contains, being able to point it to a different memory area. For example:
 
 ```c++
 void f2 (int *&p)   // The pointer is passed by reference
