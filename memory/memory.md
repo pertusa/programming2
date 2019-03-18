@@ -327,7 +327,7 @@ q->num = 7; // Error!!!
 
 ```c++
 int *p = &i;
-delete p;
+delete p; // Error!!!
 ```
 
 ### Exercises
