@@ -4,7 +4,7 @@ In this unit, we describe what happens in the memory when we declare variables i
 
 ## Memory management
 
-Each variable that we use contains information that is stored in the memory that is assigned to our program. The amount of memory that each variable occupies is determined by its data type. For example, one ```char``` is one byte in memory. As you know already, we can use a simple variable when we want to store a single value \(for example, an integer or a character \), or an _array_ when we want to store a series of data of the same type under the same variable name. If we use an array, we must specify in its declaration the maximum number of values that it can store.
+Each variable that we use contains information that is stored in the memory that is assigned to our program. The amount of memory that each variable occupies is determined by its data type. For example, one ```char``` is one byte in memory. As you already know, we can use a simple variable when we want to store a single value \(for example, an integer or a character \), or an _array_ when we want to store a series of data of the same type under the same variable name. If we use an array, we must specify in its declaration the maximum number of values that it can store.
 
 However, in some situations, when we write the code (at **compilation time**) we do not know the amount of information we need to store in memory. Sometimes, the amount of necessary memory is only known once the program is running (at **runtime**), for example if we ask the user to enter the size of an array and then we declare an array with that size.
 
@@ -34,7 +34,7 @@ In C++, **dynamic memory** is implemented using **pointers**. Internally, classe
 
 ### Definition and declaration
 
-A **pointer** is a **number** that stores a memory address. In order to declare a pointer, we use the character ```*``` and we also need the data type of the memory address that it will store, so the compiler will be able to interpret its value. Therefore, pointers are declared using the character ```*``` before the variable name. For example:
+A **pointer** is a **numeric variable** that stores a memory address. In order to declare a pointer, we use the character ```*``` and we also need the data type of the memory address that it will store, so the compiler will be able to interpret its value. Therefore, pointers are declared using the character ```*``` before the variable name. For example:
 
 ```c++
 int *pointerToInteger;  // This variable is a pointer to an integer 
@@ -242,7 +242,7 @@ Pointers can also be used as parameters of functions, allowing us to pass dynami
 
 ```c++
 void f (int *p)   // The pointer is passed by value
-{      
+{
     *p = 2;
 }
 
