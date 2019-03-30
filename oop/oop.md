@@ -1,115 +1,124 @@
-# Tema 5: Introducción a la programación orientada a objetos (en construcción)
+# Unit 5: Introduction to Object-Oriented Programming
 
-## Introducción a la programación orientada a objetos
+The programming we have studied so far with languages ​​such as C follows the principles of the so-called **procedural paradigm**, under which a program is a collection of functions (sometimes also called **procedures**) that are invoked successively during execution. The data, in addition, are usually dissociated from the functions that manipulate them. 
 
-### Definición
+In contrast, the **object-oriented programming** paradigm proposes to encapsulate the data and the functions that handle them under the concept of **class** (for example, vector is a class); these classes are **instantiated** one or more times during program execution (for example, using different vectors) to create **objects**. Therefore, a program now consists of a collection of objects that interact and communicate with each other; these objects, as we have said, are instances of one or more classes defined for the problem in question. As we will see later, classes are organized hierarchically using a mechanism known as **inheritance**.
 
-La programación que hemos estudiado hasta ahora con lenguajes como C sigue los principios del llamado *paradigma procedimental*, bajo el que un programa es una colección de funciones (a veces llamadas también *procedimientos*) que se invocan sucesivamente durante la ejecución. Los datos, además, suelen estar disociados de las funciones que los manipulan. El paradigma de la *programación orientada a objetos* propone encapsular los datos y las funciones que los manejan bajo el concepto de *clase* (por ejemplo, una clase de tipo vector); estas clases se *instancian* una o más veces durante la ejecución del programa (por ejemplo, usando distintos vectores) para crear *objetos*. Así, un programa se compone ahora de una colección de objetos que interactúan y se comunican entre ellos; estos objetos, como hemos dicho, son instancias de una o más clases definidas para el problema en cuestión. Como veremos más adelante, las clases se organizan de forma jerárquica mediante un mecanismo conocido como *herencia*.
+Since different objects communicate through function calls (in fact, through a broader concept called **message passing**), object-oriented languages allow their use to some extent in programs that follow rather the procedural paradigm. C++ is a clear example of this. It is possible in principle to write C++ programs that are closer to the procedural paradigm than to the object-oriented one (as we have been doing until now), but when it comes to the truth, programmers do not usually use C++ for the first. In this unit we will not get into many details of C++ elements related to object-oriented programming, which will be done in later subjects.
 
-Ya que los distintos objetos se comunican mediante llamadas a funciones (en realidad, mediante un concepto más amplio denominado *paso de mensajes*), los lenguajes orientados a objetos permiten hasta cierto punto su uso en programas que siguen más bien el paradigma procedimental. C++ es un claro ejemplo de ello. Aunque no todos los programas escritos en C son válidos en C++ (ni, evidentemente, a la inversa), muchos de ellos pueden ser transformados de forma relativamente sencilla en programas de C++. Por tanto, es posible en principio escribir programas en C++ que están más cerca del paradigma procedimental que del orientado a objetos, pero a la hora de la verdad los programadores no suelen usar C++ para lo primero. En este curso no ahondaremos excesivamente en los elementos de C++ relacionados con la programación orientada a objetos, lo que se hará en cursos posteriores.
+## Classes and objects
 
-### Clases y objetos
-
-En la asignatura ya hemos usado clases y objetos. No lo hemos hecho cuando declaramos una variable como
+As we have previously seen, we can declare a variable this way:
 
 ```cpp
-int i;  // Declaramos una variable i de tipo int
+int i;  // We declare a variable i of type int
+```
+In this case, we are not using object-oriented programming, as data types such as `int` or `float` are considered to be **simple types** and not classes.
+
+<!---
+ no clases, ya que hay cosas que podemos hacer con clases y objetos que no podemos hacer con ellos (por ejemplo, [sobrecargar sus operadores](http://www.cs.technion.ac.il/users/yechiel/c++-faq/intrinsics-and-operator-overloading.html)). 
+ ---->
+
+ However, we have already used ****objects**** in Programming 2. For example, when we declare an object of the class `string`:
+
+```cpp
+string s; // We declare an object s of the class string
 ```
 
-ya que en C++ los tipos como `int` o `float` se consideran *tipos primitivos* y no clases, ya que hay cosas que podemos hacer con clases y objetos que no podemos hacer con ellos (por ejemplo, [sobrecargar sus operadores](http://www.cs.technion.ac.il/users/yechiel/c++-faq/intrinsics-and-operator-overloading.html)). Sin embargo, sí hemos declarado objetos del tipo (o clase) `string`:
+Classes are similar to simple types, but they allow many extra functionalities.
+
+We can consider a class as a model to create (instantiate) objects of that class. An object of a certain class is called an instance of the class (`s` is an instance of `string`). In a first approximation, a class is similar to a struct like those studied so far, but adding functions; in this way we can **encapsulate** the data and functions (also called member functions or **methods**) that manipulate them. In addition, the developer of a class can decide that only some functions can be invoked from the external code (client code) that declares and uses objects of the class (which would constitute the **public** part of the class) and that the rest of functions and even the data of the class are **private** and can only be accessed from the code of the class itself (and, sometimes, from the code of other classes with special privileges). The public part is also known as the **interface** of the class. The idea of ​​hiding certain details to the client code is called **encapsulation** and allows, among other things, that the programmer of a class modify the representation used for class data without having to modify the client code that use objects of that class.
+
+For example, the equivalent of the following struct in C++:
 
 ```cpp
-string s; // Declaramos un objeto s de clase string
-```
-
-Las clases o tipos compuestos son similares a los tipos simples (o primitivos) pero permiten muchas más funcionalidades.
-
-Podemos considerar una clase como un modelo para crear (instanciar) objetos de ese tipo que define las características que les son comunes a todos ellos. Un objeto de una determinada clase se denomina una instancia de la clase (`s` es  una instancia de `string`). En una primera aproximación, una clase es similar a un registro como los estudiados hasta el momento, pero añadiendo funciones; de esta manera conseguimos *encapsular* los datos y las funciones (llamadas también funciones miembro o *métodos* miembro) que los manipulan. Además, el programador de una clase puede decidir que solo algunas funciones se puedan invocar desde el código externo (código cliente) que declara y usa objetos de la clase (lo que constituiría la parte *pública* de la clase) y que el resto de funciones e incluso los datos de la clase sean *privados* y solo se pueda acceder a ellos desde el código de la propia clase (y, a veces, desde el código de otras clases con privilegios especiales). A la parte pública se le conoce también como *interfaz* de la clase. A la idea de esconder ciertos detalles al código cliente se le denomina *ocultación de información* y permite, entre otras cosas, que el programador de una clase modifique la representación usada para los datos de la clase sin que haya que modificar el código cliente que usa objetos de dicha clase.
-
-El equivalente aproximado al siguiente registro en C o C++:
-
-```cpp
-struct Fecha {
-   int dia;
-   int mes;
-   int anyo;
+struct Date
+{
+   int day;
+   int month;
+   int year;
 };
 ```
 
-sería una clase como la siguiente:
+...would be this class:
 
 ```cpp
-class Fecha {
+class Date
+{
   public:
-     int dia;
-     int mes;
-     int anyo;
-}; // Ojo: el punto y coma del final es necesario
+     int day;
+     int month;
+     int year;
+}; // Important: the semicolon at the end is mandatory
 ```
 
-Si no se indica lo contrario (con la palabra reservada `public`), todos los miembros de la clase son privados. El acceso a los elementos públicos de un objeto se realiza de forma similar a como se hace con registros:
+Here, `public` means that the data can be accessed directly as in a struct. For example:
 
 ```cpp
-Fecha f;
-f.dia=12;
+Date d;
+d.day = 12;
 ```
 
-Sin embargo, como se ha comentado anteriormente, lo habitual es *esconder* del código cliente los datos de la clase de forma que en nuestro ejemplo la modificación desde fuera de la clase del atributo `dia` se tenga que realizar invocando un método público de la clase:
+> By default, all elements of a class are `private` unless the keyword `public` is indicated.
+
+However, as mentioned above, it is usual to **hide** from the client code the data of the class so that in our example the modification from outside the class of the `day` attribute must be done by invoking a public method of class:
 
 ```cpp
-class Fecha {
-  private: // Solo accesible desde metodos de la clase
-     int dia;
-     int mes;
-     int anyo;
+class Date
+{
+  private: // Only accesible from the class methods
+     int day;
+     int month;
+     int year;
   public:
-     bool setFecha(int d, int m, int a) { ... };
+     bool setDate(int d, int m, int y) { ... };
 };
 ```
 
-## Conceptos básicos
+## Basic concepts
 
-A continuación, introduciremos brevemente algunos principios en los que se basa el paradigma orientado a objetos, a saber: abstracción, encapsulación, modularidad, herencia y polimorfismo.
+Next, we will briefly introduce some principles on which the object-oriented paradigm is based: abstraction, encapsulation, modularity, inheritance and polymorphism.
 
-### Abstracción
+### Abstraction
 
-La *abstracción* es el mecanismo mediante el que determinamos las características esenciales de un objeto y su comportamiento en el contexto del programa que queremos escribir, a la vez que descartamos todo aquello que no es relevante en dicho contexto. La abstracción implica renunciar a una parte de la realidad (por ejemplo, la estatura de un contribuyente no suele ser relevante para una aplicación de gestión tributaria, pero sí lo será probablemente en un programa de supervisión dietética) y definir un modelo de esta adecuado para un propósito concreto. El proceso de abstracción permite seleccionar las características relevantes dentro de un conjunto e identificar comportamientos comunes para definir nuevas clases, y tiene lugar en la fase de diseño, que precede a la de implemenmtación.
+The **abstraction** is the mechanism by which we determine the essential characteristics of an object and its behavior in the context of our program, while discarding everything that is not relevant in that context. Abstraction implies renouncing a part of reality (for example, the stature of a taxpayer is not usually relevant for a tax administration application, but it probably will be in a program of dietary supervision) and to define a model suitable for a concrete purpose. The process of abstraction allows selecting the relevant characteristics within a set and identifying common behaviors to define new classes. It takes place in the design phase, which precedes the implementation phase.
 
-### Encapsulación
+### Encapsulation
 
-La *encapsulación* significa reunir a todos los elementos que pueden considerarse pertenecientes a una misma entidad, al mismo nivel de abstracción. En programación orientada a objetos, cada objeto puede realizar tareas, informar y cambiar su estado, y comunicarse con otros objetos en el sistema sin revelar cómo se implementan estas características; el *código cliente* no tiene acceso a los detalles de implementación e interactúa con cada objeto a través de la interfaz de su clase. La interfaz es la parte del objeto que es visible para el resto de los objetos (la parte pública): es el conjunto de métodos (y a veces datos) del cual disponemos para comunicarnos con un objeto. Cada objeto, por tanto, oculta su implementación y expone al resto de la aplicación una interfaz. Tanto la implementación como la interfaz son compartidas por todos los objetos de la misma clase. La encapsulación protege a las propiedades de un objeto contra su modificación: solamente los propios métodos internos del objeto pueden acceder a su estado. Además, el programador de una clase puede realizar cambios en la implementación y, mientras la interfaz no cambie, no será necesario modificar el código cliente.
+The **encapsulation** means bringing together all the elements that can be considered belonging to the same entity, at the same level of abstraction. In object-oriented programming, each object can perform tasks, inform and change its state, and communicate with other objects without revealing how their characteristics are implemented; the **client code** does not have access to the implementation details and interacts with each object through the interface of its class. The interface is the part of the object that is visible to the rest of the objects (the public part): it is the set of methods (and sometimes data) that we have to communicate with an object. Each object, therefore, hides its implementation and exposes an interface to the rest of the program. Both the implementation and the interface are shared by all objects of the same class. Encapsulation protects the properties of an object against its modification: only the object's own internal methods can access its state. In addition, the developer of a class can make changes to the implementation and, as long as the interface does not change, it will not be necessary to modify the client code.
 
-### Modularidad
+### Modularity
 
-Se denomina *modularidad* a la propiedad que permite subdividir una aplicación en partes más pequeñas (llamadas módulos) tan independientes como sea posible. Estos módulos se pueden compilar por separado, pero tienen conexiones con otros módulos. Generalmente, cada clase se implementa en un módulo independiente, aunque clases con funcionalidades similares pueden pertenecer al mismo módulo módulo. Lo ideal es que los componentes de un módulo estén bien cohesionados y que el acoplamiento entre módulos sea bajo; de esta manera, los cambios en una funcionalidad concreta de una aplicación implicarán normalmente cambiar las clases de un único módulo y no modificar las de otros módulos.
+**Modularity** is the property that allows us to subdivide an application into smaller parts (called modules) as independent as possible. These modules (do not confound them with functions!) can be compiled separately, but they have connections with other modules. Generally, each class is implemented in an independent module, although classes with similar functionalities can belong to the same module. Ideally, the components of a module are cohesive and the coupling between modules is low; in this way, changes in a specific functionality of an application will normally involve changing the classes of a single module and not modifying those of other modules.
 
-### Herencia
+### Inheritance
 
-Las clases se pueden relacionar entre sí formando una jerarquía de clasificación en un mecanismo conocido como *herencia*. Por ejemplo, un coche (*subclase*) o una moto (otra subclase) son vehículos (*superclase*). La superclase define las propiedades y comportamiento común y las diferentes subclases los especializan. Los objetos de las subclases heredan las propiedades y el comportamiento de todas las clases a las que pertenecen (un objeto de la clase *Coche* es también un objeto de la clase *Vehículo* y puede ser tratado a conveniencia como uno u otro). La herencia facilita la organización de la información en diferentes niveles de abstracción. Así, los objetos derivados pueden compartir (y extender) su comportamiento sin tener que volver a implementarlo. Cuando un objeto hereda de más de una clase se dice que hay *herencia múltiple*; C++ permite definir relaciones de herencia múltiple, pero no todos los lenguajes lo hacen.
+Classes can be related to each other by forming a hierarchy of classification in a mechanism known as **inheritance**. For example, a car (**subclass**) or a motorbike (another subclass) are vehicles (**superclass**). The superclass defines the properties and common behavior, and the different subclasses specialize them. The objects of the subclasses inherit the properties and behavior of all the classes to which they belong (an object of the class **Car** is also an object of the class **Vehicle** and can be treated as one or the other). Inheritance facilitates the organization of information at different levels of abstraction. Thus, derived objects can share (and extend) their behavior without having to re-implement it. When an object inherits from more than one class it is said that there is **multiple inheritance**; C++ allows us to define multiple inheritance relationships, but not all languages do it.
 
-### Polimorfismo
+### Polymorphism
 
-El *polimorfismo* es la asignación de la misma interfaz a entidades de tipos diferentes; por ejemplo, el método `desplazate()` puede referirse a acciones distintas si se trata de una moto o de un coche. En este caso la idea es que comportamientos diferentes, asociados a objetos distintos, pueden compartir el mismo nombre. Otra de las formas más usadas de polimorfismo es el conocido como *polimorfismo de subtipos* en el que una misma variable puede referenciar a instancias de diferentes clases que comparten una misma superclase, como en el siguiente ejemplo de variable polimórfica:
+The **polymorphism** is the assignment of the same interface to entities of different types. For example, the method ```move()``` could refer to different actions if it is a motorcycle or a car. In this case, the idea is that different behaviors, associated with different objects, can share the same name. Another widely used form of polymorphism is the one known as **subtype polymorphism**, in which the same variable can refer to instances of different classes that share the same superclass, as in the following polymorphic variable example:
 
 ```cpp
-Animal *a = new Perro;
+Animal *a = new Dog;
 ...
-a = new Gato;
+a = new Cat;
 ...
-a = new Gaviota;
+a = new Seagull;
 ```
 
-El polimorfismo implica una ambigüedad que ha de ser resuelta en algún momento. Cuando esto ocurre en *tiempo de ejecución*, esta última característica se llama asignación tardía o asignación dinámica. Algunos lenguajes proporcionan medios más estáticos (en *tiempo de compilación*) de polimorfismo, tales como las plantillas (*templates*) y la sobrecarga de operadores de C++.
+The polymorphism implies an ambiguity that has to be resolved at some point. When this occurs in **execution time**, this last characteristic is called late or dynamic assignment. Some languages provide more static means (in **compilation time**) of polymorphism, such as the **templates** and the overload of C++ operators.
 
-## Programación orientada a objetos en C++
+## Object Oriented Programming in C++
 
-### Sintaxis
+### Syntax
 
-El siguiente fichero de cabecera define la clase `SpaceShip` con una serie de atributos privados (que no forman parte de la interfaz pública de los objetos de la clase) y una serie de métodos que los manipulan (también conocidos como *funciones miembro*):
+The following header file defines the ```SpaceShip``` class with a series of private attributes (which are not part of the public interface of the objects in the class) and a series of methods that manipulate them (also known as **member functions**):
 
 ```cpp
-// SpaceShip.h (declaracion de la clase)
-class SpaceShip {
+// SpaceShip.h (class declaration)
+class SpaceShip 
+{
    private:
        int maxSpeed;
        string name;
@@ -121,54 +130,59 @@ class SpaceShip {
 };
 ```
 
-La implementación de los métodos de la clase `SpaceShip` se realiza habitualmente en otro fichero:
+The implementation of the methods from the `SpaceShip` class is usually done in another file:
 
 ```cpp
-// SpaceShip.cc (implementacion de los metodos)
+// SpaceShip.cc (methods implementation)
 
 #include "SpaceShip.h"
 
 // Constructor
-SpaceShip::SpaceShip(int maxSpeed, string name) {
+SpaceShip::SpaceShip(int maxSpeed, string name) 
+{
   this->maxSpeed = maxSpeed;
   this->name = name;
 }
 
-SpaceShip::~SpaceShip() {}  // Destructor
+SpaceShip::~SpaceShip()  // Destructor
+{
+}
 
-int SpaceShip::trip(int distance) {
+int SpaceShip::trip(int distance) 
+{
   return distance/maxSpeed;
 }
 
-string SpaceShip::getName() const {
+string SpaceShip::getName() const 
+{
   return name;
 }
 ```
 
-Muchas de las características del código anterior se irán analizando en las próximas secciones.
+Many of the details of the previous code will be analyzed in the next sections.
 
-### Diseño modular
+### Modular design
 
-En C++ e programa principal `main` usa y comunica las clases. Una clase `Clase` se implementa con dos ficheros fuente: `Clase.h`, que contiene constantes que se usen en este fichero, la declaración de la clase y la de sus métodos; y `Clase.cc`, que contiene constantes que se usen en este fichero y la implementación de los métodos (y puede que la de tipos internos que use la clase).
+In C++, the ```main``` program use and communicate the classes. A ```Class``` is implemented with two source files: ````Class.h```, which contains constants that are used in this file, the declaration of the class and its methods; and ```Class.cc```, which contains constants that are used in this file and the implementation of the methods (and sometimes the implementation of internal types used by the class).
 
-La tarea de traducir un programa fuente en ejecutable se realiza en dos fases:
+Actually, the task of translating a source program into executable is done in two phases:
 
-- Compilación: en C++ el compilador traduce un programa fuente en un programa en código objeto (no ejecutable)
-- Enlace: el enlazador o *linker* de C++ junta el programa en código objeto con las librerías del lenguaje (C/C++) y genera el ejecutable
+- Compilation: in C++, the compiler translates a source program into a program in object code (not executable yet)
+- Link: the **linker** of C++ joins the program in object code with the language (C/C++) libraries and generates the executable
 
-En C++, se realizan las dos fases a la vez con la siguiente instrucción:
-
-```
-g++ programa.cc -o programa
-```
-
-Con la opción `-c`, sin embargo, solo se realiza la compilación a código objeto (.o) pero sin hacer el enlace:
+In C ++, the two phases are carried out at the same time with the following instruction:
 
 ```
-g++ programa.cc -c
+g++ program.cc -o program
 ```
 
-Cuando un programa se compone de varias clases, para obtener el ejecutable se debe compilar cada clase por separado, obteniendo varios ficheros en código objeto y, a continuación, enlazar los ficheros en código objeto (las clases compiladas) con las librerías y generar un ejecutable. Para compilar cada módulo y el programa principal por separado se ejecutaría lo siguiente:
+With the `-c` option, however, compilation is only done to obtain the object code (.o) but without calling the linker:
+
+```
+g++ program.cc -c
+```
+
+When a program is composed of several classes, each class must be compiled separately to obtain the executable. This process produces several files in object code and then they they must be linked with the libraries to generate an executable. To compile each module and the main program separately, the following should be executed:
 
 ```
 g++ -Wall -g -c C1.cc
@@ -176,29 +190,29 @@ g++ -Wall -g -c C2.cc
 g++ -Wall -g -c prog.cc
 ```
 
-Para enlazar las clases compiladas y el programa, y obtener el ejecutable, haríamos:
+To obtain the executable we must link the compiled classes and the program:
 
 ```
 g++ -Wall -g C1.o C2.o prog.o -o prog
 ```
 
-En el caso de programas pequeños, puede hacerse todo de una vez con:
+In the case of small programs, these two stages can be done in a single step using:
 
 ```
 g++ -Wall -g C1.cc C2.cc prog.cc -o prog
 ```
 
-Cuando los programas son más grandes, no podemos recompilar cada vez todos los ficheros tras haber hecho un cambio mínimo en uno de ellos, ya que el tiempo necesario puede ser muy grande y entorpecer la labor del desarrollador. Más adelante veremos cómo el programa `make` se emplea para gestionar proyectos con decenas, cientos o incluso miles de clases.
+However, when the programs are large, we can not recompile all the files every time after having made a minimum change in one of them, since the necessary time can be very high. Later we will see how the `make` program is used to manage projects with tens, hundreds or even thousands of classes.
 
-### Otro ejemplo de clase en C++
+### A class example in C++
 
-Las líneas siguientes muestran el código generado para la clase `Rect` representada en el siguiente diagrama UML de clases:
+The following lines show the code generated for the `Rect` class represented in the following UML class diagram:
 
-![uml](Rect.png)
+![uml](en/Rect-e.png)
 
 
 ```cpp
-// Rect.h (declaracion de la clase)
+// Rect.h (class declaration)
 class Rect
 {
    private:
@@ -213,20 +227,32 @@ class Rect
 ```
 
 ```cpp
-// Rect.cc (implementacion de metodos)
-Rect::Rect(int ax, int ay, int bx, int by) {
+// Rect.cc (methods implementation)
+Rect::Rect(int ax, int ay, int bx, int by)
+{
    x1=ax;  
    y1=ay;  
    x2=bx;  
    y2=by;
 }
 
-Rect::~Rect() { }
+Rect::~Rect()  // Destructor (empty)
+{
+}
 
-int Rect::base() { return (x2-x1); }
-int Rect::altura() { return (y2-y1); }
-int Rect::area() {
-  return base() * altura();
+int Rect::base() 
+{ 
+  return (x2-x1); 
+}
+
+int Rect::height() 
+{ 
+  return (y2-y1); 
+}
+
+int Rect::area() 
+{
+  return base() * height();
 }
 ```
 
@@ -239,12 +265,12 @@ int main()
 }
 ```
 
-### Funciones inline
+### Inline functions
 
-En escenarios donde el rendimiento es importante, los métodos con poco código también se pueden implementar directamente en la declaración de la clase. El código generado para las funciones `inline` se inserta en cada punto donde se invoca a la función, en lugar de hacerlo una sola vez en otro lugar y hacer una llamada. Para que una función sea considerada como `inline` basta con definirla dentro de la declaración de la clase:
+In scenarios where performance is important, methods with little code (for example, just one or two lines) can also be implemented directly in the class declaration. The code generated for the `inline` functions is inserted at each point where the function is invoked, instead of just doing it once in another place and making a call. For a function to be considered as `inline` it is enough to define it within the declaration of the class:
 
 ```cpp
-// Rect.h (declaracion de la clase)
+// Rect.h (class declaration)
 class Rect
 {
    private:
@@ -253,12 +279,12 @@ class Rect
        Rect(int ax, int ay, int bx,int by);
        ~Rect() {};  // Inline
        int base() { return (x2-x1); };  // Inline
-       int altura() { return (y2-y1); }; // Inline
+       int height() { return (y2-y1); }; // Inline
        int area();
 };
 ```
 
-Las funciones inline también se pueden implementar fuera de la declaración de clase (en el `.cc`) usando la palabra reservada correspondiente.
+Inline functions can also be implemented outside the class declaration (in the `.cc`) using the corresponding reserved word.
 
 ```cpp
 inline int Rect::base()
@@ -267,106 +293,107 @@ inline int Rect::base()
 }
 ```
 
-Hay que reseñar que el compilador puede decidir *motu proprio* no implementar como *inline* una función que en principio ha sido declarada como tal.
+It should be noted that the compiler can decide by itself not to implement as *inline* a function that in principle has been declared as such.
 
-### Métodos accesores
+### Accessors
 
-Por el principio de encapsulación, ya comentado, no es conveniente permitir al código cliente acceder directamente a los datos miembro de una clase. Lo normal es definirlos como `private` e implementar funciones set/get/is (llamadas `accesores`) que permitan acceder a ellos desde el exterior de la clase.
+Because of the encapsulation principle already mentioned, it is not convenient to allow the client code to directly access the member data of a class. Usuually, we define member data as `private` and implement **setters/getters/is** functions (also called **accessors**) that allow access them from outside the class.
 
-![uml](FechaGetSet.png)
 
-Los accesores `set` nos permiten controlar que los valores de los atributos sean correctos y solo modificarlos después de comprobar la validez de los nuevos valores.
+![uml](en/FechaGetSet-e.png)
 
-### Forma canónica
+The `set` accessors allow us to control that the values of the attributes are correct and only modify them after checking the correctness of the new values.
 
-Todas las clases deben implementar al menos cuatro métodos importantes:
+### Canonical form
+
+All classes must implement at least four important methods:
 
 - Constructor
 - Destructor
-- Constructor de copia
-- Operador de asignación (no lo estudiaremos en este curso)
+- Copy constructor
+- Assignment operator (we will not study it in this course)
 
-Estas operaciones conforman lo que se conoce como *forma canónica* de una clase en C++ y son definidas *de oficio* por el compilador si el programador no las aporta.
+These operations are known as **canonical form** of a class in C++ and the compiler defines them *by default* if the programmer does not provide them.
 
-### Constructores
+### Constructors
 
-Las clases suelen tener al menos un método *constructor* y otro *destructor*. El constructor se invoca automáticamente cuando se crea un objeto de la clase, y el destructor cuando se termina de usar. El constructor se suele encargar de inicializar los atributos del objeto y de reservar recursos adicionales como la memoria dinámica necesaria para ellos; el destructor habitualmente libera estos recursos. Si no definimos un constructor, el compilador creará uno por defecto sin parámetros y que no hará nada. Los datos miembros de los objetos declarados así contendrán basura. En una clase puede haber varios constructores con parámetros distintos; diremos en ese caso que el constructor está *sobrecargado* (la sobrecarga es un tipo de polimorfismo), como en el siguiente ejemplo:
+Classes usually have at least one *constructor* and one *destructor* method. The constructor is invoked automatically when an object of the class is created, and the destructor when it is finished. The constructor is usually responsible for initializing the attributes of the object and reserving additional resources such as the dynamic memory needed for them; the destructor usually releases these resources. If we do not define any constructor, the compiler will create one by default without parameters, and that will do nothing. The member data of the objects declared this way will contain garbage. In a class there may be several constructors with different parameters. In this case, we say that the constructor is **overloaded** (the overload is a type of polymorphism), as in the following example:
 
 ```cpp
-Fecha::Fecha() {
-  dia=1;
-  mes=1;
-  anyo=1900;
+Date::Date()
+{
+  day=1;
+  month=1;
+  year=1900;
 }
-Fecha::Fecha(int d, int m, int a) {
-  dia=d;
-  mes=m;
-  anyo=a;
+Date::Date(int d, int m, int y) {
+  day=d;
+  month=m;
+  year=y;
 }
 ```
 
-Los siguientes son tres ejemplos de llamadas a los constructores anteriores:
+The following are three call examples for the previous constructors:
 
 ```cpp
-Fecha f;
-Fecha f(10,2,2010);
-Fecha *f1= new Fecha(11,11,2011);
+Date d;
+Date d(10,2,2010);
+Date *d1= new Date(11,11,2011);
 ```
 
-Nótese que aunque en otros lenguajes lo siguiente es una forma válida de ejecutar el constructor sin parámetros, en C++ no lo es:
+Note that although in other languages the following code is a valid way to run the constructor without parameters, in C++ it is not valid:
 
 ```cpp
-Fecha f(); // error de compilación
+Date d(); // compilation error
 ```
 
-Los constructores pueden tener parámetros con valores por defecto que solo se ponen en el `.h`:
+Constructors can have parameters with default values that are only given in the `.h` file:
 
 ```cpp
-Fecha(int d=1,int m=1,int a=1900);
+Date(int d=1,int m=1,int y=1900);
 ```
 
-Con este constructor podemos entonces crear un objeto de varias formas:
+With this constructor we can then create an object in several ways:
 
 ```cpp
-Fecha f;
-Fecha f(10,2,2010);
-Fecha f(10);  // dia=10
+Date d;
+Date d(10,2,2010);
+Date d(10);  // day=10
 ```
 
-### Excepciones
+### Exceptions
 
-Las excepciones son el mecanismo que permite gestionar de forma eficiente los errores que, por diversas causas, se producen en un programa durante su ejecución. Un uso habitual de las excepciones se produce cuando un constructor no puede crear el objeto correspondiente porque los parámetros suministrados por el código cliente son incorrectos. En casos como este, el constructor detecta el error pero no sabe qué hacer para solucionarlo (puede ser cambiar el valor del parámetro incorrecto y volverlo a intentar, mostrar un mensaje y pedir por consola un nuevo valor, informar al usuario a través de una ventana gráfica, emitir un sonido de alerta, terminar inmediatamente la ejecución del programa, etc.); es el código cliente que ha invocado el constructor el que probablemente sabe lo que hay que hacer para tratar el error. En otras ocasiones, puede que el tratamiento del error no se pueda hacer tampoco en la función que ha invocado al constructor, sino en la función que invocó a esta función... La idea aquí es que una vez lanzada una excepción en el punto donde se detecta el error, la excepción circulará *hacia atrás* por el programa, hasta un lugar donde se *capture* y se trate. Las excepciones no son necesarias en aquellos casos en los que la misma función que detecta un error es capaz de gestionar la situación y solucionar el problema.
+Exceptions are the mechanism that allows efficient management of errors that, for various reasons, occur in a program during its execution. A common use of exceptions occurs when a constructor can not create the corresponding object because the parameters supplied by the client code are incorrect. In cases like this, the constructor detects the error but does not know what to do to fix it (it may be to change the value of the incorrect parameter and try again, display a message and ask for a new value from the console, inform the user through a window interface, emit an alert sound, immediately finish the execution of the program, etc.). In this case, it is the client code invoked by the constructor the one that probably knows what needs to be done to deal with the error. At other times, the error handling can not be done either in the function that invoked the constructor, but in the function that invoked this function... The idea here is that once an exception is thrown at the point where the error is detected, the exception will run *backwards* through the program, to a place where it will be *captured* and treated. Exceptions are not necessary in those cases in which the same function that detects an error is able to manage the situation and solve the problem.
 
-Las excepciones en C++ se lanzan con la instrucción `throw` y se capturan en un bloque `try`/`catch` en el que la parte del `try` contiene el código que puede potencialmente lanzar una excepción y la parte `catch` contiene el código que gestiona el error. Si se produce una excepción y no se captura ni siquiera desde la función `main`, el programa terminará. La función `root` del siguiente ejemplo lanza una excepción si su parámetro es negativo; la función  `main` captura la excepción y muestra un mensaje de error.
+Exceptions in C ++ are thrown with the ```throw``` command and captured in a ```try``` / ```catch``` block in which the ```try``` part contains the code that can potentially throw an exception, and the ```catch``` part contains the code that manages the error. If an exception occurs and is not captured even from the ```main``` function, the program will terminate. The ```root``` function in the following example throws an exception if its parameter is negative. The ```main``` function captures the exception and displays an error message.
 
 ```cpp
 int root(int n)
 {
   if (n<0)
-    throw exception(); // La funcion finaliza con una excepcion
+    throw exception(); // The function ends with an exception
 
   return sqrt(n);
 }
 
 int main()
 {
-  try  // Intentamos ejecutar las siguientes instrucciones
+  try  // We try to run the next instructions
   {
-    int result=root(-1);  // Provoca una excepcion
-    cout << result << endl; // Esta linea no se ejecuta
+    int result=root(-1);  // An exception is thrown
+    cout << result << endl; // This instruction is executed only if no exceptions are given
   }
-  catch(...) // Si hay una excepcion la capturamos aqui
+  catch(...) // If there is an exception, we can capture it here
   {
      cerr << "Negative number" <<  endl;
   }
 }
 ```
 
-
-Volviendo al tema de los constructores, este es un ejemplo de constructor con excepción:
+This is an example of a constructor throwing an exception:
 
 ```cpp
-Coordenada::Coordenada(int cx, int cy)
+Coordinate::Coordinate(int cx, int cy)
 {
    if (cx>=0 && cy>=0)
    {
@@ -380,276 +407,318 @@ Coordenada::Coordenada(int cx, int cy)
 ```cpp
 int main()
 {
-   try  {
-      Coordenada c(-2,4); // Este objeto no se crea
+   try
+   {
+      Coordinate c(-2,4); // This object is not created
    }
-   catch(...) {
-      cout << "Coordenada incorrecta" << endl;
+   catch(...) 
+   {
+      cout << "Wrong coordinate" << endl;
    }
 }
 ```
 
-### Destructores
+### Destructors
 
-Todas las clases de C++ necesitan un destructor (si no se especifica, el compilador crea uno por defecto). Un destructor debe liberar los recursos (normalmente, memoria dinámica) que el objeto haya estado usando. Un destructor es una función miembro sin parámetros, que no devuelve ningún valor y con el mismo nombre que la clase precedido por el carácter ~. Una clase solo puede tener una función destructora. El compilador genera código que llama automáticamente a un destructor del objeto cuando su ámbito acaba. También se invoca al destructor al hacer `delete`. Se puede invocar explícitamente de la forma `f.~Fecha()`, aunque son muy pocas las situaciones en las que esta invocación explícita es necesaria.
+All C++ classes need a destructor (if not specified, the compiler creates one by default). A destructor must release the resources (normally, dynamic memory) that the object has been using. A destructor is a member function with no parameters, which returns no value and with the same name as the class but preceded by the character ~. A class can only have a destructor function. The compiler generates code that automatically calls a destructor of an object when its scope ends. The destructor is also called when using ```delete```. It can be invoked explicitly in the form `d.~Date()`, although there are very few situations in which this explicit invocation is necessary.
 
 ```cpp
-   // Declaracion
-   ~Fecha();
+   // Declaration
+   ~Date();
 
-   // Implementacion
-   Fecha::~Fecha() {
-      // Liberar la memoria reservada (nada en este caso)
+   // Implementation
+   Date::~Date()
+   {
+      // Free dynamic memory allocated (nothing in this case)
    }
 ```
 
-El destructor generado por defecto por el compilador invoca a los destructores de todos los atributos de la clase cuando estos son a su vez objetos.
+The destructor that is generated by default by the compiler invokes the destructors of all the attributes of the class when these are also objects.
 
+### Copy constructors
 
-### Constructores de copia
-
-De modo similar a la asignación, un constructor de copia crea un objeto a partir de otro objeto existente. Estos constructores sólo tienen un argumento, que es una referencia a un objeto de su misma clase.
+Similar to an assignment, a copy constructor creates an object from another existing object. These constructors have only one parameter, which is a reference to an object of the same class.
 
 ```cpp
-// Declaracion
-Fecha(const Fecha &f);
+// Declaration
+Date(const Date &d);
 
-// Implementacion
-Fecha::Fecha(const Fecha &f) :
-   dia(f.dia), mes(f.mes), anyo(f.anyo) {}
+// Implementation
+Date::Date(const Date &d) :
+   day(d.day), month(d.month), year(d.year) {}
 ```
 
-El constructor de copia se invoca automáticamente cuando:
+The copy constructor is invoked automatically when:
 
-- Una función devuelve un objeto (pero no un puntero o una referencia a un objeto)
+- A function returns an object (but not a pointer or a reference to an object)
 
-- Se declara un objeto usando la asignación:
+- An object is declared using the assignment operator:
 
 ```cpp
-Fecha f2(f1);
-Fecha f2 = f1;  // esta línea es equivalente a la anterior
-f1=f2; // aquí NO se invoca al constructor, sino al operador =
+Date d2(d1);
+Date d2 = d1;  // this instruction is equivalent to the previous one
+d1=d2; // in this case the copy constructor is NOT called, but the operator =
 ```
 
-- Un objeto se pasa por valor a una función (pero no cuando se pasan punteros o referencias):
+- An object is passed by value to a function (but not when passing pointers or references):
 
 ```cpp
-void funcion(Fecha f1);
-funcion(f1);
+void function(Date d1);
+function(d1);
 ```
 
-Si no se especifica ningún constructor de copia, el compilador crea uno por defecto con el mismo comportamiento que el operador `=`
+If no copy constructor is specified, the compiler creates one by default with the same behavior as the `=` operator
 
+### Assignment operator
 
-### Operador de asignación
-
-Podemos hacer una asignación directa de dos objetos (sin usar constructores de copia) usando el operador de asignación.
+We can do a direct assignment of two objects (without using copy constructors) using the assignment operator.
 
 ```cpp
-Fecha f1(10,2,2011);
-Fecha f2;
-f2=f1;  // copia directa de valores de los datos miembro
+Date d1(10,2,2011);
+Date d2;
+d2 = d1;  // Direct copy of member data values
 ```
 
-Por defecto el compilador crea un operador de asignación `=` que copia bit a bit cada atributo. Podemos redefinirlo para nuestras clases si lo consideramos necesario, pero no lo haremos en este curso.
+By default, the compiler creates an assignment operator `=` that copies each attribute bit by bit. We can redefine it for our classes if we consider it necessary, but we will not do it in this subject.
 
-### Métodos constantes
+### Constant methods
 
-Igual que ocurre con las variables de tipos primitivos, en ocasiones resulta de utilidad poder definir objetos constantes cuyo estado inicial (es decir, el valor de sus atributos establecido por el constructor) no pueda cambiar durante la ejecución del programa. C++ permite declarar métodos, llamados *métodos constantes*, que no modifican el valor de los atributos:
+As with the variables of simple types, it is sometimes useful to define constant objects whose initial state (that is, the value of their attributes set by the constructor) can not change during the execution of the program. C++ allows declaring *constant methods* that do not modify the value of the attributes:
 
 ```cpp
-int Fecha::getDia() const { // Metodo constante
-    return dia;
+int Date::getDay() const  // constant method
+{
+    return day;
 }
 ```
 
-En un objeto constante no se puede invocar a métodos no constantes. Por ejemplo, este código no compilaría:
+We can't call non-constant methods from a constant object. For example, the following code would not compile:
 
 ```cpp
-int Fecha::getDia() {
-   return dia;
+int Date::getDay()
+{
+   return day;
 }
 
-int main() {
-   const Fecha f(10,10,2011);
-   cout << f.getDia() << endl;
+int main()
+{
+   const Date d(10,10,2011);
+   cout << d.getDay() << endl;
 }
 ```
 
-De igual modo, el compilador emitirá un error si intentamos modificar los atributos del objeto desde un método constante. Obviamente, los métodos `get` deben ser constantes.
+In the same way, the compiler would issue an error if we try to modify the attributes of the object from a constant method. Obviously, all `get` methods should be constant.
 
-### Funciones amigas
+### Friend functions
 
-La parte privada de una clase (tanto si son métodos como atributos) sólo es accesible en principio desde los métodos de la propia clase, pero en C++ es conveniente poder saltarse esta regla puntualmente para permitir a funciones no definidas en la clase acceder a los elementos privados de esta. Para que una función pueda hacer lo anterior se ha de declarar como *amiga* de la clase en cuestión de la siguiente forma:
+In principle, the private part of a class (whether they are methods or attributes) is only accessible from the methods of the class itself, but sometimes it is convenient to be able to skip this rule to allow functions not defined in the class to access its private elements. For this, a function can be declared as *friend* of the class in the following way:
+
 
 ```cpp
-class MiClase {
-  friend void unaFuncionAmiga(int, MiClase&);
+class MyClass 
+{
+  friend void aFriendFunction(int c, MyClass& m);
 public:
   //...
 private:
-   int datoPrivado;
+   int privateData;
 };
 ```
 
 ```cpp
-void unaFuncionAmiga(int x, MiClase& c) {
-  c.datoPrivado = x; // OK
+void aFriendFunction(int x, MyClass& c)
+{
+  m.privateData = c; // Accessing the private part is allowed here
 }
 ```
 
-Las funciones amigas resultan especialmente útiles en C++ a la hora de sobrecargar los operadores de entrada/salida como veremos en el siguiente apartado.
+As a general rule, you should **never use a friend function** because it violates the encapsulation principle. However, in C++, friend functions are the only way allowed to overlead input/output operators, as will be seen next. Therefore, as it is the only alternative, friend functions are allowed in Programming 2 for overloading these operators, although you should not declare a friend function for other purpose.
 
-### Sobrecarga de los operadores de entrada/salida
+### Overloading input/output operators
 
-En C++ podemos sobrecargar los operadores de entrada/salida de cualquier clase (en general, pueden sobrecargarse la mayoría de operadores del lenguaje, pero se recomienda no asignarles cometidos que estén muy alejados del original atribuido por el lenguaje; por ejemplo, el operador `+` debería sobrecargarse para reflejar operaciones similares a sumas o concatenaciones, pero nunca para algo como, por ejemplo, buscar un elemento en una lista) para permitir con una sintaxis sencilla la modificación del estado de un objeto a partir de los valores suministrados por un `ifstream` (por ejemplo, `cin`) o el volcado del estado actual sobre un objeto de clase `ofstream` (por ejemplo, `cout`):
+In C++ we can **overload the input/output operators** of any kind. In general, most operators of the language can be overloaded, but it is recommended not to assign them operations with different meanings. For example, the ```operator+``` should be overloaded to reflect operations similar to sums or concatenations, but never for something like, for example, looking for an item in a list.
+
+Overloading is used to allow with a simple syntax the modification of the state of an object given the values supplied by an `ifstream` (for example, `cin`) or the dump of the current state on an `ofstream` class object (for example, `cout`):
 
 ```cpp
-MiClase obj;
-cin >> obj;  
-cout << obj;
+MyClass c1, c2;
+cin >> c1;   // Input operator
+cout << c1;  // Output operator
+c1 = c1 + c2; // Sum operator
 ```
 
-El problema que surge al intentar sobrecargar operadores que puedan usarse como en el código anterior es que no pueden ser funciones miembro de `MiClase` porque el primer operando no es un objeto de esa clase (es un `stream`); por otro lado, no podemos añadir las funciones que sobrecargan los operadores a las clases `ifstream` u `ofstream` porque son clases de la librería de C++ que, en principio, no podemos modificar. La solución es declarar las funciones de sobrecarga de los operadores fuera de cualquier clase, pero haciéndolas *amigas* de la clase `MiClase` para poder acceder a sus elementos privados:
+The problem of overloading is that operators could not be member functions of `MyClass` because the first operand is not an object of that class (it is a `stream`). In addition, we can not add the functions that overload the operators to the `ifstream` or `ofstream` classes because they belong to the C++ library that, in principle, we can not modify. The solution provided in C++ is to declare the overload functions of the operators outside any class, but making them to be *friend* of  ```MyClass``` in order to access their private elements:
 
 ```cpp
-friend ostream& operator<< (ostream &o, const MiClase& obj);
-friend istream& operator>> (istream &o, MiClase& obj);
+friend ostream& operator<< (ostream &os, const MyClass& obj);
+friend istream& operator>> (istream &is, MyClass& obj);
 ```
 
-Por ejemplo, la declaración de estos operadores para una clase `Fecha` quedaría:
+For example, the declaration of these operators for a class `Date` would be:
 
 ```cpp
-class Fecha {
- friend ostream& operator<< (ostream &os, const Fecha& obj);
- friend istream& operator>> (istream &is, Fecha& obj);
+class Date
+{
+ friend ostream& operator<< (ostream &os, const Date& d);
+ friend istream& operator>> (istream &is, Date& d);
 
  public:
-   Fecha (int dia=1, int mes=1, int anyo=1900);
+   Date(int day=1, int month=1, int year=1900);
    ...
  private:
-   int dia, mes, anyo;
+   int day, month, year;
 };
 ```
 
-Y una posible implementación sería la siguiente:
+And a possible implementation would be the following:
 
 ```cpp
-ostream& operator<< (ostream &os, const Fecha& obj) {
-  os << obj.dia << "/" << obj.mes << "/" << obj.anyo;
+ostream& operator<< (ostream &os, const Date& d)
+{
+  os << d.day << "/" << d.month << "/" << d.year;
   return os;
 }
 ```
 
 ```cpp
-istream& operator>> (istream &is, Fecha& obj) {
+istream& operator>> (istream &is, Date& d)
+{
   char dummy;
-  is >> obj.dia >> dummy >> obj.mes >> dummy >> obj.anyo;
+  is >> d.day >> dummy >> d.month >> dummy >> d.year;
   return is;
 }
 ```
 
-### Atributos y métodos de clase
+-----
 
-Los *atributos de clase* y los *métodos de clase* también se llaman *estáticos*. Se representan *subrayados* en los diagramas UML. Un atributo de clase es una variable que existe en una única posición de memoria y que es compartida por todos los objetos de la clase. Los métodos de clase, por otra parte, sólo pueden acceder a atributos de clase.
+### Exercise 1
+
+Implement the class of the following diagram:
+
+![uml](Coordenada-crop.png)
+
+You must create the files `Coordenada.cc` and `Coordenada.h`, and a `makefile` to compile them with a `main.cc` program. In the `main` function, the user should be asked for two numbers and create a coordinate with them to print it with the output operator in the format `x,y`. Write the necessary code so that each method is used at least once.
+
+-----
+
+### Static attributes and methods
+
+*Class attributes* and *class methods* are also called *static*. They are represented as underlined in the UML diagrams. A class attribute is a variable that exists in a single memory location and is shared by all the objects from that class. Class methods, on the other hand, can only access class attributes.
+
+Sometimes static attributes are necessary, for example in the following example, where there are some constants that are shared by all the objects of the class Date. This is more efficient than having non-static constants, as they would be declared for each single object:
 
 ```cpp
-class Fecha {
+class Date
+{
   public:
-    static const int semanasPorAnyo = 52;
-    static const int diasPorSemana = 7;
-    static const int diasPorAnyo = 365;
-    static string getFormato();
-    static boolean setFormato(string);
-    void setDia(int d);
-    void getDia();
+    static const int weeksPerYear = 52;
+    static const int daysPerWeek = 7;
+    static const int daysPerYear = 365;
+    static string getFormat();
+    static bool setFormat(string);
+    void setDay(int d);
+    void getDay();
     ...
   private:
-    static string cadenaFormato;
+    static string format;
     int dia;
     int mes;
     int año;
 };
 ```
 
-Cuando el atributo estático no es un tipo simple o no es constante, debe declararse en la clase pero tomar su valor fuera de ella:
+This code shows an example of how to access static attributes or methods from outside the class:
 
 ```cpp
-// Fecha.h (dentro de la declaracion de la clase)
-static const string findelmundo;
+cout << Date::daysPerWeek << endl; // static atribute
+cout << Date::getFormat() << endl;  // static method
+```
+
+> Do you remember ```string::npos```? It is a constant class attribute from string.
+
+In addition, there may be *static* variables, as in the case of *format* from the previous example, which is not constant. This means that if any object modifies this value, then it will change for all the objects of the class ```Date```.
+
+When the static attribute is not a simple type or is not constant, it must be declared inside the class, but taking its value outside it:
+
+```cpp
+// Date.h (inside the class declaration)
+static const string endoftheworld;
 
 // Fecha.cc
-const string Fecha::findelmundo="2112";
+const string Date::endoftheworld="2112";
 ```
 
-Este código ejemplifica cómo acceder a atributos o métodos *static* desde fuera de la clase:
+Static methods can only access to static attributes. This makes sense, since the method ```getFormat``` from the previous example is called as ```Date::getFormat()```, therefore it can only modify those attributes shared from all objects, but not those from a particular object because the target object it is not given in the method call.
+
+### The ```this``` pointer
+
+The ```this``` pointer is a pseudo variable that is not explicitly declared anywhere in the program and can not be modified explicitly. It is an implicit argument that all member functions (excluding ```static``` functions) receive, and it points to the object receiving the current message. It is usually omitted when accessing attributes through member functions. However, it is necessary to use ```this``` when we want to refer to an attribute of the object and there is a homonymous variable declared in its scope, or when we want to pass the object to a nested function as an argument. For example:
 
 ```cpp
-cout << Fecha::diasPorAnyo << endl; // Atributo static
-cout << Data::getFormat() << endl;  // Metodo static
-```
-
-### El puntero *this*
-
-El puntero `this` es una pseudovariable que no se declara explícitamente en ningún punto del programa ni se puede modificar explícitamente. Es un argumento implícito que reciben todas las funciones miembro (excluyendo funciones `static`) y que apunta al objeto receptor del mensaje actual. Suele omitirse para acceder a los atributos mediante funciones miembro. Es necesario usar `this`, sin embargo, cuando queremos referirnos a un atributo del objeto y existe una variable homónima declarada en un ámbito más cercano, o cuando queremos pasar como argumento el objeto a una función anidada.
-
-```cpp
-void Fecha::setDia (int dia) {
-    // dia=dia; // asigna el valor del parámetro al propio parámetro
-    this->dia=dia;  // asigna el valor del parámetro al atributo homónimo del objeto actual
-    cout << this->dia << endl;
+void Date::setDay (int day)
+{
+    // day=day;      // assigns the value of the parameter to the parameter itself.
+    this->day=day;  //  assigns the value of the parameter to the attribute of the current object
+    cout << this->day << endl; // prints the attribute
 }
 ```
 
+Therefore, ```this``` can be used to disambiguate between the attributes of the class and the parameter names received. This could be solved by simply changing the parameter name, but sometimes this is necessary, for example when we want to refer to the current object:
 
-## Relaciones
+```cpp
+void Date::myFunction() 
+{
+  MyClass c;
 
-Existen distintos tipos de relaciones que pueden establecerse entre objetos y clases. La figura siguiente muestra las que vamos a estudiar en esta sección, junto con la notación gráfica que se utiliza en UML para representarlas.
+  c.function(*this); // Here we are passing the current object as parameter for an external function.
+}
+```
 
-![uml](relaciones-crop.png)
+## Relationships
 
-Las relaciones poseen una *cardinalidad*, que define el número de clases u objetos que pueden estar implicados en ellas. Esta cardinalidad puede ser:
+There are different types of relationships that can be established between objects and classes. The following figure shows the ones we are going to study in this section, along with the graphic notation that is used in UML diagrams to represent them.
 
-- Uno o más: representada con 1..* (o bien 1..*n*, si hay un máximo definido)
-- Cero o más: representada con *
-- Número fijo: *m*
+![uml](en/relaciones-e-crop.png)
 
-### Asociación
+Relationships have a *cardinality* which defines the number of classes or objects that may be involved. This cardinality can be:
 
-![uml](asociacion-crop.png)
+- One or more: represented with 1..* (or also 1..*n*, if there is a maximum)
+- Zero or more: represented with *
+- A constant number: *m*
 
-La asociación expresa una relación (unidireccional o bidireccional) general entre los objetos instanciados a partir de las clases conectadas. Por ejemplo, la relación de la figura siguiente expresa que un trabajador está vinculado a uno o más proyectos y que en un proyecto pueden trabajar cero o más trabajadores. El sentido en que se recorre la asociación se denomina *navegabilidad* de la asociación.
 
-### Agregación y composición
+### Aggregation and composition
 
-La *agregación* y la *composición* son relaciones *todo-parte*, en la que un objeto (o varios) forma parte de la naturaleza de otro. A diferencia de la asociación, son relaciones asimétricas. Las diferencias entre agregación y composición son la fuerza de la relación. La agregación es una relación más débil que la composición. Considera, por ejemplo, el siguiente diagrama de clases:
+The *aggregation * and the *composition* are *all-part* relationships, in which one object (or several) is part of the nature of another. Unlike association, they are asymmetric relationships. The differences between aggregation and composition are the strength of the relationship: Aggregation is a weaker relationship than composition. Consider, for example, the following class diagram:
 
-![uml](agregacion-composicion-crop.png)
+![uml](en/agregacion-composicion-e-crop.png)
 
-En el caso de la relación *fuerte* de composición (representada en UML mediante un rombo relleno en el lado de la clase *todo*), cuando se destruye el objeto contenedor también se destruyen los objetos que contiene; así el ala forma parte del avión y podemos considerar que en nuestra aplicación no tiene sentido fuera del mismo. Si vendemos un avión, lo hacemos incluyendo sus alas; si llevamos un avión al desguace para su eliminación, no salvamos sus alas.
+In the case of the *strong* relation of composition (represented in UML by means of a filled rhombus on the side of the class *all*), when the container object is destroyed the objects it contains are also destroyed. Thus, the wing is part of the plane and we can consider that in our application it does not make sense to have a wing out of a plane. If we sell an airplane, we do it including its wings; If we take a plane to the scrapyard for disposal, we do not keep its wings.
 
-En el caso de la agregación (representada en UML mediante un rombo vacío en el lado de la clase *todo*), no ocurre así: el objeto parte puede existir sin el todo. La relación de agregación de la figura refleja que podemos vender un equipo, pero los jugadores pueden irse a otro club.
+In the case of aggregation (represented in UML by an empty rhombus on the side of the class *all*), this is not the case: the object part can exist without the whole. The aggregation relation of the figure reflects that we can sell a team, but the players could go later to another club.
 
-Algunas relaciones pueden ser consideradas como agregaciones o composiciones, en función del contexto y de la aplicación para la que se establezcan (por ejemplo, la relación entre bicicleta y rueda).
+Some relationships can be considered either as aggregations or compositions, depending on the context and their application (for example, the relationship between bicycle and wheel).
 
-Algunos autores consideran que la única diferencia entre ambos conceptos radica en su implementación; así una composición sería una *agregación por valor*. La composición es la relación que más usaremos en las prácticas de esta asignatura.
+Some authors consider that the only difference between both concepts lies in their implementation; thus a composition would be an *aggregation by value*. The composition is the relationship that we will use the most in Programming 2. 
 
-La siguiente figura representa esquemáticamente cómo se implementan varias composiciones con diferentes cardinalidades:
+The following figure represents schematically how several compositions with different cardinalities are implemented:
 
 ![uml](ImplementacionComposicion-crop.png)
 
-En estas composiciones, la clase `A` (la clase que representa el *todo*) tiene su propia copia de los objetos de clase `B`, por lo que el borrado de un objeto de la clase `A` implica el borrado de sus objetos de clase `B`. En la agregación, sin embargo, la clase `A` incluye punteros a objetos de clase `B` creados fuera de `A`, objetos cuyo ciclo de vida no es gestionado por la clase A:
+In these compositions, the `A` class (the class that represents the *all*) has its own copy of the `B` class objects, so the deletion of an object of the `A` class implies the deletion of your `B` class objects. In the aggregation, however, the `A` class includes pointers to objects of class `B` created outside `A` whose life cycle is not managed by class A:
 
 ![uml](ImplementacionAgregacion-crop.png)
 
-El siguiente código muestra un ejemplo de relación de agregación y la instanciación de los objetos correspondientes:
+The following code shows an example of the aggregation relationship and the instantiation of the corresponding objects:
 
 ```cpp
-class A {
+class A 
+{
    private:
-      B * b;
+      B *b;
    public:
-      A (B * b) {
+      A (B *b) 
+      {
          this->b = b;
       }
       ...
@@ -659,60 +728,72 @@ class A {
 ```cpp
 int main()
 {
-   // Dos formas:
-   // 1- Mediante un puntero
-   B * b=new B;
+   // Two ways:
+   // 1- Using a pointer
+   B *b = new B;
    A a(b);
 
-   // 2- Mediante un objeto
+   // 2- Using an object
    B b;
    A a(&b);
 }
 ```
 
-Lo comentado en los párrafos anteriores constituye una aproximación básica a la implementación de las relaciones *todo-parte*, pero esta implementación puede ser diferente en determinados contextos. Por ejemplo, si la cardinalidad de una composición es 0..1 puede interesar implementarla como un puntero que sea nulo o no nulo dependiendo de si existe el objeto *parte*; en cualquier caso, para mantener la naturaleza de la relación, la clase *todo* tendrá que crear probablemente una copia profunda del objeto *parte* que le permita controlar su ciclo de vida.
+<!---
+The comments in the previous paragraphs constitute a basic approach to the implementation of *all-part* relationships, but this implementation may be different in certain contexts. For example, if the cardinality of a composition is 0..1, it may be interesting to implement it using a pointer that is null or non-zero depending on whether the object *part* exists. In any case, to maintain the nature of the relationship, the class *all* will probably have to create a deep copy of the object *part* in order to allow it to control its life cycle.
+---->
 
-### Uso
+### Association
 
-A diferencia de las anteriores, el *uso* es una relación no persistente (tras la misma, se termina todo contacto entre los objetos). Diremos que una clase `A` usa una clase `B` cuando:
+The association expresses a general relation (usually bidirectional) between the objects instantiated from the connected classes. For example, the following figure expresses that a worker works in one or more projects, and that a project can have zero or more workers. 
 
-- Invoca algún método de la clase `B`.
-- Tiene alguna instancia de la clase `B` como parámetro de alguno de sus métodos.
-- Accede a sus variables privadas (esto sólo se puede hacer si son clases *amigas*).
+![uml](en/asociacion-e-crop.png)
 
-El siguiente diagrama UML y el código en C++ que le sigue representan una relación de uso de la clase `Gasolinera` por la clase `Coche` que se ajusta a los dos primeros casos de la lista anterior.
+It can be implemented in C++ using a pointers between both classes, in `A` and also in `B` so that `B` could reference `A` and `A` would reference `B`. If these classes are in separate header files, then it is required to use [forward class declaration](https://en.wikipedia.org/wiki/Circular_dependency#Example_of_circular_dependencies_in_C++). We will not use these kind of relations in Programming 2.
 
-![uml](uso-crop.png)
+### Use
+
+Unlike the previous relationships, the *use* is a non-persistent relation. This means that after the relation, all contact between the objects is finished. We will say that an `A` class uses a `B` class when:
+
+- Invokes some method of class `B`.
+- It has some instance of the class `B` as a parameter of one of its methods.
+- Access to `B` private variables (this can only be done if they are *friend* classes).
+
+The following UML diagram and its corresponding C++ code represent a use relationship of the `Gas station` class for the `Car` class that fits the first two cases of the previous list.
+
+![uml](en/uso-e-crop.png)
 
 
 ```cpp
-float Coche::Repostar(Gasolinera &g, float litros)
+float Car::Refuel(GasStation &g, float litres) 
 {
-     float importe=g.dispensarGaso(litros, tipoC);
-     lgaso= lgaso+litros;
-     return importe;
+  float amount=g.sellGas(litres, typeC); 
+  lgas= lgas+litres;
+  return amount;
 }
 ```
 
-### Generalización
+### Generalization (inheritance)
 
-La *herencia* es el mecanismo de los lenguajes orientados a objetos que permite definir una nueva clase (clase *derivada* o *subclase*) como una especialización de otra (clase *base* o *superclase*); se aplica cuando hay suficientes similitudes y las características de la clase base son adecuadas para la clase derivada.
+The *inheritance* is the mechanism of object-oriented languages that allows defining a new class (*derived* class or *subclass*) as a specialization of another (*base class* or *superclass*). It is used when there are sufficient similarities between them and the characteristics of the base class are suitable for the derived class.
 
-El siguiente diagrama de clases UML muestra una jerarquía de herencia en la que las subclases `Perro` y `Gato` heredan los métodos y atributos especificados por la superclase `Mamífero`.
+The following UML class diagram shows an inheritance hierarchy in which the subclasses `Dog` and `Cat` inherit the methods and attributes specified by the `Mammal` superclass.
 
-![uml](herencia-crop.png)
+![uml](en/herencia-e-crop.png)
 
-La herencia nos permite adoptar características ya implementadas por otras clases y refinarlas o sustituirlas en las clases derivadas. El siguiente código muestra una clase `Rectangle`que deriva de una clase `Shape`. Los atributos declarados como `protected` son visibles en las clases derivadas (a diferencia de los privados), pero no son públicos.
+Inheritance allows us to adopt characteristics already implemented by other classes and refine or replace them in derived classes. The following code shows a `Rectangle` class that derives from a `Shape` class. The attributes declared as `protected` are those only visible in the derived classes (unlike the private ones), but they are not public.
 
 
 ```cpp
-class Shape   // Clase base
+class Shape   // Base class
 {
    public:
-      void setWidth(int w)  {
+      void setWidth(int w)  
+      {
          width = w;
       }
-      void setHeight(int h) {
+      void setHeight(int h) 
+      {
          height = h;
       }
    protected:
@@ -722,10 +803,11 @@ class Shape   // Clase base
 ```
 
 ```cpp
-class Rectangle: public Shape   // Clase derivada
+class Rectangle: public Shape   // Derived class
 {
    public:
-      int getArea() {
+      int getArea()
+       {
          return (width * height);
       }
 };
@@ -736,30 +818,28 @@ int main()
 {
    Rectangle rect;
 
-   // Podemos llamar a los metodos de la clase base
+   // We can call the methods of the base class
    rect.setWidth(5);
    rect.setHeight(7);
 
-   // ...y a los de la clase derivada
+   // ...and also those of the derived class
    cout << "Total area: " << rect.getArea() << endl;
 }
 ```
 
 
-## El programa Make
+## The *Make* program
 
-Supongamos el caso de un fichero de cabecera `Clase.h` que se usa en varios ficheros `.cc`. Si cambiamos algo en el fichero de cabecera, no tiene sentido recompilar todo el código de la aplicación, sino solo aquellos ficheros que usan `Clase.h`. El programa `make` ayuda a compilar programas grandes compuestos por muchos ficheros; `make` nos permite definir las *dependencias* entre los diferentes ficheros de código fuente de manera que un determinado fichero solo se recompile cuando cambie su contenido o lo haga el de alguno de los ficheros de los que depende.
+Let's suppose the case of a `Class.h` header file that is used in several `.cc` files. If we change something in the header file, it does not make sense to recompile all the code of the program, but only those files that use `Class.h`. The `make` program helps compile large programs composed of many files. It allows us to define the **dependencies** between the different source code files so that a specific file would only recompiled when its content changes or that of one of the files on which it depends.
 
-Un fichero de texto llamado `makefile` especifica las dependencias entre los ficheros y qué hacer cuando cambian; si ejecutamos `make` dentro de un determinado directorio, se buscará por defecto un fichero `makefile` que contenga uno o más *objetivos* a cumplir por `make`. El fichero `makefile` tiene un objetivo principal (normalmente el programa ejecutable)
-seguido de otros objetivos secundarios. El formato de cada objetivo es:
+A text file called `makefile` specifies the dependencies between the files and what to do when they change. If we execute `make` inside a given directory, it will search by default for a `makefile` file that contains one or more **targets** to be built by `make`. The `makefile` has a main target (usually the executable program) followed by other secondary targets. The format of each target is:
 
 ```
-<objetivo> : <dependencias>
-[tabulador]<instrucción>
+<target> : <dependencies>
+[tab]<instruction>
 ```
 
-El algoritmo del programa `make` es sencillo y puede definirse informalmente como: "Si la fecha de alguna dependencia es más reciente que la del objetivo, ejecutar la instrucción". Un ejemplo de fichero `makefile` para un proyecto con dos clases `C1` y `C2` y un fichero `prog.cc` cuyo programa principal usa ambas clases quedaría como sigue:
-
+The algorithm of the `make` program is simple and can be defined informally as: "If the date of some dependency is more recent than that of the target, execute the instruction". An example of a `makefile` for a project with two classes `C1` and `C2` and a `prog.cc` file whose main program uses both classes would be as follows:
 
 ```
 prog : C1.o C2.o prog.o
@@ -773,14 +853,14 @@ prog.o : prog.cc C1.h C2.h
         g++ -Wall -g -c prog.cc
 ```
 
-Si se cambia `C2.cc` y ejecutamos `make`, se ejecutarán las siguientes instrucciones:
+If `C2.cc` is changed and we run `make`, the following instructions would be executed:
 
 ```
 g++ -Wall -g -c C2.cc
 g++ -Wall -g C1.o C2.o prog.o -o prog
 ```
 
-Si se cambia `C2.h` y ejecutamos `make`, se ejecutarán estas otras:
+If `C2.h` is changed and we run `make`, then these ones would be executed:
 
 ```
 g++ -Wall -g -c C2.cc
@@ -788,15 +868,15 @@ g++ -Wall -g -c prog.cc
 g++ -Wall -g C1.o C2.o prog.o -o prog
 ```
 
-Podemos definir variables que son sustituidas donde corresponda. Una versión mejorada del `makefile` anterior que usa algunas variables sería:
+We can define constants or variables that are replaced where appropriate. An improved version of the `makefile` above that uses some constants would be:
 
 ```
 CC = g++
 CFLAGS = –Wall -g
-MODULOS = C1.o C2.o prog.o
+MODULES = C1.o C2.o prog.o
 
-prog : $(MODULOS)
-        $(CC) $(CFLAGS) $(MODULOS) -o prog
+prog : $(MODULES)
+        $(CC) $(CFLAGS) $(MODULES) -o prog
 
 C1.o : C1.cc C1.h
         $(CC) $(CFLAGS) -c C1.cc
@@ -805,27 +885,20 @@ C2.o : C2.cc C2.h C1.h
 prog.o : prog.cc C1.h C2.h
         $(CC) $(CFLAGS) -c prog.cc
 clean:
-        rm -rf $(MODULOS)
+        rm -rf $(MODULES)
 ```
 
+-----
 
-## Ejercicios
+### Exercise 2
 
-### Ejercicio 1
-Implementa la clase del siguiente diagrama:
-
-![uml](Coordenada-crop.png)
-
-Debes crear los ficheros `Coordenada.cc` y `Coordenada.h`, y un `makefile` para compilarlos con un programa `principal.cc`. En el `main` se debe pedir al usuario dos números y crear con ellos una coordenada para imprimirla con el operador salida en el formato `x,y`. Escribe el código necesario para que cada método sea utilizado al menos una vez.
-
-
-### Ejercicio 2
-
-Implementa el código correspondiente al siguiente diagrama de clases:
+Implement the code corresponding to the following class diagram:
 
 ![uml](facturas-crop.png)
 
-Se debe hacer un programa que cree una nueva factura, añada un producto y lo imprima. Desde el constructor de `Factura` debe llamarse al método `getSigid`, que debe devolver el valor de `sigid` e incrementarlo. Este es un ejemplo de salida al imprimir una factura:
+You must create a program that creates a new invoice (`Factura`), add a product and prints it. 
+
+From the `Factura` constructor you must call the `getSigid` method, which should return the value of `sigid` and increase it. This is an example of output when printing an invoice:
 
 ```
 Factura nº: 12345
@@ -843,9 +916,12 @@ Línea;Producto;Cantidad;Precio ud.;Precio total
 --
 1;Ratón USB;1;8,43;8,43
 2;Memoria RAM 2GB;2;21,15;42,3
-3;Altavoces;1;12,66;12,66![](/assets/agregacion-composicion-crop.png)
+3;Altavoces;1;12,66;12,66
 
 Subtotal: 63,39 €
 IVA (18%): 11,41 €
 TOTAL: 74.8002 €
 ```
+
+-----
+
