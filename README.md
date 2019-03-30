@@ -4,4 +4,4 @@ This book follows the theory contents of the subject <a href="http://www.dlsi.ua
 
 Authors: <a href="http://www.dlsi.ua.es/~pertusa">Antonio Pertusa </a>, <a href="http://www.dlsi.ua.es/~dtomas">David Tomás</a>, Carlos Pérez, Jaume Aragonés, Juan Antonio Pérez y Francisco Moreno.
 
-> This book is under construction and will be updated as the subject progresses during the second semester. 
+English version: Antonio Pertusa.
