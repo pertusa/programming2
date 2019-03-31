@@ -163,7 +163,7 @@ Many of the details of the previous code will be analyzed in the next sections.
 
 ### Modular design
 
-In C++, the ```main``` program use and communicate the classes. A ```Class``` is implemented with two source files: ````Class.h```, which contains constants that are used in this file, the declaration of the class and its methods; and ```Class.cc```, which contains constants that are used in this file and the implementation of the methods (and sometimes the implementation of internal types used by the class).
+In C++, the ```main``` program use and communicate the classes. A ```Class``` is implemented with two source files: ```Class.h```, which contains constants that are used in this file, the declaration of the class and its methods; and ```Class.cc```, which contains constants that are used in this file and the implementation of the methods (and sometimes the implementation of internal types used by the class).
 
 Actually, the task of translating a source program into executable is done in two phases:
 
