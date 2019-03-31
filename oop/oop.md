@@ -170,7 +170,7 @@ Actually, the task of translating a source program into executable is done in tw
 - Compilation: in C++, the compiler translates a source program into a program in object code (not executable yet)
 - Link: the **linker** of C++ joins the program in object code with the language (C/C++) libraries and generates the executable
 
-In C ++, the two phases are carried out at the same time with the following instruction:
+In C++, the two phases are carried out at the same time with the following instruction:
 
 ```
 g++ program.cc -o program
@@ -365,7 +365,7 @@ Date d(10);  // day=10
 
 Exceptions are the mechanism that allows efficient management of errors that, for various reasons, occur in a program during its execution. A common use of exceptions occurs when a constructor can not create the corresponding object because the parameters supplied by the client code are incorrect. In cases like this, the constructor detects the error but does not know what to do to fix it (it may be to change the value of the incorrect parameter and try again, display a message and ask for a new value from the console, inform the user through a window interface, emit an alert sound, immediately finish the execution of the program, etc.). In this case, it is the client code invoked by the constructor the one that probably knows what needs to be done to deal with the error. At other times, the error handling can not be done either in the function that invoked the constructor, but in the function that invoked this function... The idea here is that once an exception is thrown at the point where the error is detected, the exception will run *backwards* through the program, to a place where it will be *captured* and treated. Exceptions are not necessary in those cases in which the same function that detects an error is able to manage the situation and solve the problem.
 
-Exceptions in C ++ are thrown with the ```throw``` command and captured in a ```try``` / ```catch``` block in which the ```try``` part contains the code that can potentially throw an exception, and the ```catch``` part contains the code that manages the error. If an exception occurs and is not captured even from the ```main``` function, the program will terminate. The ```root``` function in the following example throws an exception if its parameter is negative. The ```main``` function captures the exception and displays an error message.
+Exceptions in C++ are thrown with the ```throw``` command and captured in a ```try``` / ```catch``` block in which the ```try``` part contains the code that can potentially throw an exception, and the ```catch``` part contains the code that manages the error. If an exception occurs and is not captured even from the ```main``` function, the program will terminate. The ```root``` function in the following example throws an exception if its parameter is negative. The ```main``` function captures the exception and displays an error message.
 
 ```cpp
 int root(int n)
@@ -420,7 +420,7 @@ int main()
 
 ### Destructors
 
-All C++ classes need a destructor (if not specified, the compiler creates one by default). A destructor must release the resources (normally, dynamic memory) that the object has been using. A destructor is a member function with no parameters, which returns no value and with the same name as the class but preceded by the character ~. A class can only have a destructor function. The compiler generates code that automatically calls a destructor of an object when its scope ends. The destructor is also called when using ```delete```. It can be invoked explicitly in the form `d.~Date()`, although there are very few situations in which this explicit invocation is necessary.
+All C++ classes need a destructor (if not specified, the compiler creates one by default). A destructor must release the resources (normally, dynamic memory) that the object has been using. A destructor is a member function with no parameters, which returns no value and with the same name as the class but preceded by the character ```~```. A class can only have a destructor function. The compiler generates code that automatically calls a destructor of an object when its scope ends. The destructor is also called when using ```delete```. It can be invoked explicitly in the form ```d.~Date()```, although there are very few situations in which this explicit invocation is necessary.
 
 ```cpp
    // Declaration
@@ -630,7 +630,7 @@ class Date
 This code shows an example of how to access static attributes or methods from outside the class:
 
 ```cpp
-cout << Date::daysPerWeek << endl; // static atribute
+cout << Date::daysPerWeek << endl;  // static atribute
 cout << Date::getFormat() << endl;  // static method
 ```
 
@@ -670,7 +670,7 @@ void Date::myFunction()
 {
   MyClass c;
 
-  c.function(*this); // Here we are passing the current object as parameter for an external function.
+  c.addObject(*this); // Here we are passing the current object as parameter for an external function.
 }
 ```
 
@@ -689,7 +689,7 @@ Relationships have a *cardinality* which defines the number of classes or object
 
 ### Aggregation and composition
 
-The *aggregation * and the *composition* are *all-part* relationships, in which one object (or several) is part of the nature of another. Unlike association, they are asymmetric relationships. The differences between aggregation and composition are the strength of the relationship: Aggregation is a weaker relationship than composition. Consider, for example, the following class diagram:
+The *aggregation* and the *composition* are *all-part* relationships, in which one object (or several) is part of the nature of another. Unlike association, they are asymmetric relationships. The differences between aggregation and composition are the strength of the relationship: Aggregation is a weaker relationship than composition. Consider, for example, the following class diagram:
 
 ![uml](en/agregacion-composicion-e-crop.png)
 
@@ -749,7 +749,7 @@ The association expresses a general relation (usually bidirectional) between the
 
 ![uml](en/asociacion-e-crop.png)
 
-It can be implemented in C++ using a pointers between both classes, in `A` and also in `B` so that `B` could reference `A` and `A` would reference `B`. If these classes are in separate header files, then it is required to use [forward class declaration](https://en.wikipedia.org/wiki/Circular_dependency#Example_of_circular_dependencies_in_C++). We will not use these kind of relations in Programming 2.
+It can be implemented in C++ using pointers between both classes, in `A` and also in `B` so that `B` could reference `A` and `A` could reference `B`. If these classes are in separate header files, then it is required to use [forward class declaration](https://en.wikipedia.org/wiki/Circular_dependency#Example_of_circular_dependencies_in_C++). We will not use these kind of relations in Programming 2.
 
 ### Use
 
