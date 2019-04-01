@@ -101,9 +101,9 @@ The **polymorphism** is the assignment of the same interface to entities of diff
 
 ```cpp
 Animal *a = new Dog;
-...
+// ...
 a = new Cat;
-...
+// ...
 a = new Seagull;
 ```
 
@@ -444,8 +444,12 @@ Similar to an assignment, a copy constructor creates an object from another exis
 Date(const Date &d);
 
 // Implementation
-Date::Date(const Date &d) :
-   day(d.day), month(d.month), year(d.year) {}
+Date::Date(const Date &d)
+{
+   day = d.day;
+   month = d.month;
+   year = d.year;
+}
 ```
 
 The copy constructor is invoked automatically when:
