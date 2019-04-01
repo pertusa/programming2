@@ -333,7 +333,7 @@ Date::Date(int d, int m, int y) {
 }
 ```
 
-The following are three call examples for the previous constructors:
+The following are three example calls for the previous constructors:
 
 ```cpp
 Date d;
