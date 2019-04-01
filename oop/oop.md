@@ -221,7 +221,7 @@ class Rect
        Rect(int ax, int ay, int bx,int by); // Constructor
        ~Rect();  // Destructor
        int base();
-       int altura();
+       int height();
        int area();
 };
 ```
