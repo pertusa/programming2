@@ -601,7 +601,7 @@ Implement the class of the following diagram:
 
 ![uml](Coordenada-crop.png)
 
-You must create the files `Coordenada.cc` and `Coordenada.h`, and a `makefile` to compile them with a `main.cc` program. In the `main` function, the user should be asked for two numbers and create a coordinate with them to print it with the output operator in the format `x,y`. Write the necessary code so that each method is used at least once.
+You must create the files `Coordenada.cc`, `Coordenada.h`, and a `main.cc` program. In the `main` function, the user should be asked for two numbers and create a coordinate with them to print it with the output operator in the format `x,y`. Write the necessary code so that each method is used at least once.
 
 -----
 
